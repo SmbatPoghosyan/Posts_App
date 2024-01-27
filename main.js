@@ -10,8 +10,6 @@ const server = http.createServer((req, res) => {
   const path = parsedUrl.pathname
   const trimPath = path.replace(/^\/+|\/+$/g, '');
 
-  console.log("test")
-
   const method = req.method.toUpperCase();
 
   console.log('method', method);

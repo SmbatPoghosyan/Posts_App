@@ -17,13 +17,13 @@ const postsSchema = {
       firstName: {
         type: "string",
         maxLength: 15,
-        minLength: 0,
+        minLength: 1,
         required: true
       },
       lastName: {
         type: "string",
         maxLength: 20,
-        minLength: 0,
+        minLength: 1,
         required: true
       },
       age: {
@@ -76,79 +76,67 @@ const patchSchema = {
   }
 };
 
-const validate = (obj, schema) => {
+const validateObject = (obj, schema) => {
   let isValid = true;
-  let message = "";
-  console.log("typeof obj", typeof obj)
-  if (typeof obj !== "object" || obj.length !== undefined) {
-    isValid = false;
-    message = "Not an object.";
-    return {
-      isValid,
-      error: new Error("Not an object.")
-    }
-  }
-  const props = Object.keys(schema);
-  ["title", "name"]
-  const objKeys = Object.keys(obj);
-  if (!objKeys.length) {
-    return {
-      isValid: false,
-      error: new Error("Object is empty.")
-    }
-  }
-  objKeys.forEach((key) => {
-    if (props.indexOf(key) === -1){
-      isValid = false;
-      message = `There shouldn't be property with name ${key}.`
-    }
-  })
+  let errors = [];
+  
+  Object.keys(schema).forEach(key => {
+    const field = schema[key];
+    const value = obj[key];
 
-  if (!isValid) {
-    return {
-      isValid,
-      error: new Error(message)
-    }
-  }
-
-  props.forEach((prop) => {
-    let propertyIs = obj.hasOwnProperty(prop);
-    if (!propertyIs && schema[prop].required) {
+    if (field.required && (value === undefined || value === null)) {
       isValid = false;
-      message += "Properties are incomplete ";
-    } else if (typeof obj[prop] !== schema[prop].type) {
-      if (propertyIs) {
+      errors.push(`${key} is required`);
+      return;
+    }
+
+    if (value === undefined) {
+      return;
+    }
+
+    if (typeof value !== field.type) {
+      isValid = false;
+      errors.push(`${key} must be a ${field.type}`);
+      return;
+    }
+
+    if (field.type === "string") {
+      if (value.length < field.minLength || value.length > field.maxLength) {
         isValid = false;
-        message += `Type of ${prop} is incorrect `;
+        errors.push(`${key} must be between ${field.minLength} and ${field.maxLength} characters`);
       }
-    } else if (typeof obj[prop] === "string") {
-      if (
-        obj[prop].length < schema[prop].minLength ||
-        obj[prop].length > schema[prop].maxLength
-      ) {
+    } else if (field.type === "number") {
+      if (value < field.min || value > field.max) {
         isValid = false;
-        message += `${prop} is wrong`;
+        errors.push(`${key} must be between ${field.min} and ${field.max}`);
       }
-    } else if (typeof obj[prop] === "number") {
-      if (obj[prop] > schema[prop].max || obj[prop] < schema[prop].min) {
-        isValid = false;
-        isNumber = true;
-        message += `${prop} is wrong`;
-      }
-    } else if (typeof obj[prop] === "object") {
-      let result = validate(obj[prop], schema[prop].schema);
+    }
+
+    if (field.type === "object") {
+      const result = validateObject(value, field.schema);
       if (!result.isValid) {
         isValid = false;
-        message += `${prop} ${result.error.message} `;
+        // Append nested errors with key prefix
+        result.errors.forEach(error => {
+          errors.push(`${key}.${error}`);
+        });
       }
     }
   });
 
-  return {
-    isValid,
-    error: message ? new Error(message) : null
-  }
-};
+  return { isValid, errors };
+}
+
+function validate(schema) {
+  return (req, res, next) => {
+    const { isValid, errors } = validateObject(req.body, schema);
+    if (!isValid) {
+      res.status(400).json({ message: "Validation errors", errors });
+    } else {
+      next();
+    }
+  };
+}
 
 module.exports = {
   postsSchema,

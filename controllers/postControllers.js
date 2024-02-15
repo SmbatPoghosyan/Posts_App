@@ -1,5 +1,16 @@
 const fs = require('fs');
+const { off } = require('process');
 const postsFilePath = "./posts.json";
+
+const getPostsByLimit = async (offset, limit) => {
+  console.log(offset, limit)
+  try {
+    const posts = await getPosts();
+    return posts.splice(offset, limit)
+  } catch (err) {
+    throw new Error(`Not able to get posts with offset ${offset} and limit ${limit}`)
+  }
+}
 
 const getPosts = () => {
   let posts = [];
@@ -74,5 +85,6 @@ module.exports = {
   createPost,
   updatePost, 
   getPosts, 
-  deletePost
+  deletePost,
+  getPostsByLimit
 }

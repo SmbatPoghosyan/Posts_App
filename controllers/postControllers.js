@@ -1,71 +1,32 @@
 const fs = require('fs');
-const { off } = require('process');
+const Post = require('../models/postModel')
 const postsFilePath = "./posts.json";
 
-const getPostsByLimit = async (offset, limit) => {
-  console.log(offset, limit)
+const getPosts = async () => {
   try {
-    const posts = await getPosts();
-    return posts.splice(offset, limit)
+    const posts = await Post.query().withGraphFetched('user');
+    return posts;
   } catch (err) {
-    throw new Error(`Not able to get posts with offset ${offset} and limit ${limit}`)
+    throw new Error(err);
   }
 }
 
-const getPosts = () => {
-  let posts = [];
-  return new Promise((resolve, reject) => {
-    fs.readFile(postsFilePath, (err, data) => {
-      if (err) {
-        console.error(err.message);
-        reject(err);
-      }
-  
-      posts = data.toString('utf8');
-      resolve(JSON.parse(posts));
-    })
-  })
-}
-
-const createPost = (post) => {
-  return new Promise((resolve, reject) => {
-    getPosts().then(data => {
-      const length = data.length;
-      let id;
-      if (!length) {
-        id = 1;
-      } else {
-        id = data[length - 1].id + 1;
-      }
-      post.id = id;
-      data.push(post)
-      fs.writeFile(postsFilePath, JSON.stringify(data), (err) => {
-        if (err) {
-          console.error(err.message);
-          reject(err);
-        }
-        resolve(post);
-      })
-    })
-  })
-}
-
-const updatePost = (currentPosts, index, newData, isPatch) => {
-  if (!isPatch) {
-    currentPosts[index] = {...newData, id: currentPosts[index].id}
-  } else {
-    currentPosts[index] = {...currentPosts[index], ...newData}
+const createPost = async (post) => {
+  try {
+    const newPost = await Post.query().insert(post)
+    return newPost
+  } catch (err) {
+    throw new Error(err);
   }
+}
 
-  return new Promise((resolve, reject) => {
-    fs.writeFile(postsFilePath, JSON.stringify(currentPosts), (err) => {
-      if (err) {
-        console.error(err.message);
-        reject(err);
-      }
-      resolve(currentPosts[index]);
-    })
-  })
+const updatePost = async (postId, data) => {
+  try {
+    const updatedPost = await Post.query().patchAndFetchById(postId, data);
+    return updatedPost
+  } catch (err) {
+    throw new Error(err);
+  }
 }
 
 const deletePost = (receivedPosts, postIndex) => {
@@ -86,5 +47,4 @@ module.exports = {
   updatePost, 
   getPosts, 
   deletePost,
-  getPostsByLimit
 }

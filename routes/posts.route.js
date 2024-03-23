@@ -1,35 +1,37 @@
 const express = require('express');
 
 const {postsSchema, patchSchema,  validate } = require('../vallidations/postsValidation.js');
-const {getPosts, createPost, deletePost, updatePost, getPostsByLimit} = require('../controllers/postControllers.js');
+const {getPosts, createPost, deletePost, updatePost} = require('../controllers/postControllers.js');
 
 const router = express.Router();
 
-router.post('/', validate(postsSchema), (req, res) => {
-  createPost(req.body).then(createdPost =>{
-    res.status(201).send(createdPost);
-  }).catch(err => {
+router.post('/', async (req, res) => {
+  try {
+    const newPost = await createPost(req.body);
+    res.status(201).send(newPost)
+  } catch (err) {
     console.error("error", err);
     res.status(500).send({
       message: "Something went wrong."
     })
-  }) 
+  }
 });
 
-router.get('/', (req, res) => {
-  const page = Number(req.query.page) || 1;
-  const limit = Number(req.query.limit) || 10;
+router.get('/', async (req, res) => {
+  // const page = Number(req.query.page) || 1;
+  // const limit = Number(req.query.limit) || 10;
+  // const offset = (page - 1) * limit;
 
-  const offset = (page - 1) * limit;
-
-  getPostsByLimit(offset, limit).then(posts => {
+  try {
+    const posts = await getPosts();
     res.status(200).send(posts);
-  }).catch(err => {
+  } catch (err) {
     console.error("error", err);
     res.status(500).send({
       message: "Something went wrong."
     })
-  })
+  }
+
 })
 
 router.get('/:id', (req, res) => {

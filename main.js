@@ -1,8 +1,8 @@
 // installed node modules
 const express = require('express');
 const dotenv = require('dotenv');
-
 const postRouter = require('./routes/posts.route')
+require('./config/db');
 
 dotenv.config();
 

@@ -2,10 +2,16 @@ const fs = require('fs');
 const Post = require('../models/postModel')
 const postsFilePath = "./posts.json";
 
-const getPosts = async () => {
+const getPosts = async (limit, offset) => {
   try {
-    const posts = await Post.query().withGraphFetched('user');
-    return posts;
+    const posts = await Post.query()
+      .limit(limit)
+      .offset(offset)
+      .withGraphFetched('user');
+    
+    const totalPostsCount  = await Post.query().resultSize();
+
+    return { posts, totalPostsCount};
   } catch (err) {
     throw new Error(err);
   }

@@ -5,7 +5,7 @@ const {getPosts, createPost, deletePost, updatePost} = require('../controllers/p
 
 const router = express.Router();
 
-router.post('/', async (req, res) => {
+router.post('/', validate(postsSchema), async (req, res) => {
   try {
     const newPost = await createPost(req.body);
     res.status(201).send(newPost)
@@ -18,13 +18,23 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-  // const page = Number(req.query.page) || 1;
-  // const limit = Number(req.query.limit) || 10;
-  // const offset = (page - 1) * limit;
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 10;
+  const offset = (page - 1) * limit;
 
   try {
-    const posts = await getPosts();
-    res.status(200).send(posts);
+    const result = await getPosts(limit, offset);
+
+    const response = {
+      data: result.posts,
+      meta: {
+        totalPosts: result.totalPostsCount,
+        currentPage: page,
+        limit
+      }
+    }
+
+    res.status(200).send(response);
   } catch (err) {
     console.error("error", err);
     res.status(500).send({
@@ -54,7 +64,7 @@ router.get('/:id', (req, res) => {
   }) 
 })
 
-router.put('/:id', validate(postsSchema), (req, res) => {
+router.put('/:id', validate(patchSchema), (req, res) => {
   const id = req.params.id;
   const updatedPost = req.body;
   getPosts().then(receivedPosts => {
@@ -66,29 +76,6 @@ router.put('/:id', validate(postsSchema), (req, res) => {
     } else {
       updatePost(receivedPosts, postIndex, updatedPost, isPatch = "PATCH").then(post => {
         console.log("post updated", post);
-        res.status(200).send(post);
-      })
-    }; 
-  })
-  .catch(err => {
-    console.error("error", err);
-    res.status(500).send({
-      message: validation.error.message
-    })
-  })
-})
-
-router.patch('/:id', validate(patchSchema), (req, res) => {
-  const id = req.params.id;
-  const updatedPost = req.body;
-  getPosts().then(receivedPosts => {
-    const postIndex = receivedPosts.findIndex((el) => el.id == id);
-    if (postIndex === -1) {
-      res.status(404).send({
-        message: "Post not found."
-      })
-    }else{
-      updatePost(receivedPosts, postIndex, updatedPost, isPatch = "PATCH").then(post => {
         res.status(200).send(post);
       })
     }; 

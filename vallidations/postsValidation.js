@@ -1,45 +1,37 @@
 const Ajv = require("ajv")
+const addFormats = require("ajv-formats")
 
 const ajv = new Ajv({ allErrors: true })
+addFormats(ajv);
 
 const postsSchema = {
   type: "object",
+  required: ["user_id", "title", "content", "creation_date"],
   properties: {
+    user_id: {
+      type: "integer",
+    },
     title: {
       type: "string",
       minLength: 1,
-      maxLength: 10
+      maxLength: 50,
     },
     subtitle: {
       type: "string",
       minLength: 1,
-      maxLength: 10
+      maxLength: 50,
     },
-    author: {
-      type: "object",
-      properties: {
-        firstName: {
-          type: "string",
-          minLength: 1,
-          maxLength: 10
-        }, 
-        lastName: {
-          type: "string",
-          minLength: 1,
-          maxLength: 10
-        },
-        age: {
-          type: "number", 
-          minimum: 18,
-          maximum: 100
-        }
-      },
-      required: ["firstName", "lastName"]
-    }
+    content: {
+      type: "string",
+      minLength: 1,
+    },
+    creation_date: {
+      type: "string",
+      format: "date",
+    },
   },
-  required: ["title", "author"],
   additionalProperties: false
-}
+};
 
 const patchSchema = {
   type: "object",
@@ -47,36 +39,18 @@ const patchSchema = {
     title: {
       type: "string",
       minLength: 1,
-      maxLength: 10
+      maxLength: 50,
     },
     subtitle: {
       type: "string",
       minLength: 1,
-      maxLength: 10
+      maxLength: 50,
     },
-    author: {
-      type: "object",
-      properties: {
-        firstName: {
-          type: "string",
-          minLength: 1,
-          maxLength: 10
-        }, 
-        lastName: {
-          type: "string",
-          minLength: 1,
-          maxLength: 10
-        },
-        age: {
-          type: "number", 
-          minimum: 18,
-          maximum: 100
-        }
-      },
-      required: ["firstName", "lastName"]
+    content: {
+      type: "string",
+      minLength: 1,
     }
   },
-  minProperties: 1,
   additionalProperties: false
 }
 

@@ -8,6 +8,7 @@ const router = express.Router();
 router.post('/', validate(postsSchema), async (req, res) => {
   try {
     const newPost = await createPost(req.body);
+    //create response object similar to get
     res.status(201).send(newPost)
   } catch (err) {
     console.error("error", err);
@@ -45,6 +46,7 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
+  // change current implementation
   const id = req.params.id;
   getPosts().then(receivedPosts => {
     const postIndex = receivedPosts.findIndex((el) => el.id == id);
@@ -65,6 +67,7 @@ router.get('/:id', (req, res) => {
 })
 
 router.put('/:id', validate(patchSchema), (req, res) => {
+    // change current implementation
   const id = req.params.id;
   const updatedPost = req.body;
   getPosts().then(receivedPosts => {
@@ -89,6 +92,7 @@ router.put('/:id', validate(patchSchema), (req, res) => {
 })
 
 router.delete('/:id', (req, res) =>{
+    // change current implementation
   getPosts().then(receivedPosts => {
     const id = req.params.id;
       const postIndex = receivedPosts.findIndex((el) => el.id == id);

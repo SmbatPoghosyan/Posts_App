@@ -1,15 +1,22 @@
 const express = require('express');
 
-const {postsSchema, patchSchema,  validate } = require('../vallidations/postsValidation.js');
-const {getPosts, createPost, deletePost, updatePost} = require('../controllers/postControllers.js');
+const { postsSchema, patchSchema, validate } = require('../vallidations/postsValidation.js');
+const {
+  getPosts,
+  createPost,
+  deletePost,
+  updatePost,
+  getPostById
+} = require('../controllers/postControllers.js');
+const createResponseObj = require('../utils/createResponseObj.js')
 
 const router = express.Router();
 
 router.post('/', validate(postsSchema), async (req, res) => {
   try {
     const newPost = await createPost(req.body);
-    //create response object similar to get
-    res.status(201).send(newPost)
+    const response = createResponseObj(newPost, { message: "Post created Successfully"}, 201);
+    res.status(201).send(response)
   } catch (err) {
     console.error("error", err);
     res.status(500).send({
@@ -26,14 +33,11 @@ router.get('/', async (req, res) => {
   try {
     const result = await getPosts(limit, offset);
 
-    const response = {
-      data: result.posts,
-      meta: {
-        totalPosts: result.totalPostsCount,
-        currentPage: page,
-        limit
-      }
-    }
+    const response = createResponseObj(result.posts, {
+      totalPosts: result.totalPostsCount,
+      currentPage: page,
+      limit
+    }, 200);
 
     res.status(200).send(response);
   } catch (err) {
@@ -45,74 +49,62 @@ router.get('/', async (req, res) => {
 
 })
 
-router.get('/:id', (req, res) => {
-  // change current implementation
+router.get('/:id', async (req, res) => {
   const id = req.params.id;
-  getPosts().then(receivedPosts => {
-    const postIndex = receivedPosts.findIndex((el) => el.id == id);
-    if (postIndex === -1) {
-      res.status(404).send({
-        message: "Post not found."
+  try {
+    const currentPost = await getPostById(id);
+    if  (!currentPost) {
+      return res.status(404).send({
+        message: `Post with id ${id} not found`
       })
-    }else{
-      res.status(200).send(receivedPosts[postIndex])
     }
-  })
-  .catch(err => {
+    const response = createResponseObj(currentPost, {}, 200);
+    return res.status(200).send(response)
+  } catch (err) {
     console.error("error", err);
     res.status(500).send({
       message: "Something went wrong."
     })
-  }) 
+  }
 })
 
-router.put('/:id', validate(patchSchema), (req, res) => {
-    // change current implementation
+router.put('/:id', validate(patchSchema), async (req, res) => {
   const id = req.params.id;
-  const updatedPost = req.body;
-  getPosts().then(receivedPosts => {
-    const postIndex = receivedPosts.findIndex((el) => el.id == id);
-    if (postIndex === -1) {
-        res.status(404).send({
-        message: "Post not found."
+  const data = req.body;
+  try {
+    const updatedPost = await updatePost(id, data)
+    if  (!updatedPost) {
+      return res.status(404).send({
+        message: `Post with id ${id} not found`
       })
-    } else {
-      updatePost(receivedPosts, postIndex, updatedPost, isPatch = "PATCH").then(post => {
-        console.log("post updated", post);
-        res.status(200).send(post);
-      })
-    }; 
-  })
-  .catch(err => {
+    }
+    const response = createResponseObj(updatedPost, {message: `Post with id ${id} updated successfully`}, 200);
+    return res.status(200).send(response);
+  } catch (err) {
     console.error("error", err);
     res.status(500).send({
-      message: validation.error.message
+      message: "Something went wrong."
     })
-  })
+  }
 })
 
-router.delete('/:id', (req, res) =>{
-    // change current implementation
-  getPosts().then(receivedPosts => {
-    const id = req.params.id;
-      const postIndex = receivedPosts.findIndex((el) => el.id == id);
-      if (postIndex === -1) {
-        res.status(404).send({
-          message: "Post not found."
-        })
-      }else{
-        deletePost(receivedPosts, postIndex).then(() => {
-          res.status(200).send({
-              message: `Post with id - ${id} successfully deleted`
-          })
-        }) .catch(err => {
-          console.error("error", err)
-          res.status(500).send({
-          message: "Something went wrong."
-          })
-        })
-      }
-    }) 
+router.delete('/:id', async (req, res) =>{
+  const id = req.params.id;
+  try {
+    const result = await deletePost(id);
+    if (!result) {
+      return res.status(404).send({
+        message: "Post not found"
+      })
+    }
+    const response = createResponseObj(result, {message: `Post with id ${id} deleted successfully`}, 200);
+    return res.status(200).send(response)
+  } catch (err) {
+    console.error("error", err);
+    res.status(500).send({
+      message: "Something went wrong."
+    })
+  }
 })
 
 module.exports = router

@@ -28,24 +28,27 @@ const createPost = async (post) => {
 
 const updatePost = async (postId, data) => {
   try {
-    const updatedPost = await Post.query().patchAndFetchById(postId, data);
-    return updatedPost
+    return await Post.query().patchAndFetchById(postId, data);
   } catch (err) {
     throw new Error(err);
   }
 }
 
-const deletePost = (receivedPosts, postIndex) => {
-  receivedPosts.splice(postIndex, 1)
-  return new Promise((resolve, reject) => {
-    fs.writeFile(postsFilePath, JSON.stringify(receivedPosts), (err) => {
-      if (err) {
-        console.error(err.message);
-        reject(err);
-      }
-      resolve()
-    })  
-  })
+const getPostById = async (id) => {
+  try {
+    return await Post.query().findById(id);
+  } catch (err) {
+    throw new Error(err);
+  }
+}
+
+const deletePost = async (postId) => {
+  try {
+    const res = await Post.query().deleteById(postId);
+    return res
+  } catch (err) {
+    throw new Error(err);
+  }
 }
 
 module.exports = {
@@ -53,4 +56,5 @@ module.exports = {
   updatePost, 
   getPosts, 
   deletePost,
+  getPostById
 }

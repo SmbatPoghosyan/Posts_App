@@ -1,7 +1,8 @@
 // installed node modules
 const express = require('express');
 const dotenv = require('dotenv');
-const postRouter = require('./routes/posts.route')
+const postRouter = require('./routes/postsRoute')
+const authRouter = require('./routes/authRoute')
 require('./config/db');
 
 dotenv.config();
@@ -17,6 +18,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/posts', postRouter);
+app.use('/auth', authRouter);
          
 app.listen(PORT, () => { 
   console.log(`server is running on localhost:${PORT}`)

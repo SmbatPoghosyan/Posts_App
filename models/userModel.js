@@ -12,6 +12,17 @@ class User extends Model {
     return 'id';
   }
 
+  $formatJson(json) {
+    // Remember to call the super class's implementation.
+    json = super.$formatJson(json);
+    
+    if (json.password) {
+      delete json.password
+    }
+    // Do your conversion here.
+    return json;
+  }
+
   static get jsonSchema() {
     return {
       type: 'object',

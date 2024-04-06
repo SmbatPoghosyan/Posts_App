@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const postRouter = require('./routes/postsRoute')
 const authRouter = require('./routes/authRoute')
 require('./config/db');
+const passportConfig = require('./config/passport')
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ const PORT = process.env.PORT;
 const app = express();
 
 app.use(express.json());
+app.use(passportConfig.initialize());
 
 app.use((req, res, next) => {
   req.time = new Date();

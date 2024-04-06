@@ -1,6 +1,7 @@
 const express = require('express');
 
-const { postsSchema, patchSchema, validate } = require('../vallidations/postsValidation.js');
+const { postsSchema, patchSchema } = require('../vallidations/postsValidation.js');
+const validate = require('../vallidations')
 const {
   getPosts,
   createPost,
@@ -11,9 +12,11 @@ const {
 const createResponseObj = require('../utils/createResponseObj.js')
 
 const router = express.Router();
+const passprotConf = require('../config/passport.js');
 
-router.post('/', validate(postsSchema), async (req, res) => {
+router.post('/', passprotConf.authenticate('jwt', { session: false }), validate(postsSchema), async (req, res) => {
   try {
+    console.log(req.user)
     const newPost = await createPost(req.body);
     const response = createResponseObj(newPost, { message: "Post created Successfully"}, 201);
     res.status(201).send(response)

@@ -17,7 +17,8 @@ const getPosts = async (limit, offset) => {
   }
 }
 
-const createPost = async (post) => {
+const createPost = async (post, userId) => {
+  post.user_id = userId;
   try {
     const newPost = await Post.query().insert(post)
     return newPost

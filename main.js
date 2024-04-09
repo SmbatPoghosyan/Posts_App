@@ -19,7 +19,7 @@ app.use((req, res, next) => {
   next();
 })
 
-app.use('/posts', postRouter);
+app.use('/posts', passportConfig.authenticate('jwt', { session: false }),  postRouter);
 app.use('/auth', authRouter);
          
 app.listen(PORT, () => { 

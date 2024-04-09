@@ -12,12 +12,13 @@ const {
 const createResponseObj = require('../utils/createResponseObj.js')
 
 const router = express.Router();
-const passprotConf = require('../config/passport.js');
+const { ROLE_NAME } = require('../constants/index.js');
+const checkRole = require('../middlewares/checkRole.js');
 
-router.post('/', passprotConf.authenticate('jwt', { session: false }), validate(postsSchema), async (req, res) => {
+router.post('/', checkRole(ROLE_NAME.CREATOR), validate(postsSchema), async (req, res) => {
   try {
-    console.log(req.user)
-    const newPost = await createPost(req.body);
+    const userId = req.user.id;
+    const newPost = await createPost(req.body, userId);
     const response = createResponseObj(newPost, { message: "Post created Successfully"}, 201);
     res.status(201).send(response)
   } catch (err) {
@@ -71,8 +72,11 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-router.put('/:id', validate(patchSchema), async (req, res) => {
+router.put('/:id', checkRole(ROLE_NAME.CREATOR), validate(patchSchema), async (req, res) => {
   const id = req.params.id;
+  if (id !== req.user.id) {
+    res.send()
+  }
   const data = req.body;
   try {
     const updatedPost = await updatePost(id, data)
@@ -91,7 +95,7 @@ router.put('/:id', validate(patchSchema), async (req, res) => {
   }
 })
 
-router.delete('/:id', async (req, res) =>{
+router.delete('/:id', checkRole(ROLE_NAME.ADMIN, ROLE_NAME.SUPERADMIN, ROLE_NAME.CREATOR), async (req, res) =>{
   const id = req.params.id;
   try {
     const result = await deletePost(id);

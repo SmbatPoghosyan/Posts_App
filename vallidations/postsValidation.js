@@ -1,10 +1,7 @@
 const postsSchema = {
   type: "object",
-  required: ["user_id", "title", "content", "creation_date"],
+  required: ["title", "content", "creation_date"],
   properties: {
-    user_id: {
-      type: "integer",
-    },
     title: {
       type: "string",
       minLength: 1,

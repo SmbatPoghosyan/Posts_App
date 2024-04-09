@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { ROLES } = require('../constants')
+const { ROLE_ID } = require('../constants')
 const User = require('../models/userModel')
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv')
@@ -48,7 +48,7 @@ const signup = async (email, password, username) => {
       email,
       password: hashedPassword,
       username,
-      role_id: ROLES.USER
+      role_id: ROLE_ID.USER
     }
     const newUser = await User.query().insert(userObject)
     return newUser;

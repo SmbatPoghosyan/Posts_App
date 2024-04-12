@@ -22,21 +22,21 @@ The post app allows users to **create**, **read**, **update**, **delete** posts,
 
 ## Technologies Used
 
--Node.js
--Express.js
--PostgreSql
--dependencies
-    -ajv: JSON Schema validator
-    -ajv-errors: Additional error messages for Ajv
-    -ajv-formats: Additional formats for Ajv
-    -bcrypt: Library for hashing passwords
-    -express: Web framework for Node.js
-    -jsonwebtoken: Library for JSON Web Tokens
-    -knex: SQL query builder for Node.js
-    -objection: ORM for Node.js
-    -passport: Authentication middleware for Node.js
-    -passport-jwt: Passport strategy for authenticating with a JSON Web Token
-    -pg: PostgreSQL client for Node.js
+- Node.js
+- Express.js
+- PostgreSql
+- dependencies
+    - ajv: JSON Schema validator
+    - ajv-errors: Additional error messages for Ajv
+    - ajv-formats: Additional formats for Ajv
+    - bcrypt: Library for hashing passwords
+    - express: Web framework for Node.js
+    - jsonwebtoken: Library for JSON Web Tokens
+    - knex: SQL query builder for Node.js
+    - objection: ORM for Node.js
+    - passport: Authentication middleware for Node.js
+    - passport-jwt: Passport strategy for authenticating with a JSON Web Token
+    - pg: PostgreSQL client for Node.js
 
 
 ## Installation

@@ -22,10 +22,10 @@ The post app allows users to **create**, **read**, **update**, **delete** posts,
 
 ## Technologies Used
 
--**Node.js**
--**Express.js**
--**PostgreSql**
--**dependencies**
+-Node.js
+-Express.js
+-PostgreSql
+-dependencies
     -ajv: JSON Schema validator
     -ajv-errors: Additional error messages for Ajv
     -ajv-formats: Additional formats for Ajv

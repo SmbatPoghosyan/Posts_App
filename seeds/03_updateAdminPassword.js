@@ -15,3 +15,5 @@ exports.seed = async function (knex) {
     .where({ id: user.id })
     .update({ password: hashedPassword });
 };
+
+

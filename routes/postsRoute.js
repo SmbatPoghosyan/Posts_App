@@ -13,7 +13,6 @@ const createResponseObj = require('../utils/createResponseObj.js')
 
 const router = express.Router();
 const { ROLE_NAME } = require('../constants/index.js');
-const { ROLE_ID } = require('../constants/index.js');
 const checkRole = require('../middlewares/checkRole.js');
 
 router.post('/', checkRole(ROLE_NAME.CREATOR), validate(postsSchema), async (req, res) => {
@@ -100,7 +99,7 @@ router.delete('/:id', checkRole(ROLE_NAME.ADMIN, ROLE_NAME.SUPERADMIN, ROLE_NAME
 
     const postId = req.params.id;
     const post = await Post.query().findById(postId);
-    if (post.user_id !== req.user.id && req.user.role_id === ROLE_ID.CREATOR) {
+    if (post.user_id !== req.user.id && req.userRole === ROLE_NAME.CREATOR) {
       return res.status(403).send({
         message: "You are not allowed to delete other's posts"
       })

@@ -5,10 +5,13 @@
  */
 const bcrypt = require("bcrypt");
 exports.seed = async function (knex) {
-  let user = await knex.select("password").from("users").first();
-
+  const user = await knex
+    .select("password", "id")
+    .from("users")
+    .where({ username: "admin" })
+    .first();
   const hashedPassword = await bcrypt.hash(user.password, 10);
   await knex("users")
-    .where({ role_id: 3 })
+    .where({ id: user.id })
     .update({ password: hashedPassword });
 };

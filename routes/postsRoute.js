@@ -13,6 +13,7 @@ const createResponseObj = require('../utils/createResponseObj.js')
 
 const router = express.Router();
 const { ROLE_NAME } = require('../constants/index.js');
+const { ROLE_ID } = require('../constants/index.js');
 const checkRole = require('../middlewares/checkRole.js');
 
 router.post('/', checkRole(ROLE_NAME.CREATOR), validate(postsSchema), async (req, res) => {

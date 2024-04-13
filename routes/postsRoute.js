@@ -96,6 +96,16 @@ router.put('/:id', checkRole(ROLE_NAME.CREATOR), validate(patchSchema), async (r
 })
 
 router.delete('/:id', checkRole(ROLE_NAME.ADMIN, ROLE_NAME.SUPERADMIN, ROLE_NAME.CREATOR), async (req, res) =>{
+
+    const postId = req.params.id;
+    const post = await Post.query().findById(postId);
+    if (post.user_id !== req.user.id && req.user.role_id === ROLE_ID.CREATOR) {
+      return res.status(403).send({
+        message: "You are not allowed to delete other's posts"
+      })
+    }
+
+
   const id = req.params.id;
   try {
     const result = await deletePost(id);

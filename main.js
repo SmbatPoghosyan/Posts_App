@@ -1,10 +1,11 @@
 // installed node modules
-const express = require('express');
-const dotenv = require('dotenv');
-const postRouter = require('./routes/postsRoute')
-const authRouter = require('./routes/authRoute')
-require('./config/db');
-const passportConfig = require('./config/passport')
+const express = require("express");
+const dotenv = require("dotenv");
+const postRouter = require("./routes/postsRoute");
+const authRouter = require("./routes/authRoute");
+const commentsRouter = require("./routes/commentsRoute");
+require("./config/db");
+const passportConfig = require("./config/passport");
 
 dotenv.config();
 
@@ -17,11 +18,16 @@ app.use(passportConfig.initialize());
 app.use((req, res, next) => {
   req.time = new Date();
   next();
-})
+});
 
-app.use('/posts', passportConfig.authenticate('jwt', { session: false }),  postRouter);
-app.use('/auth', authRouter);
-         
-app.listen(PORT, () => { 
-  console.log(`server is running on localhost:${PORT}`)
+app.use(
+  "/posts",
+  passportConfig.authenticate("jwt", { session: false }),
+  postRouter
+);
+app.use("/auth", authRouter);
+app.use("/comments", commentsRouter);
+
+app.listen(PORT, () => {
+  console.log(`server is running on localhost:${PORT}`);
 });

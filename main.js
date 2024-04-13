@@ -3,7 +3,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const postRouter = require("./routes/postsRoute");
 const authRouter = require("./routes/authRoute");
-const commetsRouter = require("./routes/commentsRoute");
+const commentsRouter = require("./routes/commentsRoute");
 require("./config/db");
 const passportConfig = require("./config/passport");
 
@@ -26,7 +26,7 @@ app.use(
   postRouter
 );
 app.use("/auth", authRouter);
-app.use("/comments", commetsRouter);
+app.use("/comments", commentsRouter);
 
 app.listen(PORT, () => {
   console.log(`server is running on localhost:${PORT}`);

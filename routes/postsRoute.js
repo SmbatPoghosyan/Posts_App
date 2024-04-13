@@ -122,7 +122,7 @@ router.put(
   }
 );
 
-router.delete('/:id', checkRole(ROLE_NAME.ADMIN, ROLE_NAME.SUPERADMIN, ROLE_NAME.CREATOR), async (req, res) =>{
+router.delete('/:id', checkRole(ROLE_NAME.ADMIN, ROLE_NAME.SUPERADMIN, ROLE_NAME.CREATOR), async (req, res) => {
 
     const postId = req.params.id;
     const post = await Post.query().findById(postId);
@@ -149,6 +149,6 @@ router.delete('/:id', checkRole(ROLE_NAME.ADMIN, ROLE_NAME.SUPERADMIN, ROLE_NAME
       message: "Something went wrong."
     })
   }
-);
+});
 
 module.exports = router;

@@ -7,16 +7,20 @@ const {
   getComments,
   createComment,
   updateComment,
-  getCommentById,
   deleteComment,
 } = require("../controllers/commentControllers.js");
 const createResponseObj = require("../utils/createResponseObj.js");
 const Comment = require("../models/commentModel");
+const {
+  commentPostSchema,
+  commentPatchSchema,
+} = require("../vallidations/commentsVallidations.js");
+const validate = require("../vallidations");
 
 router.post(
   "/",
   checkRole(ROLE_NAME.CREATOR, ROLE_NAME.USER),
-  // validate(commentPostSchema),
+  validate(commentPostSchema),
   async (req, res) => {
     try {
       const userId = req.user.id;
@@ -92,7 +96,7 @@ router.get("/:id", async (req, res) => {
 router.put(
   "/:id",
   checkRole(ROLE_NAME.CREATOR, ROLE_NAME.USER),
-  // validate(commentpatchSchema),
+  validate(commentPatchSchema),
   async (req, res) => {
     const id = req.params.id;
     const comment = await Comment.query().findById(id);

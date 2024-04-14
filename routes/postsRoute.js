@@ -13,6 +13,7 @@ const {
 } = require("../controllers/postControllers.js");
 const createResponseObj = require("../utils/createResponseObj.js");
 const Post = require("../models/postModel.js");
+const Comment = require("../models/commentModel.js");
 
 const router = express.Router();
 const { ROLE_NAME } = require("../constants/index.js");
@@ -53,8 +54,9 @@ router.get("/", async (req, res) => {
       result.posts.map(async (post) => {
         return await Post.query()
           .findById(post.id)
+          .withGraphFetched("user")
           .withGraphFetched("comments")
-          .withGraphFetched("user");
+          .withGraphFetched("comments.user");
       })
     );
 

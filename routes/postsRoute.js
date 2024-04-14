@@ -49,17 +49,18 @@ router.get("/", async (req, res) => {
   try {
     const result = await getPosts(limit, offset);
 
-    const response = createResponseObj(
-      result.posts,
-      {
-        totalPosts: result.totalPostsCount,
-        currentPage: page,
-        limit,
-      },
-      200
+    const post = await Promise.all(
+      result.posts.map(async (post) => {
+        return await Post.query()
+          .findById(post.id)
+          .withGraphFetched("comments")
+          .withGraphFetched("user");
+      })
     );
 
-    res.status(200).send(response);
+    const response = createResponseObj(post, 200);
+
+    return res.status(200).send(response);
   } catch (err) {
     console.error("error", err);
     res.status(500).send({
@@ -71,7 +72,9 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
   try {
-    const currentPost = await getPostById(id);
+    const currentPost = await Post.query()
+      .findById(id)
+      .withGraphFetched("comments");
     if (!currentPost) {
       return res.status(404).send({
         message: `Post with id ${id} not found`,
@@ -122,33 +125,39 @@ router.put(
   }
 );
 
-router.delete('/:id', checkRole(ROLE_NAME.ADMIN, ROLE_NAME.SUPERADMIN, ROLE_NAME.CREATOR), async (req, res) => {
-
+router.delete(
+  "/:id",
+  checkRole(ROLE_NAME.ADMIN, ROLE_NAME.SUPERADMIN, ROLE_NAME.CREATOR),
+  async (req, res) => {
     const postId = req.params.id;
     const post = await Post.query().findById(postId);
     if (post.user_id !== req.user.id && req.userRole === ROLE_NAME.CREATOR) {
       return res.status(403).send({
-        message: "You are not allowed to delete other's posts"
-      })
+        message: "You are not allowed to delete other's posts",
+      });
     }
 
-
-  const id = req.params.id;
-  try {
-    const result = await deletePost(id);
-    if (!result) {
-      return res.status(404).send({
-        message: "Post not found"
-      })
+    const id = req.params.id;
+    try {
+      const result = await deletePost(id);
+      if (!result) {
+        return res.status(404).send({
+          message: "Post not found",
+        });
+      }
+      const response = createResponseObj(
+        result,
+        { message: `Post with id ${id} deleted successfully` },
+        200
+      );
+      return res.status(200).send(response);
+    } catch (err) {
+      console.error("error", err);
+      res.status(500).send({
+        message: "Something went wrong.",
+      });
     }
-    const response = createResponseObj(result, {message: `Post with id ${id} deleted successfully`}, 200);
-    return res.status(200).send(response)
-  } catch (err) {
-    console.error("error", err);
-    res.status(500).send({
-      message: "Something went wrong."
-    })
   }
-});
+);
 
 module.exports = router;

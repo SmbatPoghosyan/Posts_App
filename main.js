@@ -27,7 +27,11 @@ app.use(
   postRouter
 );
 app.use("/auth", authRouter);
-app.use("/comments", commentsRouter);
+app.use(
+  "/comments",
+  passportConfig.authenticate("jwt", { session: false }),
+  commentsRouter
+);
 app.use("/users", usersRouter);
 
 app.listen(PORT, () => {

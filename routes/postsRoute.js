@@ -2,7 +2,9 @@ const express = require("express");
 const {
   postsSchema,
   patchSchema,
+  commentSchema,
 } = require("../vallidations/postsValidation.js");
+
 const validate = require("../vallidations");
 const {
   getPosts,
@@ -10,10 +12,10 @@ const {
   deletePost,
   updatePost,
   getPostById,
+  createPostComment,
 } = require("../controllers/postControllers.js");
 const createResponseObj = require("../utils/createResponseObj.js");
 const Post = require("../models/postModel.js");
-const Comment = require("../models/commentModel.js");
 
 const router = express.Router();
 const { ROLE_NAME } = require("../constants/index.js");
@@ -29,6 +31,30 @@ router.post(
       const newPost = await createPost(req.body, userId);
       const response = createResponseObj(
         newPost,
+        { message: "Post created Successfully" },
+        201
+      );
+      res.status(201).send(response);
+    } catch (err) {
+      console.error("error", err);
+      res.status(500).send({
+        message: "Something went wrong.",
+      });
+    }
+  }
+);
+
+router.post(
+  "/:id/comment",
+  checkRole(ROLE_NAME.CREATOR),
+  validate(commentSchema),
+  async (req, res) => {
+    const postId = req.params.id;
+    try {
+      const userId = req.user.id;
+      const newcomment = await createPostComment(postId, userId, req.body);
+      const response = createResponseObj(
+        newcomment,
         { message: "Post created Successfully" },
         201
       );

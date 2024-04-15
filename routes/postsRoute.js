@@ -76,7 +76,9 @@ router.get("/:id", async (req, res) => {
   try {
     const currentPost = await Post.query()
       .findById(id)
-      .withGraphFetched("comments");
+      .withGraphFetched("user")
+      .withGraphFetched("comments")
+      .withGraphFetched("comments.user");
     if (!currentPost) {
       return res.status(404).send({
         message: `Post with id ${id} not found`,

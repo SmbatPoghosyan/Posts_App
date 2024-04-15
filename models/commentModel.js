@@ -1,48 +1,48 @@
-const { Model } = require('objection');
-const User = require('./userModel');
-const Post = require('./postModel');
+const { Model } = require("objection");
+const User = require("./userModel");
 
 class Comment extends Model {
   static get tableName() {
-    return 'comments';
+    return "comments";
   }
 
   static get idColumn() {
-    return 'id';
+    return "id";
   }
 
   static get jsonSchema() {
     return {
-      type: 'object',
-      required: ['user_id', 'post_id', 'comment'],
+      type: "object",
+      required: ["user_id", "post_id", "comment"],
       properties: {
-        id: { type: 'integer' },
-        user_id: { type: 'integer' },
-        post_id: { type: 'integer' },
-        comment: { type: 'string', minLength: 1 },
-        creation_date: { type: 'string', format: 'date' }
-      }
+        id: { type: "integer" },
+        user_id: { type: "integer" },
+        post_id: { type: "integer" },
+        comment: { type: "string", minLength: 1 },
+        creation_date: { type: "string", format: "date" },
+      },
     };
   }
 
   static get relationMappings() {
+    const Post = require("./postModel");
     return {
       user: {
         relation: Model.BelongsToOneRelation,
         modelClass: User,
         join: {
-          from: 'comments.user_id',
-          to: 'users.id'
-        }
+          from: "comments.user_id",
+          to: "users.id",
+        },
       },
       post: {
         relation: Model.BelongsToOneRelation,
         modelClass: Post,
         join: {
-          from: 'comments.post_id',
-          to: 'posts.id'
-        }
-      }
+          from: "comments.post_id",
+          to: "posts.id",
+        },
+      },
     };
   }
 }

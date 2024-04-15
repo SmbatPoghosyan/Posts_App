@@ -33,7 +33,12 @@ app.use(
   passportConfig.authenticate("jwt", { session: false }),
   userRouter
 );
-app.use("/comments", commentsRouter);
+app.use(
+  "/comments",
+  passportConfig.authenticate("jwt", { session: false }),
+  commentsRouter
+);
+app.use("/users", usersRouter);
 
 app.listen(PORT, () => {
   console.log(`server is running on localhost:${PORT}`);

@@ -1,7 +1,6 @@
 const { Model } = require("objection");
 const Role = require("./roleModel");
-const Post = require("./postModel");
-//const Comment = require("./commentModel");
+const Comment = require("./commentModel");
 
 class User extends Model {
   static get tableName() {
@@ -10,17 +9,6 @@ class User extends Model {
 
   static get idColumn() {
     return "id";
-  }
-
-  $formatJson(json) {
-    // Remember to call the super class's implementation.
-    json = super.$formatJson(json);
-
-    if (json.password) {
-      delete json.password;
-    }
-    // Do your conversion here.
-    return json;
   }
 
   static get jsonSchema() {
@@ -38,7 +26,7 @@ class User extends Model {
   }
 
   static get relationMappings() {
-    const Comment = require("./commentModel");
+    const Post = require("./postModel");
     return {
       role: {
         relation: Model.BelongsToOneRelation,

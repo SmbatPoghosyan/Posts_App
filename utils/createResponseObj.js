@@ -7,7 +7,7 @@
 } */
 
 const createResponseObj = (data, metadata, statusCode, success = true) => {
-  if (data.password) {
+  if (data?.password) {
     delete data.password;
   }
   return {

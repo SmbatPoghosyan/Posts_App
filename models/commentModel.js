@@ -1,5 +1,4 @@
 const { Model } = require("objection");
-const User = require("./userModel");
 
 class Comment extends Model {
   static get tableName() {
@@ -25,6 +24,7 @@ class Comment extends Model {
   }
 
   static get relationMappings() {
+    const User = require("./userModel");
     const Post = require("./postModel");
     return {
       user: {

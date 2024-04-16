@@ -21,7 +21,7 @@ const postsSchema = {
       format: "date",
     },
   },
-  additionalProperties: false
+  additionalProperties: false,
 };
 
 const patchSchema = {
@@ -40,12 +40,31 @@ const patchSchema = {
     content: {
       type: "string",
       minLength: 1,
-    }
+    },
   },
-  additionalProperties: false
-}
+  additionalProperties: false,
+};
+const commentSchema = {
+  type: "object",
+  required: ["comment", "creation_date"],
+  properties: {
+    post_id: {
+      type: "integer",
+    },
+    comment: {
+      type: "string",
+      minLength: 1,
+    },
+    creation_date: {
+      type: "string",
+      format: "date",
+    },
+  },
+  additionalProperties: false,
+};
 
 module.exports = {
   postsSchema,
-  patchSchema
-}
+  patchSchema,
+  commentSchema
+};

@@ -1,4 +1,5 @@
 const Post = require("../models/postModel");
+const Comment = require("../models/commentModel");
 
 const getPosts = async (limit, offset) => {
   try {
@@ -50,10 +51,22 @@ const deletePost = async (postId) => {
   }
 };
 
+const createPostComment = async (postId, userId, comment) => {
+  try {
+    comment.post_id = Number(postId);
+    comment.user_id = userId;
+    const newComment = await Comment.query().insert(comment);
+    return newComment;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
 module.exports = {
   createPost,
   updatePost,
   getPosts,
   deletePost,
   getPostById,
+  createPostComment,
 };

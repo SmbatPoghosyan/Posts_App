@@ -55,7 +55,7 @@ router.post(
       const newcomment = await createPostComment(postId, userId, req.body);
       const response = createResponseObj(
         newcomment,
-        { message: "Post created Successfully" },
+        { message: "comment created Successfully" },
         201
       );
       res.status(201).send(response);

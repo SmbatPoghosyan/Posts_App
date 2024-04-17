@@ -1,16 +1,42 @@
 const Post = require("../models/postModel");
 const Comment = require("../models/commentModel");
+const User = require("../models/userModel");
 
-const getPosts = async (limit, offset) => {
+const getPosts = async (limit, offset, withComments = false) => {
   try {
-    const posts = await Post.query()
-      .limit(limit)
-      .offset(offset)
-      .withGraphFetched("user");
+    if (withComments) {
+      const posts = await Post.query()
+        .limit(limit)
+        .offset(offset)
+        .withGraphFetched("user")
+        .modifyGraph("user", (builder) => {
+          builder.select("id", "username");
+        })
+        .select("id", "title", "content", "creation_date", "view_count")
+        .withGraphFetched("comments")
+        .modifyGraph("comments", (builder) => {
+          builder.select("id", "user_id", "comment", "creation_date");
+        })
+        .withGraphFetched("comments.user")
+        .modifyGraph("comments.user", (builder) => {
+          builder.select("id", "username");
+        });
 
-    const totalPostsCount = await Post.query().resultSize();
+      const totalPostsCount = await Post.query().resultSize();
+      return { posts, totalPostsCount };
+    } else {
+      const posts = await Post.query()
+        .limit(limit)
+        .offset(offset)
+        .withGraphFetched("user")
+        .modifyGraph("user", (builder) => {
+          builder.select("id", "username");
+        })
+        .select("id", "title", "content", "creation_date", "view_count");
 
-    return { posts, totalPostsCount };
+      const totalPostsCount = await Post.query().resultSize();
+      return { posts, totalPostsCount };
+    }
   } catch (err) {
     throw new Error(err);
   }
@@ -34,9 +60,35 @@ const updatePost = async (postId, data) => {
   }
 };
 
-const getPostById = async (id) => {
+const getPostById = async (id, withComments = false) => {
   try {
-    return await Post.query().findById(id);
+    if (withComments) {
+      const post = await Post.query()
+        .findById(id)
+        .withGraphFetched("user")
+        .modifyGraph("user", (builder) => {
+          builder.select("id", "username");
+        })
+        .select("id", "title", "content", "creation_date", "view_count")
+        .withGraphFetched("comments")
+        .modifyGraph("comments", (builder) => {
+          builder.select("id", "user_id", "comment", "creation_date");
+        })
+        .withGraphFetched("comments.user")
+        .modifyGraph("comments.user", (builder) => {
+          builder.select("id", "username");
+        });
+      return post;
+    } else {
+      const post = await Post.query()
+        .findById(id)
+        .withGraphFetched("user")
+        .modifyGraph("user", (builder) => {
+          builder.select("id", "username");
+        })
+        .select("id", "title", "content", "creation_date", "view_count");
+      return post;
+    }
   } catch (err) {
     throw new Error(err);
   }

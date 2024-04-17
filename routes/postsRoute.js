@@ -72,21 +72,12 @@ router.get("/", async (req, res) => {
   const page = Number(req.query.page) || 1;
   const limit = Number(req.query.limit) || 10;
   const offset = (page - 1) * limit;
+  const withComment = req.query.withComment;
 
   try {
-    const result = await getPosts(limit, offset);
+    const result = await getPosts(limit, offset, withComment);
 
-    const post = await Promise.all(
-      result.posts.map(async (post) => {
-        return await Post.query()
-          .findById(post.id)
-          .withGraphFetched("user")
-          .withGraphFetched("comments")
-          .withGraphFetched("comments.user");
-      })
-    );
-
-    const response = createResponseObj(post, 200);
+    const response = createResponseObj(result, 200);
 
     return res.status(200).send(response);
   } catch (err) {
@@ -98,13 +89,10 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  const id = req.params.id;
   try {
-    const currentPost = await Post.query()
-      .findById(id)
-      .withGraphFetched("user")
-      .withGraphFetched("comments")
-      .withGraphFetched("comments.user");
+    const id = req.params.id;
+    const currentPost = getPostById(id, true);
+
     if (!currentPost) {
       return res.status(404).send({
         message: `Post with id ${id} not found`,

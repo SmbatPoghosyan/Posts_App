@@ -15,11 +15,11 @@ const {
   createPostComment,
 } = require("../controllers/postControllers.js");
 const createResponseObj = require("../utils/createResponseObj.js");
-const Post = require("../models/postModel.js");
 
 const router = express.Router();
-const { ROLE_NAME } = require("../constants/index.js");
+const { ROLE_NAME, RESOURCE } = require("../constants/index.js");
 const checkRole = require("../middlewares/checkRole.js");
+const checkIfUserAllowed = require("../middlewares/checkIfUserAllowed.js");
 
 router.post(
   "/",
@@ -46,7 +46,7 @@ router.post(
 
 router.post(
   "/:id/comment",
-  checkRole(ROLE_NAME.CREATOR),
+  checkRole(ROLE_NAME.CREATOR, ROLE_NAME.USER),
   validate(commentSchema),
   async (req, res) => {
     const postId = req.params.id;
@@ -55,7 +55,7 @@ router.post(
       const newcomment = await createPostComment(postId, userId, req.body);
       const response = createResponseObj(
         newcomment,
-        { message: "comment created Successfully" },
+        { message: "Comment created Successfully" },
         201
       );
       res.status(201).send(response);
@@ -123,15 +123,10 @@ router.get("/:id", async (req, res) => {
 router.put(
   "/:id",
   checkRole(ROLE_NAME.CREATOR),
+  checkIfUserAllowed(RESOURCE.Post),
   validate(patchSchema),
   async (req, res) => {
     const id = req.params.id;
-    const post = await Post.query().findById(id);
-    if (post.user_id !== req.user.id) {
-      return res
-        .status(400)
-        .send({ message: "You are not allowed to update this post" });
-    }
     const data = req.body;
     try {
       const updatedPost = await updatePost(id, data);
@@ -158,15 +153,8 @@ router.put(
 router.delete(
   "/:id",
   checkRole(ROLE_NAME.ADMIN, ROLE_NAME.SUPERADMIN, ROLE_NAME.CREATOR),
+  checkIfUserAllowed(RESOURCE.Post),
   async (req, res) => {
-    const postId = req.params.id;
-    const post = await Post.query().findById(postId);
-    if (post.user_id !== req.user.id && req.userRole === ROLE_NAME.CREATOR) {
-      return res.status(403).send({
-        message: "You are not allowed to delete other's posts",
-      });
-    }
-
     const id = req.params.id;
     try {
       const result = await deletePost(id);

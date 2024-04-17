@@ -12,11 +12,11 @@ const {
   getUserById,
 } = require("../controllers/usersControllers.js");
 const createResponseObj = require("../utils/createResponseObj.js");
-const User = require("../models/userModel.js");
 
 const router = express.Router();
-const { ROLE_NAME } = require("../constants/index.js");
+const { ROLE_NAME, RESOURCE } = require("../constants/index.js");
 const checkRole = require("../middlewares/checkRole.js");
+const checkIfUserAllowed = require("../middlewares/checkIfUserAllowed.js");
 
 router.post(
   "/",
@@ -100,15 +100,10 @@ router.get(
 router.put(
   "/:id",
   checkRole(ROLE_NAME.SUPERADMIN, ROLE_NAME.ADMIN),
+  checkIfUserAllowed(RESOURCE.User),
   validate(updateUserSchema),
   async (req, res) => {
     const id = req.params.id;
-    const user = await User.query().findById(id);
-    if (user.role_id >= req.user.role_id) {
-      return res
-        .status(400)
-        .send({ message: "You are not allowed to update this post" });
-    }
     const data = req.body;
     try {
       const updatedUser = await updateUser(id, data);
@@ -135,20 +130,9 @@ router.put(
 router.delete(
   "/:id",
   checkRole(ROLE_NAME.SUPERADMIN, ROLE_NAME.ADMIN),
+  checkIfUserAllowed(RESOURCE.User),
   async (req, res) => {
     const userId = req.params.id;
-    const user = await User.query().findById(userId);
-    if (!user) {
-      return res.status(403).send({
-        message: `User with id ${userId} not found`,
-      });
-    }
-
-    if (user.role_id > req.user.role_id) {
-      return res.status(403).send({
-        message: "You are not allowed to delete admin or superadmin", // how can I write this message correct?
-      });
-    }
     try {
       const result = await deleteUser(userId);
       if (!result) {

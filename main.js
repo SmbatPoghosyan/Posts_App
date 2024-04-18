@@ -5,6 +5,7 @@ const postRouter = require("./routes/postsRoute");
 const authRouter = require("./routes/authRoute");
 const userRouter = require("./routes/usersRoute");
 const commentsRouter = require("./routes/commentsRoute");
+const userProfileRouter = require("../routes/userProfileRoute");
 
 require("./config/db");
 const passportConfig = require("./config/passport");
@@ -37,6 +38,11 @@ app.use(
   "/comments",
   passportConfig.authenticate("jwt", { session: false }),
   commentsRouter
+);
+app.use(
+  "/user_profiles",
+  passportConfig.authenticate("jwt", { session: false }),
+  userProfileRouter
 );
 
 app.listen(PORT, () => {

@@ -1,8 +1,30 @@
 const express = require("express");
+const {
+  createUserProfilesSchema,
+  updateUserProfilesSchema,
+} = require("../vallidations/userProfilesValidation");
+const validate = require("../vallidations");
+const {
+  createUserProfile,
+  getUserProfiles,
+  getUserProfileById,
+  updateUserProfile,
+  deleteUserPorfile,
+} = require("../controllers/user_profilesControllers");
+const createResponseObj = require("../utils/createResponseObj");
+const createResponseObj = require("../utils/createResponseObj");
+
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post("/", validate(createUserProfilesSchema), async (req, res) => {
   try {
+    const newUserProfile = await createUserProfile(req.body);
+    const response = createResponseObj(
+      newUserProfile,
+      { message: "UserProfile created successfully" },
+      201
+    );
+    res.status(201).send(response);
   } catch (err) {
     console.error("error", err);
     res.status(500).send({
@@ -13,6 +35,9 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
+    const userProfiles = await getUserProfiles();
+    const response = createResponseObj(userProfiles, {}, 200);
+    res.status(201).send(response);
   } catch (err) {
     console.error("error", err);
     res.status(500).send({
@@ -22,7 +47,16 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
+  const id = req.params.id;
   try {
+    const userProfile = await getUserProfileById(id);
+    if (!userProfile) {
+      return res.status(404).send({
+        message: `UserProfile with id ${id} not found`,
+      });
+    }
+    const response = createResponseObj(userProfile, {}, 200);
+    res.status(200).send(response);
   } catch (err) {
     console.error("error", err);
     res.status(500).send({
@@ -31,8 +65,21 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", validate(updateUserProfilesSchema), async (req, res) => {
+  const id = req.params.id;
   try {
+    const updatedUserProfile = await updateUserProfile(id, req.body);
+    if (!updatedUserProfile) {
+      return res
+        .status(404)
+        .send({ message: `UserProfile with id ${id} not found` });
+    }
+    const response = createResponseObj(
+      updatedUserProfile,
+      { message: `UserProfile with id ${id} updated successfully` },
+      200
+    );
+    res.status(200).send(response);
   } catch (err) {
     console.error("error", err);
     res.status(500).send({
@@ -42,7 +89,18 @@ router.put("/:id", async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
+  const id = req.params.id;
   try {
+    const deletedUserProfile = await deleteUserPorfile(id, req.body);
+    if (!deletedUserProfile) {
+      return res
+        .status(404)
+        .send({ message: `UserProfile with id ${id} not found` });
+    }
+    const response = createResponseObj(deletedUserProfile, {
+      message: `UserProfile with id ${id} was successfully deleted`,
+    });
+    res.status(200).send(response);
   } catch (err) {
     console.error("error", err);
     res.status(500).send({

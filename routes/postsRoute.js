@@ -15,11 +15,11 @@ const {
   createPostComment,
 } = require("../controllers/postControllers.js");
 const createResponseObj = require("../utils/createResponseObj.js");
-const Post = require("../models/postModel.js");
 
 const router = express.Router();
-const { ROLE_NAME } = require("../constants/index.js");
+const { ROLE_NAME, RESOURCE } = require("../constants/index.js");
 const checkRole = require("../middlewares/checkRole.js");
+const checkIfUserAllowed = require("../middlewares/checkIfUserAllowed.js");
 
 router.post(
   "/",
@@ -46,7 +46,7 @@ router.post(
 
 router.post(
   "/:id/comment",
-  checkRole(ROLE_NAME.CREATOR),
+  checkRole(ROLE_NAME.CREATOR, ROLE_NAME.USER),
   validate(commentSchema),
   async (req, res) => {
     const postId = req.params.id;
@@ -55,7 +55,7 @@ router.post(
       const newcomment = await createPostComment(postId, userId, req.body);
       const response = createResponseObj(
         newcomment,
-        { message: "comment created Successfully" },
+        { message: "Comment created Successfully" },
         201
       );
       res.status(201).send(response);
@@ -72,21 +72,12 @@ router.get("/", async (req, res) => {
   const page = Number(req.query.page) || 1;
   const limit = Number(req.query.limit) || 10;
   const offset = (page - 1) * limit;
+  const withComment = req.query.withComment;
 
   try {
-    const result = await getPosts(limit, offset);
+    const result = await getPosts(limit, offset, withComment);
 
-    const post = await Promise.all(
-      result.posts.map(async (post) => {
-        return await Post.query()
-          .findById(post.id)
-          .withGraphFetched("user")
-          .withGraphFetched("comments")
-          .withGraphFetched("comments.user");
-      })
-    );
-
-    const response = createResponseObj(post, 200);
+    const response = createResponseObj(result, 200);
 
     return res.status(200).send(response);
   } catch (err) {
@@ -98,13 +89,11 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  const id = req.params.id;
   try {
-    const currentPost = await Post.query()
-      .findById(id)
-      .withGraphFetched("user")
-      .withGraphFetched("comments")
-      .withGraphFetched("comments.user");
+    const id = req.params.id;
+    const withComments = req.query.withComments;
+    const currentPost = await getPostById(id, withComments);
+    console.log(currentPost);
     if (!currentPost) {
       return res.status(404).send({
         message: `Post with id ${id} not found`,
@@ -123,15 +112,10 @@ router.get("/:id", async (req, res) => {
 router.put(
   "/:id",
   checkRole(ROLE_NAME.CREATOR),
+  checkIfUserAllowed(RESOURCE.Post),
   validate(patchSchema),
   async (req, res) => {
     const id = req.params.id;
-    const post = await Post.query().findById(id);
-    if (post.user_id !== req.user.id) {
-      return res
-        .status(400)
-        .send({ message: "You are not allowed to update this post" });
-    }
     const data = req.body;
     try {
       const updatedPost = await updatePost(id, data);
@@ -158,15 +142,8 @@ router.put(
 router.delete(
   "/:id",
   checkRole(ROLE_NAME.ADMIN, ROLE_NAME.SUPERADMIN, ROLE_NAME.CREATOR),
+  checkIfUserAllowed(RESOURCE.Post),
   async (req, res) => {
-    const postId = req.params.id;
-    const post = await Post.query().findById(postId);
-    if (post.user_id !== req.user.id && req.userRole === ROLE_NAME.CREATOR) {
-      return res.status(403).send({
-        message: "You are not allowed to delete other's posts",
-      });
-    }
-
     const id = req.params.id;
     try {
       const result = await deletePost(id);

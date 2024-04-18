@@ -12,11 +12,11 @@ const {
   getUserById,
 } = require("../controllers/usersControllers.js");
 const createResponseObj = require("../utils/createResponseObj.js");
-const User = require("../models/userModel.js");
 
 const router = express.Router();
-const { ROLE_NAME } = require("../constants/index.js");
+const { ROLE_NAME, RESOURCE } = require("../constants/index.js");
 const checkRole = require("../middlewares/checkRole.js");
+const checkIfUserAllowed = require("../middlewares/checkIfUserAllowed.js");
 
 router.post(
   "/",
@@ -94,50 +94,36 @@ router.get(
   }
 );
 
-router.put("/:id", validate(updateUserSchema), async (req, res) => {
-  const id = req.params.id;
-  const user = await User.query().findById(id);
-  if (user.role_id >= req.user.role_id) {
-    return res
-      .status(400)
-      .send({ message: "You are not allowed to update this post" });
-  }
-  const data = req.body;
-  try {
-    const updatedUser = await updateUser(id, data);
-    if (!updatedUser) {
-      return res.status(404).send({
-        message: `User with id ${id} not found`,
+router.put(
+  "/:id",
+  checkIfUserAllowed(RESOURCE.User),
+  validate(updateUserSchema),
+  async (req, res) => {
+    const id = req.params.id;
+    try {
+      const updatedUser = await updateUser(id, data);
+      if (!updatedUser) {
+        return res.status(404).send({
+          message: `User with id ${id} not found`,
+        });
+      }
+      const response = createResponseObj(
+        updatedUser,
+        { message: `User with id ${id} updated successfully` },
+        200
+      );
+      return res.status(200).send(response);
+    } catch (err) {
+      console.error("error", err);
+      res.status(500).send({
+        message: "Something went wrong.",
       });
     }
-    const response = createResponseObj(
-      updatedUser,
-      { message: `User with id ${id} updated successfully` },
-      200
-    );
-    return res.status(200).send(response);
-  } catch (err) {
-    console.error("error", err);
-    res.status(500).send({
-      message: "Something went wrong.",
-    });
   }
-});
+);
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", checkIfUserAllowed(RESOURCE.User), async (req, res) => {
   const userId = req.params.id;
-  const user = await User.query().findById(userId);
-  if (!user) {
-    return res.status(403).send({
-      message: `User with id ${userId} not found`,
-    });
-  }
-
-  if (user.role_id > req.user.role_id) {
-    return res.status(403).send({
-      message: "You are not allowed to delete this user",
-    });
-  }
   try {
     const result = await deleteUser(userId);
     if (!result) {

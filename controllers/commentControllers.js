@@ -5,7 +5,19 @@ const getComments = async (limit, offset) => {
     const comments = await Comment.query()
       .limit(limit)
       .offset(offset)
-      .withGraphFetched("user");
+      .select("id", "comment", "creation_date")
+      .withGraphFetched("user")
+      .modifyGraph("user", (builder) => {
+        builder.select("id", "username");
+      })
+      .withGraphFetched("post")
+      .modifyGraph("post", (builder) => {
+        builder.select("id", "title", "subtitle", "content", "creation_date");
+      })
+      .withGraphFetched("post.user")
+      .modifyGraph("post.user", (builder) => {
+        builder.select("id", "username");
+      });
 
     const totalCommentsCount = await Comment.query().resultSize();
 
@@ -15,10 +27,9 @@ const getComments = async (limit, offset) => {
   }
 };
 
-const createComment = async (comment, userId) => {
-  comment.user_id = userId;
+const createComment = async (data) => {
   try {
-    const newComment = await Comment.query().insert(comment);
+    const newComment = await Comment.query().insert(data);
     return newComment;
   } catch (err) {
     throw new Error(err);
@@ -35,7 +46,22 @@ const updateComment = async (commentId, data) => {
 
 const getCommentById = async (id) => {
   try {
-    return await Comment.query().findById(id);
+    const currentComment = await Comment.query()
+      .findById(id)
+      .select("id", "comment", "creation_date")
+      .withGraphFetched("user")
+      .modifyGraph("user", (builder) => {
+        builder.select("id", "username");
+      })
+      .withGraphFetched("post")
+      .modifyGraph("post", (builder) => {
+        builder.select("id", "title", "subtitle", "content", "creation_date");
+      })
+      .withGraphFetched("post.user")
+      .modifyGraph("post.user", (builder) => {
+        builder.select("id", "username");
+      });
+    return currentComment;
   } catch (err) {
     throw new Error(err);
   }

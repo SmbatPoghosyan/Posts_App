@@ -2,15 +2,20 @@ const { ROLE_NAME, RESOURCE, HTTP_METHOD } = require("../constants/index.js");
 const Comment = require("../models/commentModel");
 const Post = require("../models/postModel.js");
 const User = require("../models/userModel.js");
+const UserProfile = require("../models/userProfileModel.js");
 
 const checkIfUserAllowed = (resource) => async (req, res, next) => {
   try {
     const id = req.params.id;
+    const user = await User.query()
+      .findById(req.user.id)
+      .withGraphFetched("role");
+
+    const userRole = user.role.role_name.toUpperCase();
     if (resource === RESOURCE.User) {
       if (
-        (req.method === HTTP_METHOD.DELETE || HTTP_METHOD.PUT) &&
-        (req.userRole === ROLE_NAME.ADMIN ||
-          req.userRole === ROLE_NAME.SUPERADMIN)
+        (req.method === HTTP_METHOD.DELETE || req.method === HTTP_METHOD.PUT) &&
+        (userRole === ROLE_NAME.ADMIN || userRole === ROLE_NAME.SUPERADMIN)
       ) {
         next();
         return;
@@ -18,8 +23,7 @@ const checkIfUserAllowed = (resource) => async (req, res, next) => {
     }
     if (
       req.method === HTTP_METHOD.DELETE &&
-      (req.userRole === ROLE_NAME.ADMIN ||
-        req.userRole === ROLE_NAME.SUPERADMIN)
+      (userRole === ROLE_NAME.ADMIN || userRole === ROLE_NAME.SUPERADMIN)
     ) {
       next();
       return;
@@ -51,7 +55,6 @@ const checkIfUserAllowed = (resource) => async (req, res, next) => {
       : currentResource.id;
 
     if (user_id !== req.user.id) {
-      console.log(user_id);
       resource = resource.toLowerCase();
       return res.status(400).send({
         message: `You are not allowed to update this ${resource}.`,

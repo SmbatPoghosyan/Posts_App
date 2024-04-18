@@ -100,6 +100,7 @@ router.put(
   validate(updateUserSchema),
   async (req, res) => {
     const id = req.params.id;
+    const data = req.body;
     try {
       const updatedUser = await updateUser(id, data);
       if (!updatedUser) {

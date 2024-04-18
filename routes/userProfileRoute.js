@@ -14,7 +14,7 @@ const {
 const createResponseObj = require("../utils/createResponseObj");
 
 const router = express.Router();
-const { ROLE_NAME, RESOURCE } = require("../constants");
+const { RESOURCE } = require("../constants");
 const checkRole = require("../middlewares/checkRole.js");
 const checkIfUserAllowed = require("../middlewares/checkIfUserAllowed.js");
 

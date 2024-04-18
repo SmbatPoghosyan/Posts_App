@@ -78,6 +78,7 @@ const getPostById = async (id, withComments = false) => {
         .modifyGraph("comments.user", (builder) => {
           builder.select("id", "username");
         });
+
       return post;
     } else {
       const post = await Post.query()

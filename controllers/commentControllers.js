@@ -5,7 +5,7 @@ const getComments = async (limit, offset) => {
     const comments = await Comment.query()
       .limit(limit)
       .offset(offset)
-      .withGraphFetched("user",);
+      .withGraphFetched("user");
 
     const totalCommentsCount = await Comment.query().resultSize();
 

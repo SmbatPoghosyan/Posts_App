@@ -12,14 +12,22 @@ const ROLE_NAME = {
 };
 
 const RESOURCE = {
-  Post: "Post",
-  Comment: "Comment",
-  User: "User",
-  UserProfile: "UserProfile",
+  Post: "POST",
+  Comment: "COMMENT",
+  User: "USER",
+  UserProfile: "USERPROFILE",
+};
+
+const HTTP_METHOD = {
+  DELETE: "DELETE",
+  PUT: "PUT",
+  GET: "GET",
+  POST: "POST",
 };
 
 module.exports = {
   ROLE_ID,
   ROLE_NAME,
   RESOURCE,
+  HTTP_METHOD,
 };

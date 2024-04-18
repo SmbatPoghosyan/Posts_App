@@ -1,4 +1,4 @@
-const { ROLE_NAME, RESOURCE } = require("../constants/index.js");
+const { ROLE_NAME, RESOURCE, HTTP_METHOD } = require("../constants/index.js");
 const Comment = require("../models/commentModel");
 const Post = require("../models/postModel.js");
 const User = require("../models/userModel.js");
@@ -8,24 +8,19 @@ const checkIfUserAllowed = (resource) => async (req, res, next) => {
     const id = req.params.id;
     if (resource === RESOURCE.User) {
       if (
-        req.method === "DELETE" ||
-        ("PUT" &&
-          (req.userRole === ROLE_NAME.ADMIN ||
-            req.userRole === ROLE_NAME.SUPERADMIN))
+        (req.method === HTTP_METHOD.DELETE || HTTP_METHOD.PUT) &&
+        (req.userRole === ROLE_NAME.ADMIN ||
+          req.userRole === ROLE_NAME.SUPERADMIN)
       ) {
-        console.log(req.method);
-        console.log(req.userRole);
         next();
         return;
       }
     }
     if (
-      req.method === "DELETE" &&
+      req.method === HTTP_METHOD.DELETE &&
       (req.userRole === ROLE_NAME.ADMIN ||
         req.userRole === ROLE_NAME.SUPERADMIN)
     ) {
-      console.log(req.method);
-      console.log(req.userRole);
       next();
       return;
     }
@@ -48,7 +43,7 @@ const checkIfUserAllowed = (resource) => async (req, res, next) => {
         currentResource = await Comment.query().findById(id);
         break;
       default:
-        throw new Error(err);
+        throw new Error("Resource type is not supported.");
     }
 
     const user_id = currentResource.user_id

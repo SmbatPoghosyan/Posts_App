@@ -116,17 +116,7 @@ router.put(
   async (req, res) => {
     const id = req.params.id;
     const data = req.body;
-    const username = req.user.username;
     try {
-      const userQuery = User.query().where("username", username);
-      const user = await userQuery.first();
-      const hashedPassword = user.password;
-      const isSame = await bcrypt.compare(data.password, hashedPassword);
-      if (!isSame) {
-        return res.status(400).send({
-          message: `Wrong password!`,
-        });
-      }
       delete data.password;
 
       const updatedUser = await updateUser(id, data);

@@ -117,7 +117,6 @@ router.put(
     const id = req.params.id;
     const data = req.body;
     try {
-      delete data.password;
 
       const updatedUser = await updateUser(id, data);
       if (!updatedUser) {

@@ -175,7 +175,7 @@ router.get("/self", checkRole(ROLE_NAME.CREATOR), async (req, res) => {
       return res.status(404).send({ error: "You don't have posts yet :(" });
     }
     const response = createResponseObj(posts, {}, 200);
-    return response;
+    res.status(200).send(response);
   } catch (err) {
     console.error("error", err);
     res.status(500).send({

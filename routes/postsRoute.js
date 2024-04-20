@@ -168,16 +168,14 @@ router.delete(
   }
 );
 
-router.get("/self", async (req, res) => {
+router.get("/self", checkRole(ROLE_NAME.CREATOR), async (req, res) => {
   try {
-    if (req.user.ROLE_NAME !== "CREATOR") {
-      return res.status(403).send({ message: "You not have access to this." });
-    }
     const posts = await getCreatorsPosts(req.user.id);
-
-    if (!posts) {
+    if (!posts.length) {
       return res.status(404).send({ error: "You don't have posts yet :(" });
     }
+    const response = createResponseObj(posts, {}, 200);
+    return response;
   } catch (err) {
     console.error("error", err);
     res.status(500).send({

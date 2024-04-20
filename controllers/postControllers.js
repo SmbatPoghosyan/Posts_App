@@ -115,6 +115,15 @@ const createPostComment = async (postId, userId, comment) => {
   }
 };
 
+const getCreatorsPosts = async (userId) => {
+  try {
+    const posts = await Post.query().find({ user_id: userId });
+    return posts;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
 module.exports = {
   createPost,
   updatePost,
@@ -122,4 +131,5 @@ module.exports = {
   deletePost,
   getPostById,
   createPostComment,
+  getCreatorsPosts,
 };

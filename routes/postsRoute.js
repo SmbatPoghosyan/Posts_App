@@ -13,6 +13,7 @@ const {
   updatePost,
   getPostById,
   createPostComment,
+  getCreatorsPosts,
 } = require("../controllers/postControllers.js");
 const createResponseObj = require("../utils/createResponseObj.js");
 
@@ -166,5 +167,23 @@ router.delete(
     }
   }
 );
+
+router.get("/self", async (req, res) => {
+  try {
+    if (req.user.ROLE_NAME !== "CREATOR") {
+      return res.status(403).send({ message: "You not have access to this." });
+    }
+    const posts = await getCreatorsPosts(req.user.id);
+
+    if (!posts) {
+      return res.status(404).send({ error: "You don't have posts yet :(" });
+    }
+  } catch (err) {
+    console.error("error", err);
+    res.status(500).send({
+      message: "Something went wrong",
+    });
+  }
+});
 
 module.exports = router;

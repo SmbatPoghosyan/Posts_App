@@ -1,4 +1,5 @@
 const express = require("express");
+const express = require("express");
 const router = express.Router();
 const createResponseObj = require("../utils/createResponseObj");
 const validate = require("../vallidations");
@@ -31,10 +32,12 @@ router.post("/signup", validate(signupSchema), async (req, res) => {
   } catch (err) {
     console.error("error", err);
     res.status(500).send({
-      message: "Something went wrong.",
+      message: "User with this username or email already exsists!",
     });
   }
 });
+
+router.post("/signin", validate(signinSchema), async (req, res) => {});
 
 router.post("/signin", validate(signinSchema), async (req, res) => {
   const data = req.body;
@@ -48,6 +51,12 @@ router.post("/signin", validate(signinSchema), async (req, res) => {
     );
     res.status(200).send(resObj);
   } catch (err) {
+    let errorMessage;
+    if (email) {
+      errorMessage = "Wrong email or password!";
+    } else if (username) {
+      errorMessage = "Wrong username or password";
+    }
     console.error("error", err);
     res.status(500).send({
       message: "Something went wrong.",

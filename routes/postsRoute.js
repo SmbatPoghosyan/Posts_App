@@ -13,6 +13,7 @@ const {
   updatePost,
   getPostById,
   createPostComment,
+  getCreatorsPosts,
 } = require("../controllers/postControllers.js");
 const createResponseObj = require("../utils/createResponseObj.js");
 
@@ -93,7 +94,6 @@ router.get("/:id", async (req, res) => {
     const id = req.params.id;
     const withComments = req.query.withComments;
     const currentPost = await getPostById(id, withComments);
-    console.log(currentPost);
     if (!currentPost) {
       return res.status(404).send({
         message: `Post with id ${id} not found`,
@@ -166,5 +166,21 @@ router.delete(
     }
   }
 );
+
+router.get("/self", checkRole(ROLE_NAME.CREATOR), async (req, res) => {
+  try {
+    const posts = await getCreatorsPosts(req.user.id);
+    if (!posts.length) {
+      return res.status(404).send({ error: "You don't have posts yet :(" });
+    }
+    const response = createResponseObj(posts, {}, 200);
+    res.status(200).send(response);
+  } catch (err) {
+    console.error("error", err);
+    res.status(500).send({
+      message: "Something went wrong",
+    });
+  }
+});
 
 module.exports = router;

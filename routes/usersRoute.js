@@ -12,7 +12,8 @@ const {
   getUserById,
 } = require("../controllers/usersControllers.js");
 const createResponseObj = require("../utils/createResponseObj.js");
-
+const User = require("../models/userModel");
+const bcrypt = require("bcrypt");
 const router = express.Router();
 const { ROLE_NAME, RESOURCE } = require("../constants/index.js");
 const checkRole = require("../middlewares/checkRole.js");
@@ -51,10 +52,18 @@ router.get(
 
     try {
       const result = await getUsers(limit, offset);
+      result.users.forEach((el) => {
+        delete el.password;
+        delete el.created_at;
+        delete el.updated_at;
+        delete el.comments;
+        delete el.posts;
+      });
+
       const response = createResponseObj(
         result.users,
         {
-          totalPosts: result.totalUsersCount,
+          totalUsers: result.totalUsersCount,
           currentPage: page,
           limit,
         },
@@ -78,11 +87,17 @@ router.get(
     const id = req.params.id;
     try {
       const currentUser = await getUserById(id);
+
       if (!currentUser) {
         return res.status(404).send({
           message: `User with id ${id} not found`,
         });
       }
+
+      delete currentUser.password;
+      delete currentUser.created_at;
+      delete currentUser.updated_at;
+
       const response = createResponseObj(currentUser, {}, 200);
       return res.status(200).send(response);
     } catch (err) {
@@ -101,7 +116,19 @@ router.put(
   async (req, res) => {
     const id = req.params.id;
     const data = req.body;
+    const username = req.user.username;
     try {
+      const userQuery = User.query().where("username", username);
+      const user = await userQuery.first();
+      const hashedPassword = user.password;
+      const isSame = await bcrypt.compare(data.password, hashedPassword);
+      if (!isSame) {
+        return res.status(400).send({
+          message: `Wrong password!`,
+        });
+      }
+      delete data.password;
+
       const updatedUser = await updateUser(id, data);
       if (!updatedUser) {
         return res.status(404).send({
@@ -113,6 +140,8 @@ router.put(
         { message: `User with id ${id} updated successfully` },
         200
       );
+      delete response.data.created_at;
+      delete response.data.updated_at;
       return res.status(200).send(response);
     } catch (err) {
       console.error("error", err);

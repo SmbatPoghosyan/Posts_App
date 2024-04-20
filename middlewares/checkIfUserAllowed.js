@@ -2,36 +2,36 @@ const { ROLE_NAME, RESOURCE, HTTP_METHOD } = require("../constants/index.js");
 const Comment = require("../models/commentModel");
 const Post = require("../models/postModel.js");
 const User = require("../models/userModel.js");
-const Role = require("../models/roleModel.js");
+const UserProfile = require("../models/userProfileModel.js");
 
 const checkIfUserAllowed = (resource) => async (req, res, next) => {
   try {
     const id = req.params.id;
+    const user = await User.query()
+      .findById(req.user.id)
+      .withGraphFetched("role");
+
+    const userRole = user.role.role_name.toUpperCase();
     if (resource === RESOURCE.User) {
-      const userRoleId = req.user.role_id;
-      const userRole = await Role.query().findById(userRoleId);
-      const userRoleName = userRole.role_name.toUpperCase();
       if (
         (req.method === HTTP_METHOD.DELETE || req.method === HTTP_METHOD.PUT) &&
-        (userRoleName === ROLE_NAME.ADMIN ||
-          userRoleName === ROLE_NAME.SUPERADMIN)
+        (userRole === ROLE_NAME.ADMIN || userRole === ROLE_NAME.SUPERADMIN)
       ) {
         next();
         return;
-      }else if (
+      } else if (
         (req.method === HTTP_METHOD.DELETE || req.method === HTTP_METHOD.PUT) &&
-        (userRoleName !== ROLE_NAME.ADMIN &&
-          userRoleName !== ROLE_NAME.SUPERADMIN)
+        userRole !== ROLE_NAME.ADMIN &&
+        userRole !== ROLE_NAME.SUPERADMIN
       ) {
         return res.status(400).send({
-        message: `You are not allowed to update or delete this ${resource}.`,
-      });
+          message: `You are not allowed to update or delete this ${resource}.`,
+        });
       }
     }
     if (
       req.method === HTTP_METHOD.DELETE &&
-      (req.userRole === ROLE_NAME.ADMIN ||
-        req.userRole === ROLE_NAME.SUPERADMIN)
+      (userRole === ROLE_NAME.ADMIN || userRole === ROLE_NAME.SUPERADMIN)
     ) {
       next();
       return;

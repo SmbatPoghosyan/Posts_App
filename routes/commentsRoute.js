@@ -83,7 +83,7 @@ router.get("/:id", async (req, res) => {
 router.put(
   "/:id",
   checkRole(ROLE_NAME.CREATOR, ROLE_NAME.USER),
-  checkIfUserAllowed(RESOURCE.Comment),
+  checkIfUserAllowed("COMMENT"),
   validate(commentPatchSchema),
   async (req, res) => {
     const id = req.params.id;

@@ -1,6 +1,4 @@
 const { Model } = require("objection");
-const Role = require("./roleModel");
-const Comment = require("./commentModel");
 
 class User extends Model {
   static get tableName() {
@@ -27,6 +25,9 @@ class User extends Model {
 
   static get relationMappings() {
     const Post = require("./postModel");
+    const UserProfile = require("./userProfileModel");
+    const Role = require("./roleModel");
+    const Comment = require("./commentModel");
     return {
       role: {
         relation: Model.BelongsToOneRelation,
@@ -50,6 +51,14 @@ class User extends Model {
         join: {
           from: "users.id",
           to: "comments.user_id",
+        },
+      },
+      profile: {
+        relation: Model.HasOneRelation,
+        modelClass: UserProfile,
+        join: {
+          from: "users.id",
+          to: "user_profiles.user_id",
         },
       },
     };

@@ -93,7 +93,6 @@ router.get("/:id", async (req, res) => {
     const id = req.params.id;
     const withComments = req.query.withComments;
     const currentPost = await getPostById(id, withComments);
-    console.log(currentPost);
     if (!currentPost) {
       return res.status(404).send({
         message: `Post with id ${id} not found`,

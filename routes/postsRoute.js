@@ -73,10 +73,10 @@ router.get("/", async (req, res) => {
   const page = Number(req.query.page) || 1;
   const limit = Number(req.query.limit) || 10;
   const offset = (page - 1) * limit;
-  const withComment = req.query.withComment;
+  const withComments = req.query.withComments;
 
   try {
-    const result = await getPosts(limit, offset, withComment);
+    const result = await getPosts(limit, offset, withComments);
 
     const response = createResponseObj(result, 200);
 

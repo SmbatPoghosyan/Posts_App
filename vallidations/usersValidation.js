@@ -14,7 +14,7 @@ const createUserSchema = {
     role_id: {
       type: "number",
       minimum: 1,
-      maximum: 2,
+      maximum: 4,
     },
     password: {
       type: "string",
@@ -28,6 +28,7 @@ const createUserSchema = {
 
 const updateUserSchema = {
   type: "object",
+  required: ["password"],
   properties: {
     username: {
       type: "string",

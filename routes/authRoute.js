@@ -20,15 +20,13 @@ router.post("/signup", validate(signupSchema), async (req, res) => {
   try {
     currentCode = await sendVerificationEmail(data.email);
     console.log(currentCode);
-    newUser = await signup(email, password, username, currentCode, false);
+    newUser = await signup(email, password, username, currentCode);
 
-    if (newUser.is_active === true) {
-      responseObj = createResponseObj(
-        newUser,
-        { message: "You succesfully registered." },
-        200
-      );
-    }
+    responseObj = createResponseObj(
+      newUser,
+      { message: "You succesfully registered." },
+      200
+    );
     res.status(200).send(responseObj);
   } catch (err) {
     console.error("error", err);

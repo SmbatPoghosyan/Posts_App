@@ -63,7 +63,7 @@ const sendEmail = async (recipient) => {
     const info = await transporter.sendMail(mailOptions);
     console.log(`Email sent: ${info.response}`);
   } catch (error) {
-    console.error(error);
+    throw error(error);
   }
 };
 

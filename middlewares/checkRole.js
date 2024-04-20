@@ -11,7 +11,7 @@ const checkRole = (...roles) => async (req, res, next)  => {
       next();
     } else {
       res.status(403).send({
-        message: "Not allowed to create post"
+        message: "Not allowed"
       })
     }
   } catch (err) {

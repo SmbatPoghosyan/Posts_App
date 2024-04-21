@@ -1,5 +1,4 @@
 const express = require("express");
-const express = require("express");
 const router = express.Router();
 const createResponseObj = require("../utils/createResponseObj");
 const validate = require("../vallidations");
@@ -9,20 +8,18 @@ const {
 } = require("../vallidations/authValidations");
 const { signin, signup } = require("../services/authService");
 const { sendVerificationEmail } = require("../services/verificationService");
-
-let currentCode;
-let newUser;
+const User = require("../models/userModel");
 
 router.post("/signup", validate(signupSchema), async (req, res) => {
   const data = req.body;
-  let responseObj;
   const { email, password, username } = data;
 
   try {
-    currentCode = await sendVerificationEmail(data.email);
-    console.log(currentCode);
-    newUser = await signup(email, password, username, currentCode);
+    const currentCode = await sendVerificationEmail(data.email);
+    const newUser = await signup(email, password, username, currentCode);
+    newUser.verification_code = currentCode;
 
+    let responseObj;
     responseObj = createResponseObj(
       newUser,
       { message: "You succesfully registered." },
@@ -36,8 +33,6 @@ router.post("/signup", validate(signupSchema), async (req, res) => {
     });
   }
 });
-
-router.post("/signin", validate(signinSchema), async (req, res) => {});
 
 router.post("/signin", validate(signinSchema), async (req, res) => {
   const data = req.body;
@@ -67,10 +62,12 @@ router.post("/signin", validate(signinSchema), async (req, res) => {
 router.post("/verify", async (req, res) => {
   try {
     const code = req.body.code;
-    console.log(req.body.code);
-    if (code === currentCode) {
-      console.log(req.user);
-      newUser.is_active = true;
+    const user = await User.query().findOne({ verification_code: code });
+    if (!user) {
+      return res.status(401).send({ message: "Invalid code" });
+    } else {
+      await User.query().patchAndFetchById(user.id, { is_active: true });
+
       const resObj = createResponseObj(
         {},
         { message: "You successfully verified your email." },
@@ -78,15 +75,23 @@ router.post("/verify", async (req, res) => {
       );
 
       res.status(200).send(resObj);
-
-      responseObj = createResponseObj(
-        newUser,
-        { message: "You succesfully registered." },
-        200
-      );
-
-      res.status(200).send(responseObj);
     }
+
+    //   if (code === newUser.verification_code) {
+    //     newUser.is_active = true;
+    //     const resObj = createResponseObj(
+    //       {},
+    //       { message: "You successfully verified your email." },
+    //       200
+    //     );
+
+    //     res.status(200).send(resObj);
+    //   }
+    // } catch (err) {
+    //   console.error("error", err);
+    //   res.status(500).send({
+    //     message: "Something went wrong.",
+    //   });
   } catch (err) {
     console.error("error", err);
     res.status(500).send({

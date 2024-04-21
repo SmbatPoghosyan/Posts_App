@@ -1,4 +1,4 @@
-const { Model } = require("objections");
+const { Model } = require("objection");
 const User = require("../models/userModel");
 
 class UserProfile extends Model {
@@ -26,6 +26,7 @@ class UserProfile extends Model {
 
   static get relationMappings() {
     const User = require("./userModel");
+    const Image = require("./imageModel");
     return {
       user: {
         relation: Model.BelongsToOneRelation,
@@ -33,6 +34,14 @@ class UserProfile extends Model {
         join: {
           from: "user_profiles.user_id",
           to: "users.id",
+        },
+      },
+      avatar: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Image,
+        join: {
+          from: "user_profiles.avatar",
+          to: "images.id",
         },
       },
     };

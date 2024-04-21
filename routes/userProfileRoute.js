@@ -3,7 +3,7 @@ const {
   createUserProfilesSchema,
   updateUserProfilesSchema,
 } = require("../vallidations/userProfilesValidation");
-const validate = require("../vallidations");
+
 const {
   createUserProfile,
   getUserProfiles,
@@ -11,7 +11,6 @@ const {
   updateUserProfile,
   deleteUserPorfile,
 } = require("../controllers/user_profilesControllers");
-const createResponseObj = require("../utils/createResponseObj");
 const createResponseObj = require("../utils/createResponseObj");
 
 const router = express.Router();

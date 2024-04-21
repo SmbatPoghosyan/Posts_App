@@ -1,6 +1,8 @@
 const Post = require("../models/postModel");
 const Comment = require("../models/commentModel");
 const User = require("../models/userModel");
+const Image = require("../models/imageModel");
+const PostImage = require("../models/postImageModel");
 
 const getPosts = async (limit, offset, withComments = false) => {
   try {
@@ -42,10 +44,14 @@ const getPosts = async (limit, offset, withComments = false) => {
   }
 };
 
-const createPost = async (post, userId) => {
+const createPost = async (post, userId, image) => {
   post.user_id = userId;
   try {
-    const newPost = await Post.query().insert(post);
+    const newImage = await Image.query().insert(image);
+    const newPost = await Post.query().insert(post).withGraphFetched("images");
+    const imageId = await Image.query().select("id");
+    const postId = await Post.query().select("id");
+    const postImage = await PostImage.query().insert({ imageId, postId });
     return newPost;
   } catch (err) {
     throw new Error(err);

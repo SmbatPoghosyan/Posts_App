@@ -124,7 +124,7 @@ router.put(
 
 router.delete("/:id", checkIfUserAllowed(RESOURCE.User), async (req, res) => {
   const userId = req.params.id;
-  try {
+    try {
     const result = await deleteUser(userId);
     if (!result) {
       return res.status(404).send({

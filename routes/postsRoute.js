@@ -20,15 +20,26 @@ const router = express.Router();
 const { ROLE_NAME, RESOURCE } = require("../constants/index.js");
 const checkRole = require("../middlewares/checkRole.js");
 const checkIfUserAllowed = require("../middlewares/checkIfUserAllowed.js");
+const {upload} = require("../middlewares/upload.js");
 
 router.post(
   "/",
   checkRole(ROLE_NAME.CREATOR),
   validate(postsSchema),
+  upload.single("image"),
   async (req, res) => {
     try {
+      const { url, filename, size, format } = req.file;
+      const image = await {
+        url: `${process.env.BASE_URL}/${filename}`,
+        name,
+        details,
+        size,
+        format,
+      };
+
       const userId = req.user.id;
-      const newPost = await createPost(req.body, userId);
+      const newPost = await createPost(req.body, userId, image);
       const response = createResponseObj(
         newPost,
         { message: "Post created Successfully" },
@@ -93,7 +104,6 @@ router.get("/:id", async (req, res) => {
     const id = req.params.id;
     const withComments = req.query.withComments;
     const currentPost = await getPostById(id, withComments);
-    console.log(currentPost);
     if (!currentPost) {
       return res.status(404).send({
         message: `Post with id ${id} not found`,

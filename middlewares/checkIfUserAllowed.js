@@ -51,7 +51,6 @@ const checkIfUserAllowed = (resource) => async (req, res, next) => {
       : currentResource.id;
 
     if (user_id !== req.user.id) {
-      console.log(user_id);
       resource = resource.toLowerCase();
       return res.status(400).send({
         message: `You are not allowed to update this ${resource}.`,

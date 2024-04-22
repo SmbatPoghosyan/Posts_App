@@ -8,10 +8,10 @@ const email_verification_template = require("../html_templates/email_verificatio
 
 const sendEmail = async (recipient, verification_code) => {
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    service: process.env.EMAIL_SENDING_SERVICE, //gmail
     auth: {
-      user: process.env.EMAIL, //"daniilakopyan221@gmail.com",
-      pass: process.env.APP_PASSWORD, //"nwjw fidr nttr sars",
+      user: process.env.EMAIL_ADDRESS, //"daniilakopyan221@gmail.com",
+      pass: process.env.EMAIL_APPLICATION_PASSWORD, //"nwjw fidr nttr sars",
     },
   });
 

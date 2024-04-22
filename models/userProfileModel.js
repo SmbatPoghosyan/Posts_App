@@ -15,10 +15,10 @@ class UserProfile extends Model {
       properties: {
         id: { type: "integer" },
         user_id: { type: "integer" },
-        firstname: { type: "string", minlength: 1, maxlength: 50 },
-        lastname: { type: "string", minlength: 1, maxlength: 50 },
+        firstname: { type: "string", minLength: 1, maxLength: 50 },
+        lastname: { type: "string", minLength: 1, maxLength: 50 },
         age: { type: "integer" },
-        gender: { type: "string", minlength: 1, maxlength: 10 },
+        gender: { type: "string", minLength: 1, maxLength: 10 },
       },
     };
   }

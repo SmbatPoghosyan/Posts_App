@@ -76,22 +76,6 @@ router.post("/verify", async (req, res) => {
 
       res.status(200).send(resObj);
     }
-
-    //   if (code === newUser.verification_code) {
-    //     newUser.is_active = true;
-    //     const resObj = createResponseObj(
-    //       {},
-    //       { message: "You successfully verified your email." },
-    //       200
-    //     );
-
-    //     res.status(200).send(resObj);
-    //   }
-    // } catch (err) {
-    //   console.error("error", err);
-    //   res.status(500).send({
-    //     message: "Something went wrong.",
-    //   });
   } catch (err) {
     console.error("error", err);
     res.status(500).send({

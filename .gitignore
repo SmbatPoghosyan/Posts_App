@@ -1,5 +1,4 @@
 node_modules
 test.txt
 .env
-./public
-./public/images
+public/images/

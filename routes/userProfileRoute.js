@@ -3,7 +3,7 @@ const {
   createUserProfilesSchema,
   updateUserProfilesSchema,
 } = require("../vallidations/userProfilesValidation");
-const validate = require("../vallidations");
+
 const {
   createUserProfile,
   getUserProfiles,

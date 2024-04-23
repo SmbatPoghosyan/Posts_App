@@ -1,6 +1,10 @@
 const { Model } = require("objection");
 const User = require("./userModel");
 const Comment = require("./commentModel");
+const { Model } = require("objection");
+const User = require("./userModel");
+const Comment = require("./commentModel");
+const Image = require("./imageModel");
 
 class Post extends Model {
   static get tableName() {
@@ -40,6 +44,14 @@ class Post extends Model {
       comments: {
         relation: Model.HasManyRelation,
         modelClass: Comment,
+        join: {
+          from: "posts.id",
+          to: "comments.post_id",
+        },
+      },
+      images: {
+        relation: Model.HasManyRelation,
+        modelClass: Image,
         join: {
           from: "posts.id",
           to: "comments.post_id",

@@ -20,20 +20,20 @@ const router = express.Router();
 const { ROLE_NAME, RESOURCE } = require("../constants/index.js");
 const checkRole = require("../middlewares/checkRole.js");
 const checkIfUserAllowed = require("../middlewares/checkIfUserAllowed.js");
-const {upload} = require("../middlewares/upload.js");
+const { upload } = require("../middlewares/upload.js");
 
 router.post(
   "/",
   checkRole(ROLE_NAME.CREATOR),
-  validate(postsSchema),
-  upload.single("image"),
+  upload.single("image1"),
   async (req, res) => {
     try {
-      const { url, filename, size, format } = req.file;
-      const image = await {
-        url: `${process.env.BASE_URL}/${filename}`,
-        name,
-        details,
+      console.log("req.file", req.file);
+      console.log("req.body", req.body);
+      const { filename, size, mimetype: format } = req.file;
+      const image = {
+        url: `${process.env.BASE_URL}/images/${filename}`,
+        name: filename,
         size,
         format,
       };

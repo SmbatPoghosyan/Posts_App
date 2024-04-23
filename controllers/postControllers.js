@@ -48,10 +48,11 @@ const createPost = async (post, userId, image) => {
   post.user_id = userId;
   try {
     const newImage = await Image.query().insert(image);
-    const newPost = await Post.query().insert(post).withGraphFetched("images");
-    const imageId = await Image.query().select("id");
-    const postId = await Post.query().select("id");
-    const postImage = await PostImage.query().insert({ imageId, postId });
+    const newPost = await Post.query().insert(post);
+    const image_id = newImage.id;
+    const post_id = newPost.id;
+    await PostImage.query().insert({ image_id, post_id });
+    newPost.images = [newImage];
     return newPost;
   } catch (err) {
     throw new Error(err);

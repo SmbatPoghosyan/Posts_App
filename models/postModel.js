@@ -1,6 +1,9 @@
 const { Model } = require("objection");
 const User = require("./userModel");
 const Comment = require("./commentModel");
+const { Model } = require("objection");
+const User = require("./userModel");
+const Comment = require("./commentModel");
 const Image = require("./imageModel");
 
 class Post extends Model {
@@ -50,12 +53,8 @@ class Post extends Model {
         relation: Model.HasManyRelation,
         modelClass: Image,
         join: {
-          from: 'posts.id',
-          through: {
-            from: 'posts_images.post_id',
-            to: 'posts_images.image_id',
-          },
-          to: 'images.id',
+          from: "posts.id",
+          to: "comments.post_id",
         },
       },
     };

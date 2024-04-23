@@ -14,9 +14,7 @@ const {
 const createResponseObj = require("../utils/createResponseObj");
 
 const router = express.Router();
-const { ROLE_NAME, RESOURCE } = require("../constants");
-const validate = require("../vallidations");
-const checkRole = require("../middlewares/checkRole.js");
+const { RESOURCE } = require("../constants");
 const checkIfUserAllowed = require("../middlewares/checkIfUserAllowed.js");
 
 router.post("/", validate(createUserProfilesSchema), async (req, res) => {

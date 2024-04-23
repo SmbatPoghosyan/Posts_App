@@ -1,5 +1,4 @@
 const { Model } = require("objection");
-const User = require("../models/userModel");
 
 class UserProfile extends Model {
   static get tableName() {

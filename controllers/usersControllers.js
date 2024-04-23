@@ -20,7 +20,7 @@ const getUsers = async (limit, offset) => {
 const createUser = async (user) => {
   try {
     const hashedPassword = await bcrypt.hash(user.password, 10);
-    user.password = hashedPassword
+    user.password = hashedPassword;
     const newUser = await User.query().insert(user);
     return newUser;
   } catch (err) {

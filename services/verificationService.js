@@ -6,7 +6,7 @@ const { v4: uuidv4 } = require("uuid");
 
 const email_verification_template = require("../html_templates/email_verification");
 
-const sendEmail = async (recipient, verification_code) => {
+const sendEmail = async (recipient, verification_code, recipient_name) => {
   const transporter = nodemailer.createTransport({
     service: process.env.EMAIL_SENDING_SERVICE, //gmail
     auth: {
@@ -19,10 +19,12 @@ const sendEmail = async (recipient, verification_code) => {
     from: `"Daniel Hakobyan" <daniilakopyan221@gmail.com>`,
     to: `${recipient}`,
     subject: "Verification code for Post_Application",
-    html: email_verification_template.replace(
-      "${verification_code}",
-      verification_code
-    ),
+    html: email_verification_template
+      .replace("${verification_code}", verification_code)
+      .replace("${name}", recipient_name),
+    //"${verification_code}",
+    //verification_code
+    //),
   };
 
   try {
@@ -33,10 +35,10 @@ const sendEmail = async (recipient, verification_code) => {
   }
 };
 
-const sendVerificationEmail = async (recipient) => {
+const sendVerificationEmail = async (recipient, recipient_name) => {
   const verification_code = uuidv4();
   try {
-    await sendEmail(recipient, verification_code);
+    await sendEmail(recipient, verification_code, recipient_name);
     return verification_code;
   } catch (error) {
     console.error(error);

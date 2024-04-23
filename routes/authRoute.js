@@ -15,7 +15,7 @@ router.post("/signup", validate(signupSchema), async (req, res) => {
   const { email, password, username } = data;
 
   try {
-    const currentCode = await sendVerificationEmail(data.email);
+    const currentCode = await sendVerificationEmail(data.email, data.username);
     const newUser = await signup(email, password, username, currentCode);
     newUser.verification_code = currentCode;
 

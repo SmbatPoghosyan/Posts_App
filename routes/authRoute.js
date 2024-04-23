@@ -71,27 +71,6 @@ router.post("/verify", async (req, res) => {
     } else {
       await User.query().patchAndFetchById(user.id, { is_active: true });
 
-      try {
-        const { user, token } = await signin(email, password, username);
-        const resObj = createResponseObj(
-          user,
-          { message: "You successfully loged in", token },
-          200
-        );
-        res.status(200).send(resObj);
-      } catch (err) {
-        let errorMessage;
-        if (email) {
-          errorMessage = "Wrong email or password!";
-        } else if (username) {
-          errorMessage = "Wrong username or password!";
-        }
-        console.error("error", err);
-        res.status(500).send({
-          message: "Something went wrong.",
-        });
-      }
-
       const resObj = createResponseObj(
         {},
         { message: "You successfully verified your email." },

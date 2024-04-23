@@ -4,7 +4,7 @@ const email_verification_template = `verification <table class="wrapper" width="
             <table class="main" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                     <td>
-                        <h1>Hi [name],! Verify your email</h1>
+                        <h1>Hi \${name},! Verify your email</h1>
                         <p>Thank you for signing up!
                             
                             Your verification code is  <p style="font-size: 24px; font-weight: 600">\${verification_code}</p>

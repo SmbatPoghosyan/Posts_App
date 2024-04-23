@@ -50,7 +50,7 @@ router.post("/signin", validate(signinSchema), async (req, res) => {
     if (email) {
       errorMessage = "Wrong email or password!";
     } else if (username) {
-      errorMessage = "Wrong username or password";
+      errorMessage = "Wrong username or password!";
     }
     console.error("error", err);
     res.status(500).send({
@@ -62,11 +62,35 @@ router.post("/signin", validate(signinSchema), async (req, res) => {
 router.post("/verify", async (req, res) => {
   try {
     const code = req.body.code;
+    if (!code) {
+      return res.status(401).send({ message: "Code is empty" });
+    }
     const user = await User.query().findOne({ verification_code: code });
     if (!user) {
       return res.status(401).send({ message: "Invalid code" });
     } else {
       await User.query().patchAndFetchById(user.id, { is_active: true });
+
+      try {
+        const { user, token } = await signin(email, password, username);
+        const resObj = createResponseObj(
+          user,
+          { message: "You successfully loged in", token },
+          200
+        );
+        res.status(200).send(resObj);
+      } catch (err) {
+        let errorMessage;
+        if (email) {
+          errorMessage = "Wrong email or password!";
+        } else if (username) {
+          errorMessage = "Wrong username or password!";
+        }
+        console.error("error", err);
+        res.status(500).send({
+          message: "Something went wrong.",
+        });
+      }
 
       const resObj = createResponseObj(
         {},

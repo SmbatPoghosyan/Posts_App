@@ -21,15 +21,26 @@ const router = express.Router();
 const { ROLE_NAME, RESOURCE } = require("../constants/index.js");
 const checkRole = require("../middlewares/checkRole.js");
 const checkIfUserAllowed = require("../middlewares/checkIfUserAllowed.js");
+const { upload } = require("../middlewares/upload.js");
 
 router.post(
   "/",
   checkRole(ROLE_NAME.CREATOR),
-  validate(postsSchema),
+  upload.single("image1"),
   async (req, res) => {
     try {
+      console.log("req.file", req.file);
+      console.log("req.body", req.body);
+      const { filename, size, mimetype: format } = req.file;
+      const image = {
+        url: `${process.env.BASE_URL}/images/${filename}`,
+        name: filename,
+        size,
+        format,
+      };
+
       const userId = req.user.id;
-      const newPost = await createPost(req.body, userId);
+      const newPost = await createPost(req.body, userId, image);
       const response = createResponseObj(
         newPost,
         { message: "Post created Successfully" },

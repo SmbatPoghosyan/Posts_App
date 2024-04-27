@@ -6,6 +6,7 @@ const authRouter = require("./routes/authRoute");
 const userRouter = require("./routes/usersRoute");
 const commentsRouter = require("./routes/commentsRoute");
 const userProfileRouter = require("./routes/userProfileRoute");
+const path = require("path");
 
 require("./config/db");
 const passportConfig = require("./config/passport");
@@ -44,6 +45,7 @@ app.use(
   passportConfig.authenticate("jwt", { session: false }),
   userProfileRouter
 );
+app.use(express.static(path.join(__dirname, "public")));
 
 app.listen(PORT, () => {
   console.log(`server is running on localhost:${PORT}`);

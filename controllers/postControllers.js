@@ -1,5 +1,7 @@
 const Post = require("../models/postModel");
 const Comment = require("../models/commentModel");
+const Image = require("../models/imageModel");
+const PostImage = require("../models/postImageModel");
 const formateDate = require("../utils/formateDate");
 
 const getPosts = async (limit, offset, withComments = false) => {
@@ -54,10 +56,15 @@ const getPosts = async (limit, offset, withComments = false) => {
   }
 };
 
-const createPost = async (post, userId) => {
+const createPost = async (post, userId, image) => {
   post.user_id = userId;
   try {
+    const newImage = await Image.query().insert(image);
     const newPost = await Post.query().insert(post);
+    const image_id = newImage.id;
+    const post_id = newPost.id;
+    await PostImage.query().insert({ image_id, post_id });
+    newPost.images = [newImage];
     return newPost;
   } catch (err) {
     throw new Error(err);

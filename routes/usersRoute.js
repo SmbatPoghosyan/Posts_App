@@ -110,7 +110,7 @@ router.get(
 
 router.put(
   "/:id",
-  checkIfUserAllowed(RESOURCE.User),
+  checkIfUserAllowed(RESOURCE.USER),
   validate(updateUserSchema),
   async (req, res) => {
     const id = req.params.id;
@@ -140,7 +140,7 @@ router.put(
   }
 );
 
-router.delete("/:id", checkIfUserAllowed(RESOURCE.User), async (req, res) => {
+router.delete("/:id", checkIfUserAllowed(RESOURCE.USER), async (req, res) => {
   const userId = req.params.id;
     try {
     const result = await deleteUser(userId);

@@ -123,7 +123,7 @@ router.get("/:id", async (req, res) => {
 router.put(
   "/:id",
   checkRole(ROLE_NAME.CREATOR),
-  checkIfUserAllowed(RESOURCE.Post),
+  checkIfUserAllowed(RESOURCE.POST),
   validate(patchSchema),
   async (req, res) => {
     const id = req.params.id;
@@ -153,7 +153,7 @@ router.put(
 router.delete(
   "/:id",
   checkRole(ROLE_NAME.ADMIN, ROLE_NAME.SUPERADMIN, ROLE_NAME.CREATOR),
-  checkIfUserAllowed(RESOURCE.Post),
+  checkIfUserAllowed(RESOURCE.POST),
   async (req, res) => {
     const id = req.params.id;
     try {

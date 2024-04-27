@@ -12,7 +12,7 @@ const checkIfUserAllowed = (resource) => async (req, res, next) => {
       .withGraphFetched("role");
 
     const userRole = user.role.role_name.toUpperCase();
-    if (resource === RESOURCE.User) {
+    if (resource === RESOURCE.USER) {
       if (
         (req.method === HTTP_METHOD.DELETE || req.method === HTTP_METHOD.PUT) &&
         (userRole === ROLE_NAME.ADMIN || userRole === ROLE_NAME.SUPERADMIN)
@@ -39,16 +39,16 @@ const checkIfUserAllowed = (resource) => async (req, res, next) => {
 
     let currentResource;
     switch (resource) {
-      case RESOURCE.User:
+      case RESOURCE.USER:
         currentResource = await User.query().findById(id);
         break;
-      case RESOURCE.UserProfile:
+      case RESOURCE.USERPROFILE:
         currentResource = await UserProfile.query().findById(id);
         break;
-      case RESOURCE.Post:
+      case RESOURCE.POST:
         currentResource = await Post.query().findById(id);
         break;
-      case RESOURCE.Comment:
+      case RESOURCE.COMMENT:
         currentResource = await Comment.query().findById(id);
         break;
       default:

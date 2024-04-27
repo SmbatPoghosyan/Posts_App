@@ -68,7 +68,7 @@ router.get("/:id", async (req, res) => {
 
 router.put(
   "/:id",
-  checkIfUserAllowed(RESOURCE.UserProfile),
+  checkIfUserAllowed(RESOURCE.USERPROFILE),
   validate(updateUserProfilesSchema),
   async (req, res) => {
     const id = req.params.id;
@@ -96,7 +96,7 @@ router.put(
 
 router.delete(
   "/:id",
-  checkIfUserAllowed(RESOURCE.UserProfile),
+  checkIfUserAllowed(RESOURCE.USERPROFILE),
   async (req, res) => {
     const id = req.params.id;
     try {

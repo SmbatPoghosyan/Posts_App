@@ -1,3 +1,5 @@
+const UserProfile = require("../models/userProfileModel");
+
 const ROLE_ID = {
   USER: 1,
   CREATOR: 2,
@@ -12,10 +14,10 @@ const ROLE_NAME = {
 };
 
 const RESOURCE = {
-  Post: "POST",
-  Comment: "COMMENT",
-  User: "USER",
-  UserProfile: "USERPROFILE",
+  POST: "POST",
+  COMMENT: "COMMENT",
+  USER: "USER",
+  USERPROFILE: "USERPROFILE",
 };
 
 const HTTP_METHOD = {

@@ -12,8 +12,7 @@ const {
   getUserById,
 } = require("../controllers/usersControllers.js");
 const createResponseObj = require("../utils/createResponseObj.js");
-const User = require("../models/userModel");
-const bcrypt = require("bcrypt");
+
 const router = express.Router();
 const { ROLE_NAME, RESOURCE } = require("../constants/index.js");
 const checkRole = require("../middlewares/checkRole.js");

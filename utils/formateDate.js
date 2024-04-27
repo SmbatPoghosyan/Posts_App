@@ -1,4 +1,4 @@
-const formatingDate = (date) => {
+const formateDate = (date) => {
   const year = date.getFullYear();
   let month = date.getMonth() + 1;
   let dayOfMonth = date.getDate();
@@ -7,4 +7,4 @@ const formatingDate = (date) => {
   return `${year}-${month}-${dayOfMonth}`;
 };
 
-module.exports = formatingDate;
+module.exports = formateDate;

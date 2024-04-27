@@ -1,5 +1,5 @@
 const Comment = require("../models/commentModel");
-const formatingDate = require("../utils/formatingDate");
+const formateDate = require("../utils/formateDate");
 
 const getComments = async (limit, offset) => {
   try {
@@ -20,9 +20,9 @@ const getComments = async (limit, offset) => {
         builder.select("id", "username");
       });
     comments.forEach((comment) => {
-      comment.creation_date = formatingDate(comment.creation_date);
+      comment.creation_date = formateDate(comment.creation_date);
       if (typeof comment.post.creation_date === "object") {
-        comment.post.creation_date = formatingDate(comment.post.creation_date);
+        comment.post.creation_date = formateDate(comment.post.creation_date);
       }
     });
 
@@ -48,7 +48,7 @@ const updateComment = async (commentId, data) => {
     const comment = await Comment.query().patchAndFetchById(commentId, data);
     delete comment.created_at;
     delete comment.updated_at;
-    comment.creation_date = formatingDate(comment.creation_date);
+    comment.creation_date = formateDate(comment.creation_date);
 
     return comment;
   } catch (err) {
@@ -73,8 +73,8 @@ const getCommentById = async (id) => {
       .modifyGraph("post.user", (builder) => {
         builder.select("id", "username");
       });
-    currentComment.creation_date = formatingDate(currentComment.creation_date);
-    currentComment.post.creation_date = formatingDate(
+    currentComment.creation_date = formateDate(currentComment.creation_date);
+    currentComment.post.creation_date = formateDate(
       currentComment.post.creation_date
     );
     return currentComment;

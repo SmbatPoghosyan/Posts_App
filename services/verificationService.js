@@ -22,9 +22,6 @@ const sendEmail = async (recipient, verification_code, recipient_name) => {
     html: email_verification_template
       .replace("${verification_code}", verification_code)
       .replace("${name}", recipient_name),
-    //"${verification_code}",
-    //verification_code
-    //),
   };
 
   try {

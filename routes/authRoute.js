@@ -9,6 +9,7 @@ const {
 const { signin, signup } = require("../services/authService");
 const { sendVerificationEmail } = require("../services/verificationService");
 const User = require("../models/userModel");
+const { Query } = require("pg");
 
 router.post("/signup", validate(signupSchema), async (req, res) => {
   const data = req.body;

@@ -1,6 +1,6 @@
 const createUserProfilesSchema = {
   type: "object",
-  require: ["firstname", "lastname", "age", "gender", "user_id"],
+  required: ["firstname", "lastname", "age", "gender", "user_id"],
   properties: {
     firstname: {
       type: "string",

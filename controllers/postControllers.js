@@ -1,8 +1,8 @@
 const Post = require("../models/postModel");
 const Comment = require("../models/commentModel");
-const User = require("../models/userModel");
 const Image = require("../models/imageModel");
 const PostImage = require("../models/postImageModel");
+const formateDate = require("../utils/formateDate");
 
 const getPosts = async (limit, offset, withComments = false) => {
   try {
@@ -23,6 +23,14 @@ const getPosts = async (limit, offset, withComments = false) => {
         .modifyGraph("comments.user", (builder) => {
           builder.select("id", "username");
         });
+      console.log(post.creation_date);
+
+      posts.forEach((post) => {
+        post.creation_date = formateDate(post.creation_date);
+        post.comments.forEach((comment) => {
+          comment.creation_date = formateDate(comment.creation_date);
+        });
+      });
 
       const totalPostsCount = await Post.query().resultSize();
       return { posts, totalPostsCount };
@@ -35,6 +43,10 @@ const getPosts = async (limit, offset, withComments = false) => {
           builder.select("id", "username");
         })
         .select("id", "title", "content", "creation_date", "view_count");
+
+      posts.forEach((post) => {
+        post.creation_date = formateDate(post.creation_date);
+      });
 
       const totalPostsCount = await Post.query().resultSize();
       return { posts, totalPostsCount };
@@ -61,7 +73,13 @@ const createPost = async (post, userId, image) => {
 
 const updatePost = async (postId, data) => {
   try {
-    return await Post.query().patchAndFetchById(postId, data);
+    const post = await Post.query().patchAndFetchById(postId, data);
+    delete post.created_at;
+    delete post.updated_at;
+    delete post.view_count;
+    post.creation_date = formateDate(post.creation_date);
+
+    return post;
   } catch (err) {
     throw new Error(err);
   }
@@ -85,6 +103,10 @@ const getPostById = async (id, withComments = false) => {
         .modifyGraph("comments.user", (builder) => {
           builder.select("id", "username");
         });
+      post.creation_date = formateDate(post.creation_date);
+      post.comments.forEach((el) => {
+        el.creation_date = formateDate(el.creation_date);
+      });
 
       return post;
     } else {
@@ -95,6 +117,7 @@ const getPostById = async (id, withComments = false) => {
           builder.select("id", "username");
         })
         .select("id", "title", "content", "creation_date", "view_count");
+      post.creation_date = formateDate(post.creation_date);
       return post;
     }
   } catch (err) {

@@ -57,7 +57,7 @@ const checkIfUserAllowed = (resource) => async (req, res, next) => {
 
     if (!currentResource) {
       return res.status(404).send({
-        message: `User or Post with id ${id} not found!`,
+        message: `${resource.toLowerCase()} with id ${id} not found!`,
       });
     }
 

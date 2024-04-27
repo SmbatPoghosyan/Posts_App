@@ -24,6 +24,7 @@ const signin = async (email, password, username) => {
     const isSame = await bcrypt.compare(password, hashedPassword);
 
     if (isSame) {
+      delete user.password;
       const token = jwt.sign(
         {
           user_id: user.id,
@@ -45,7 +46,13 @@ const signin = async (email, password, username) => {
   }
 };
 
-const signup = async (email, password, username) => {
+const signup = async (
+  email,
+  password,
+  username,
+  verification_code,
+  is_active = false
+) => {
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     const userObject = {
@@ -53,10 +60,13 @@ const signup = async (email, password, username) => {
       password: hashedPassword,
       username,
       role_id: ROLE_ID.USER,
+      verification_code,
+      is_active,
     };
     const newUser = await User.query().insert(userObject);
     return newUser;
   } catch (err) {
+    console.error(err, err.message);
     console.error(err, err.message);
     throw new Error(err);
   }

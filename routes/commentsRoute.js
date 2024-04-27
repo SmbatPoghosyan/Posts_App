@@ -118,7 +118,7 @@ router.delete(
     ROLE_NAME.CREATOR,
     ROLE_NAME.USER
   ),
-  checkIfUserAllowed(RESOURCE.Comment),
+  checkIfUserAllowed(RESOURCE.COMMENT),
   async (req, res) => {
     const id = req.params.id;
     try {

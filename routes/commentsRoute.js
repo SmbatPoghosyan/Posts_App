@@ -1,4 +1,5 @@
 const express = require("express");
+const Post = require("../models/postModel");
 
 const router = express.Router();
 const { ROLE_NAME, RESOURCE } = require("../constants");
@@ -26,6 +27,12 @@ router.post(
     try {
       const data = req.body;
       data.user_id = req.user.id;
+      const id = data.post_id;
+      const post = await Post.query().findById(id);
+      if (!post) {
+        res.status(404).send({ message: `Post with id ${id} not found!` });
+        return;
+      }
       const newcomment = await createComment(data);
       const response = createResponseObj(
         newcomment,

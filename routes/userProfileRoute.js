@@ -12,6 +12,7 @@ const {
   deleteUserPorfile,
 } = require("../controllers/user_profilesControllers");
 const createResponseObj = require("../utils/createResponseObj");
+const validate = require("../vallidations/index");
 
 const router = express.Router();
 const { RESOURCE } = require("../constants");

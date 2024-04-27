@@ -1,9 +1,6 @@
 const { Model } = require("objection");
 const User = require("./userModel");
 const Comment = require("./commentModel");
-const { Model } = require("objection");
-const User = require("./userModel");
-const Comment = require("./commentModel");
 const Image = require("./imageModel");
 
 class Post extends Model {

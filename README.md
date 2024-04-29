@@ -53,6 +53,8 @@ The post app allows users to **create**, **read**, **update**, **delete** posts,
    - Scroll down and click on **App passwords** and create one (you will use it instead of your google account password).
    - Thats all you need, now come back to the code and use your **email addres** and **App password** in your .env
 
+Go by this link if you want get more information [Google help centre](https://support.google.com/mail/answer/185833?hl=en).
+
 If there are problems with installation, please inform us about it.
 
 ## Usage

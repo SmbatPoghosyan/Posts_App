@@ -26,6 +26,7 @@ const { upload } = require("../middlewares/upload.js");
 router.post(
   "/",
   checkRole(ROLE_NAME.CREATOR),
+  validate(postsSchema),
   upload.single("image1"),
   async (req, res) => {
     try {

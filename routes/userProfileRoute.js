@@ -10,6 +10,7 @@ const {
   getUserProfileById,
   updateUserProfile,
   deleteUserPorfile,
+  uploadProfileAvatar,
 } = require("../controllers/user_profilesControllers");
 const createResponseObj = require("../utils/createResponseObj");
 const validate = require("../vallidations/index");
@@ -17,6 +18,7 @@ const validate = require("../vallidations/index");
 const router = express.Router();
 const { RESOURCE } = require("../constants");
 const checkIfUserAllowed = require("../middlewares/checkIfUserAllowed.js");
+const { uploadAvatar,resizeAndCheckAvatar } = require("../middlewares/upload.js");
 
 router.post("/", validate(createUserProfilesSchema), async (req, res) => {
   try {
@@ -82,6 +84,43 @@ router.put(
       }
       const response = createResponseObj(
         updatedUserProfile,
+        { message: `UserProfile with id ${id} updated successfully` },
+        200
+      );
+      res.status(200).send(response);
+    } catch (err) {
+      console.error("error", err);
+      res.status(500).send({
+        message: "Something went wrong.",
+      });
+    }
+  }
+);
+
+router.put(
+  "/:id/avatar",
+  checkIfUserAllowed(RESOURCE.USERPROFILE),
+  uploadAvatar.single("avatar"),
+  resizeAndCheckAvatar,
+  validate(updateUserProfilesSchema),
+  async (req, res) => {
+    const id = req.params.id;
+    try {
+      const { filename, size, mimetype: format } = req.file;
+      const image = {
+        url: `${process.env.BASE_URL}/images/${filename}`,
+        name: filename,
+        size,
+        format,
+      };
+      const uploadedProfileAvatar = await uploadProfileAvatar(id, image);
+      if (!uploadedProfileAvatar) {
+        return res
+          .status(404)
+          .send({ message: `UserProfile with id ${id} not found` });
+      }
+      const response = createResponseObj(
+        uploadedProfileAvatar,
         { message: `UserProfile with id ${id} updated successfully` },
         200
       );

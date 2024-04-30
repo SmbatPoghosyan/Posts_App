@@ -1,5 +1,9 @@
 const User = require("../models/userModel");
 const UserProfile = require("../models/userProfileModel");
+const Image = require("../models/imageModel");
+const {
+  createUserProfilesSchema,
+} = require("../vallidations/userProfilesValidation");
 
 const createUserProfile = async (profile) => {
   try {
@@ -49,10 +53,28 @@ const updateUserProfile = async (id, data) => {
   }
 };
 
+const uploadProfileAvatar = async (id, image) => {
+  try {
+    const newImage = await Image.query().insert(image);
+    const image_id = newImage.id;
+    const obj = { avatar: image_id };
+    const uploadProfileAvatar = await UserProfile.query().patchAndFetchById(
+      id,
+      obj
+    );
+
+    uploadProfileAvatar.image = newImage;
+    return { uploadProfileAvatar };
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
 module.exports = {
   createUserProfile,
   getUserProfiles,
   getUserProfileById,
   updateUserProfile,
   deleteUserPorfile,
+  uploadProfileAvatar,
 };

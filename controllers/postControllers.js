@@ -23,7 +23,6 @@ const getPosts = async (limit, offset, withComments = false) => {
         .modifyGraph("comments.user", (builder) => {
           builder.select("id", "username");
         });
-      console.log(post.creation_date);
 
       posts.forEach((post) => {
         post.creation_date = formateDate(post.creation_date);
@@ -56,15 +55,23 @@ const getPosts = async (limit, offset, withComments = false) => {
   }
 };
 
-const createPost = async (post, userId, image) => {
+const createPost = async (post, userId, images) => {
   post.user_id = userId;
   try {
-    const newImage = await Image.query().insert(image);
+    let newImagespath = "";
     const newPost = await Post.query().insert(post);
-    const image_id = newImage.id;
     const post_id = newPost.id;
-    await PostImage.query().insert({ image_id, post_id });
-    newPost.images = [newImage];
+    for (let i = 0; i < images.length; i++) {
+      const newImage = await Image.query().insert(images[i]);
+      const image_id = newImage.id;
+      await PostImage.query().insert({ image_id, post_id });
+      if (i < images.length - 1) {
+        newImagespath += `${images[i].url} ; `;
+      } else {
+        newImagespath += `${images[i].url}.`;
+      }
+    }
+    newPost.images = [newImagespath];
     return newPost;
   } catch (err) {
     throw new Error(err);

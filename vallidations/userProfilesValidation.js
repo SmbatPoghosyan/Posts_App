@@ -15,7 +15,6 @@ const createUserProfilesSchema = {
     user_id: {
       type: "number",
       minimum: 1,
-      maximum: 2,
     },
     age: {
       type: "number",

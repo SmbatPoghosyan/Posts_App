@@ -12,8 +12,7 @@ const {
   getUserById,
 } = require("../controllers/usersControllers.js");
 const createResponseObj = require("../utils/createResponseObj.js");
-const User = require("../models/userModel");
-const bcrypt = require("bcrypt");
+
 const router = express.Router();
 const { ROLE_NAME, RESOURCE } = require("../constants/index.js");
 const checkRole = require("../middlewares/checkRole.js");
@@ -111,7 +110,7 @@ router.get(
 
 router.put(
   "/:id",
-  checkIfUserAllowed(RESOURCE.User),
+  checkIfUserAllowed(RESOURCE.USER),
   validate(updateUserSchema),
   async (req, res) => {
     const id = req.params.id;
@@ -140,9 +139,9 @@ router.put(
   }
 );
 
-router.delete("/:id", checkIfUserAllowed(RESOURCE.User), async (req, res) => {
+router.delete("/:id", checkIfUserAllowed(RESOURCE.USER), async (req, res) => {
   const userId = req.params.id;
-  try {
+    try {
     const result = await deleteUser(userId);
     if (!result) {
       return res.status(404).send({

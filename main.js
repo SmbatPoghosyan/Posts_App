@@ -8,6 +8,7 @@ const commentsRouter = require("./routes/commentsRoute");
 const userProfileRouter = require("./routes/userProfileRoute");
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
+const path = require("path");
 
 require("./config/db");
 const passportConfig = require("./config/passport");
@@ -66,6 +67,7 @@ app.use(
   passportConfig.authenticate("jwt", { session: false }),
   userProfileRouter
 );
+app.use(express.static(path.join(__dirname, "public")));
 
 app.listen(PORT, () => {
   console.log(`server is running on localhost:${PORT}`);

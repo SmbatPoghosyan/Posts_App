@@ -15,16 +15,17 @@ class UserProfile extends Model {
       properties: {
         id: { type: "integer" },
         user_id: { type: "integer" },
-        firstname: { type: "string", minlength: 1, maxlength: 50 },
-        lastname: { type: "string", minlength: 1, maxlength: 50 },
+        firstname: { type: "string", minLength: 1, maxLength: 50 },
+        lastname: { type: "string", minLength: 1, maxLength: 50 },
         age: { type: "integer" },
-        gender: { type: "string", minlength: 1, maxlength: 10 },
+        gender: { type: "string", minLength: 1, maxLength: 10 },
       },
     };
   }
 
   static get relationMappings() {
     const User = require("./userModel");
+    const Image = require("./imageModel");
     return {
       user: {
         relation: Model.BelongsToOneRelation,
@@ -32,6 +33,14 @@ class UserProfile extends Model {
         join: {
           from: "user_profiles.user_id",
           to: "users.id",
+        },
+      },
+      avatar: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Image,
+        join: {
+          from: "user_profiles.avatar",
+          to: "images.id",
         },
       },
     };

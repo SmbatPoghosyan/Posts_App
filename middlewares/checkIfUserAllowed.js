@@ -12,23 +12,6 @@ const checkIfUserAllowed = (resource) => async (req, res, next) => {
       .withGraphFetched("role");
 
     const userRole = user.role.role_name.toUpperCase();
-    if (resource === RESOURCE.User) {
-      if (
-        (req.method === HTTP_METHOD.DELETE || req.method === HTTP_METHOD.PUT) &&
-        (userRole === ROLE_NAME.ADMIN || userRole === ROLE_NAME.SUPERADMIN)
-      ) {
-        next();
-        return;
-      } else if (
-        (req.method === HTTP_METHOD.DELETE || req.method === HTTP_METHOD.PUT) &&
-        userRole !== ROLE_NAME.ADMIN &&
-        userRole !== ROLE_NAME.SUPERADMIN
-      ) {
-        return res.status(400).send({
-          message: `You are not allowed to update or delete this ${resource}.`,
-        });
-      }
-    }
     if (
       req.method === HTTP_METHOD.DELETE &&
       (userRole === ROLE_NAME.ADMIN || userRole === ROLE_NAME.SUPERADMIN)
@@ -39,16 +22,28 @@ const checkIfUserAllowed = (resource) => async (req, res, next) => {
 
     let currentResource;
     switch (resource) {
-      case RESOURCE.User:
-        currentResource = await User.query().findById(id);
-        break;
-      case RESOURCE.UserProfile:
+      case RESOURCE.USER:
+        if (
+          req.method === HTTP_METHOD.PUT &&
+          (userRole === ROLE_NAME.ADMIN || userRole === ROLE_NAME.SUPERADMIN)
+        ) {
+          next();
+          return;
+        } else if (
+          req.method === HTTP_METHOD.PUT &&
+          userRole !== ROLE_NAME.ADMIN &&
+          userRole !== ROLE_NAME.SUPERADMIN
+        ) {
+          currentResource = await User.query().findById(id);
+          break;
+        }
+      case RESOURCE.USERPROFILE:
         currentResource = await UserProfile.query().findById(id);
         break;
-      case RESOURCE.Post:
+      case RESOURCE.POST:
         currentResource = await Post.query().findById(id);
         break;
-      case RESOURCE.Comment:
+      case RESOURCE.COMMENT:
         currentResource = await Comment.query().findById(id);
         break;
       default:
@@ -57,7 +52,7 @@ const checkIfUserAllowed = (resource) => async (req, res, next) => {
 
     if (!currentResource) {
       return res.status(404).send({
-        message: `User or Post with id ${id} not found!`,
+        message: `${resource} with id ${id} not found!`,
       });
     }
 
@@ -66,9 +61,8 @@ const checkIfUserAllowed = (resource) => async (req, res, next) => {
       : currentResource.id;
 
     if (user_id !== req.user.id) {
-      resource = resource.toLowerCase();
       return res.status(400).send({
-        message: `You are not allowed to update or delete this ${resource}.`,
+        message: `You are not allowed to update or delete this ${resource.toLowerCase()}.`,
       });
     } else {
       next();

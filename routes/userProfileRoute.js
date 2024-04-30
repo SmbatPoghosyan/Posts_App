@@ -3,7 +3,7 @@ const {
   createUserProfilesSchema,
   updateUserProfilesSchema,
 } = require("../vallidations/userProfilesValidation");
-const validate = require("../vallidations");
+
 const {
   createUserProfile,
   getUserProfiles,
@@ -12,6 +12,7 @@ const {
   deleteUserPorfile,
 } = require("../controllers/user_profilesControllers");
 const createResponseObj = require("../utils/createResponseObj");
+const validate = require("../vallidations/index");
 
 const router = express.Router();
 const { RESOURCE } = require("../constants");
@@ -68,7 +69,7 @@ router.get("/:id", async (req, res) => {
 
 router.put(
   "/:id",
-  checkIfUserAllowed(RESOURCE.UserProfile),
+  checkIfUserAllowed(RESOURCE.USERPROFILE),
   validate(updateUserProfilesSchema),
   async (req, res) => {
     const id = req.params.id;
@@ -96,7 +97,7 @@ router.put(
 
 router.delete(
   "/:id",
-  checkIfUserAllowed(RESOURCE.UserProfile),
+  checkIfUserAllowed(RESOURCE.USERPROFILE),
   async (req, res) => {
     const id = req.params.id;
     try {

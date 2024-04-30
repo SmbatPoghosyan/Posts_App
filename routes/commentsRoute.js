@@ -1,4 +1,5 @@
 const express = require("express");
+const Post = require("../models/postModel");
 
 const router = express.Router();
 const { ROLE_NAME, RESOURCE } = require("../constants");
@@ -26,6 +27,12 @@ router.post(
     try {
       const data = req.body;
       data.user_id = req.user.id;
+      const id = data.post_id;
+      const post = await Post.query().findById(id);
+      if (!post) {
+        res.status(404).send({ message: `Post with id ${id} not found!` });
+        return;
+      }
       const newcomment = await createComment(data);
       const response = createResponseObj(
         newcomment,
@@ -83,7 +90,7 @@ router.get("/:id", async (req, res) => {
 router.put(
   "/:id",
   checkRole(ROLE_NAME.CREATOR, ROLE_NAME.USER),
-  checkIfUserAllowed(RESOURCE.Comment),
+  checkIfUserAllowed("COMMENT"),
   validate(commentPatchSchema),
   async (req, res) => {
     const id = req.params.id;
@@ -118,7 +125,7 @@ router.delete(
     ROLE_NAME.CREATOR,
     ROLE_NAME.USER
   ),
-  checkIfUserAllowed(RESOURCE.Comment),
+  checkIfUserAllowed(RESOURCE.COMMENT),
   async (req, res) => {
     const id = req.params.id;
     try {

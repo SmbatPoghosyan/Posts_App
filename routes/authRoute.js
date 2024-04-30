@@ -58,4 +58,50 @@ router.post("/signin", validate(signinSchema), async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /signup:
+ *   post:
+ *     summary: Register a new user
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/SignupInput'
+ *     responses:
+ *       200:
+ *         description: User successfully registered
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       500:
+ *         description: User with this username or email already exists
+ */
+
+/**
+ * @swagger
+ * /signin:
+ *   post:
+ *     summary: Log in with existing user credentials
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/SigninInput'
+ *     responses:
+ *       200:
+ *         description: User successfully logged in
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/LoginResponse'
+ *       500:
+ *         description: Wrong email/username or password
+ */
+
 module.exports = router;

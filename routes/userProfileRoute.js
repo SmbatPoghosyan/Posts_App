@@ -119,4 +119,111 @@ router.delete(
   }
 );
 
+/**
+ * @swagger
+ * /userProfiles:
+ *   post:
+ *     summary: Create a new user profile
+ *     tags: [User Profiles]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/CreateUserProfileInput'
+ *     responses:
+ *       201:
+ *         description: User profile created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/UserProfile'
+ *       500:
+ *         description: Internal server error
+ *
+ *   get:
+ *     summary: Get all user profiles
+ *     tags: [User Profiles]
+ *     responses:
+ *       200:
+ *         description: List of user profiles
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/UserProfile'
+ *       500:
+ *         description: Internal server error
+ *
+ * /userProfiles/{id}:
+ *   get:
+ *     summary: Get a user profile by ID
+ *     tags: [User Profiles]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the user profile to get
+ *     responses:
+ *       200:
+ *         description: User profile found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/UserProfile'
+ *       404:
+ *         description: User profile not found
+ *       500:
+ *         description: Internal server error
+ *
+ *   put:
+ *     summary: Update a user profile by ID
+ *     tags: [User Profiles]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the user profile to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/UpdateUserProfileInput'
+ *     responses:
+ *       200:
+ *         description: User profile updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/UserProfile'
+ *       404:
+ *         description: User profile not found
+ *       500:
+ *         description: Internal server error
+ *
+ *   delete:
+ *     summary: Delete a user profile by ID
+ *     tags: [User Profiles]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the user profile to delete
+ *     responses:
+ *       200:
+ *         description: User profile deleted successfully
+ *       404:
+ *         description: User profile not found
+ *       500:
+ *         description: Internal server error
+ */
+
 module.exports = router;

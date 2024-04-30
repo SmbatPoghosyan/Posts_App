@@ -6,6 +6,8 @@ const authRouter = require("./routes/authRoute");
 const userRouter = require("./routes/usersRoute");
 const commentsRouter = require("./routes/commentsRoute");
 const userProfileRouter = require("./routes/userProfileRoute");
+const swaggerUI = require("swagger-ui-express");
+const swaggerJsDoc = require("swagger-jsdoc");
 
 require("./config/db");
 const passportConfig = require("./config/passport");
@@ -14,6 +16,26 @@ dotenv.config();
 
 const PORT = process.env.PORT;
 const app = express();
+
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "PostsApp API",
+      version: "1.0.0",
+      description: "A simple Express PostsApp API",
+    },
+    servers: [
+      {
+        url: "http://localhost:3000",
+      },
+    ],
+  },
+  apis: ["./routes/*.js"],
+};
+
+const specs = swaggerJsDoc(options);
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
 app.use(express.json());
 app.use(passportConfig.initialize());

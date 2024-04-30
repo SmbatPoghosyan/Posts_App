@@ -16,7 +16,7 @@ const sendEmail = async (recipient, verification_code, recipient_name) => {
   });
 
   const mailOptions = {
-    from: `"Daniel Hakobyan" <daniilakopyan221@gmail.com>`,
+    from: `"Yura Khachatryan" <yurakhachatryan3@gmail.com>`,
     to: `${recipient}`,
     subject: "Verification code for Post_Application",
     html: email_verification_template
@@ -28,12 +28,13 @@ const sendEmail = async (recipient, verification_code, recipient_name) => {
     const info = await transporter.sendMail(mailOptions);
     console.log(`Email sent: ${info.response}`);
   } catch (error) {
-    throw error(error);
+    throw new Error(error);
   }
 };
 
 const sendVerificationEmail = async (recipient, recipient_name) => {
   const verification_code = uuidv4();
+
   try {
     await sendEmail(recipient, verification_code, recipient_name);
     return verification_code;

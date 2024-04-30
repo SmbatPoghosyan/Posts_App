@@ -43,7 +43,20 @@ const signinSchema = {
   additionalProperties: false,
 };
 
+const resetPasswordSchema = {
+  type: "object",
+  properties: {
+    email: {
+      type: "string",
+      format: "email",
+    },
+  },
+  minProperties: 1,
+  additionalProperties: false,
+};
+
 module.exports = {
   signinSchema,
   signupSchema,
+  resetPasswordSchema,
 };

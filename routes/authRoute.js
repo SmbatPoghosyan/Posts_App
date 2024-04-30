@@ -5,8 +5,11 @@ const validate = require("../vallidations");
 const {
   signinSchema,
   signupSchema,
+  resetPasswordSchema,
 } = require("../vallidations/authValidations");
-const { signin, signup } = require("../services/authService");
+const { signin, signup, resetPassword } = require("../services/authService");
+const emailTemplate = require("../html_templates/reset_password");
+
 const { sendVerificationEmail } = require("../services/verificationService");
 const User = require("../models/userModel");
 const { Query } = require("pg");
@@ -85,6 +88,31 @@ router.post("/verify", async (req, res) => {
     res.status(500).send({
       message: "Something went wrong.",
     });
+  }
+});
+
+router.post("/forgot", validate(resetPasswordSchema), async (req, res) => {
+  try {
+    const recipient = req.body.email;
+    const userQuery = User.query();
+    if (recipient) {
+      userQuery.where("email", recipient);
+    }
+    const user = await userQuery.first();
+    const recipient_name = user.username;
+    const sendSucces = await resetPassword(
+      recipient,
+      recipient_name,
+      emailTemplate
+    );
+    if (sendSucces) {
+      res.status(200).send({ message: "Email was succesfully send." });
+    } else {
+      res.status(500).send({ message: "Email was not send!" });
+    }
+  } catch (err) {
+    console.log("error", err);
+    res.status(500).send({ message: "Something went wrong" });
   }
 });
 

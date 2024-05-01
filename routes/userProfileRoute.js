@@ -18,24 +18,40 @@ const validate = require("../vallidations/index");
 const router = express.Router();
 const { RESOURCE } = require("../constants");
 const checkIfUserAllowed = require("../middlewares/checkIfUserAllowed.js");
-const { uploadAvatar,resizeAndCheckAvatar } = require("../middlewares/upload.js");
+const {
+  uploadAvatarS3,
+  resizeAndCheckAvatar,
+} = require("../middlewares/upload.js");
 
-router.post("/", validate(createUserProfilesSchema), async (req, res) => {
-  try {
-    const newUserProfile = await createUserProfile(req.body);
-    const response = createResponseObj(
-      newUserProfile,
-      { message: "UserProfile created successfully" },
-      201
-    );
-    res.status(201).send(response);
-  } catch (err) {
-    console.error("error", err);
-    res.status(500).send({
-      message: "Something went wrong.",
-    });
+router.post(
+  "/",
+  uploadAvatarS3.single("avatar"),
+  resizeAndCheckAvatar,
+  validate(createUserProfilesSchema),
+  async (req, res) => {
+    try {
+      const { filename, size, mimetype: format } = req.file;
+      const image = {
+        url: `${process.env.BASE_URL}/images/${filename}`,
+        name: filename,
+        size,
+        format,
+      };
+      const newUserProfile = await createUserProfile(req.body,image);
+      const response = createResponseObj(
+        newUserProfile,
+        { message: "UserProfile created successfully" },
+        201
+      );
+      res.status(201).send(response);
+    } catch (err) {
+      console.error("error", err);
+      res.status(500).send({
+        message: "Something went wrong.",
+      });
+    }
   }
-});
+);
 
 router.get("/", async (req, res) => {
   try {
@@ -56,7 +72,7 @@ router.get("/:id", async (req, res) => {
     const userProfile = await getUserProfileById(id);
     if (!userProfile) {
       return res.status(404).send({
-        message: `UserProfile with id ${id} not found`,
+        message: `User profile with id ${id} not found`,
       });
     }
     const response = createResponseObj(userProfile, {}, 200);
@@ -77,10 +93,10 @@ router.put(
     const id = req.params.id;
     try {
       const updatedUserProfile = await updateUserProfile(id, req.body);
-      if (!updatedUserProfile) {
-        return res
-          .status(404)
-          .send({ message: `UserProfile with id ${id} not found` });
+      if (!userProfile) {
+        return res.status(404).send({
+          message: `User profile with id ${id} not found`,
+        });
       }
       const response = createResponseObj(
         updatedUserProfile,
@@ -100,7 +116,7 @@ router.put(
 router.put(
   "/:id/avatar",
   checkIfUserAllowed(RESOURCE.USERPROFILE),
-  uploadAvatar.single("avatar"),
+  uploadAvatarS3.single("avatar"),
   resizeAndCheckAvatar,
   validate(updateUserProfilesSchema),
   async (req, res) => {
@@ -114,11 +130,7 @@ router.put(
         format,
       };
       const uploadedProfileAvatar = await uploadProfileAvatar(id, image);
-      if (!uploadedProfileAvatar) {
-        return res
-          .status(404)
-          .send({ message: `UserProfile with id ${id} not found` });
-      }
+      uploadProfileAvatar.location = req.file.location;
       const response = createResponseObj(
         uploadedProfileAvatar,
         { message: `UserProfile with id ${id} updated successfully` },

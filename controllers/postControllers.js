@@ -161,6 +161,29 @@ const getCreatorsPosts = async (userId) => {
   }
 };
 
+const uploadPostImages = async (id, images) => {
+  try {
+    let newImagespath = "";
+    const post_id = id
+    for (let i = 0; i < images.length; i++) {
+      const newImage = await Image.query().insert(images[i]);
+      const image_id = newImage.id;
+      await PostImage.query().insert({ image_id, post_id });
+      if (i < images.length - 1) {
+        newImagespath += `${images[i].url} ; `;
+      } else {
+        newImagespath += `${images[i].url}.`;
+      }
+    }
+    const post = await Post.query()
+        .findById(id)
+        .withGraphFetched("images")
+    return post;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
 module.exports = {
   createPost,
   updatePost,
@@ -169,4 +192,5 @@ module.exports = {
   getPostById,
   createPostComment,
   getCreatorsPosts,
+  uploadPostImages
 };

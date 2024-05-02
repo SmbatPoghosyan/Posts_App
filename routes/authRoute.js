@@ -7,12 +7,16 @@ const {
   signupSchema,
   resetPasswordSchema,
 } = require("../vallidations/authValidations");
+const { updateUser } = require("../controllers/usersControllers");
 const { signin, signup, resetPassword } = require("../services/authService");
 const emailTemplate = require("../html_templates/reset_password");
 
 const { sendVerificationEmail } = require("../services/verificationService");
 const User = require("../models/userModel");
-const { Query } = require("pg");
+
+const resetPasswordHTML = require("../htmlPages/resetPassword");
+const { v4: uuidv4 } = require("uuid");
+const code = uuidv4();
 
 router.post("/signup", validate(signupSchema), async (req, res) => {
   const data = req.body;
@@ -100,11 +104,15 @@ router.post("/forgot", validate(resetPasswordSchema), async (req, res) => {
     }
     const user = await userQuery.first();
     const recipient_name = user.username;
-    const sendSucces = await resetPassword(
+    const id = user.id;
+    const result = await resetPassword(
       recipient,
       recipient_name,
-      emailTemplate
+      emailTemplate,
+      code,
+      id
     );
+    const sendSucces = result.sendSucces;
     if (sendSucces) {
       res.status(200).send({ message: "Email was succesfully send." });
     } else {
@@ -113,6 +121,34 @@ router.post("/forgot", validate(resetPasswordSchema), async (req, res) => {
   } catch (err) {
     console.log("error", err);
     res.status(500).send({ message: "Something went wrong" });
+  }
+});
+
+router.get("/recover-password/:id", async (req, res) => {
+  if (req.query.code === code) {
+    res.send(
+      resetPasswordHTML.replace("${code}", code).replace("${id}", req.params.id)
+    );
+  } else {
+    res.send({ message: "Wrong code" });
+  }
+});
+
+router.post("/recover-password/:id", async (req, res) => {
+  const data = { password: req.body.newPassword };
+  const id = Number(req.params.id);
+  try {
+    if (req.body.newPassword === req.body.repeatPassword) {
+      const result = await updateUser(id, data);
+      if (!result) {
+        res.send("Could not update user");
+      } else {
+        res.status(200).send("User password was updated successfully");
+      }
+    }
+  } catch (err) {
+    console.error(err);
+    throw new Error(err);
   }
 });
 

@@ -72,9 +72,14 @@ const signup = async (
   }
 };
 
-const resetPassword = async (recipient, recipient_name, emailTemplate) => {
-  const resetPasswordURL = `http://localhost:3000/recover-password?code=`;
-
+const resetPassword = async (
+  recipient,
+  recipient_name,
+  emailTemplate,
+  code,
+  id
+) => {
+  const resetPasswordURL = `http://localhost:3000/auth/recover-password/${id}?code=${code}`;
   try {
     const sendSucces = await sendEmail(
       recipient,
@@ -82,11 +87,12 @@ const resetPassword = async (recipient, recipient_name, emailTemplate) => {
       recipient_name,
       emailTemplate
     );
-    return sendSucces;
+    return { sendSucces, code };
   } catch (error) {
     console.error(error);
   }
 };
+
 module.exports = {
   signin,
   signup,

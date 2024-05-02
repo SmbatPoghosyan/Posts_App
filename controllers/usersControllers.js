@@ -30,7 +30,12 @@ const createUser = async (user) => {
 
 const updateUser = async (userId, data) => {
   try {
-    return await User.query().patchAndFetchById(userId, data);
+    if (data.password) {
+      const hashedPassword = await bcrypt.hash(data.password, 10);
+      data.password = hashedPassword;
+    }
+    const user = await User.query().patchAndFetchById(userId, data);
+    return user;
   } catch (err) {
     throw new Error(err);
   }

@@ -5,6 +5,8 @@ const {
   commentSchema,
 } = require("../vallidations/postsValidation.js");
 
+const postFollowers = require("../models/postFollowersModel");
+
 const validate = require("../vallidations");
 const {
   getPosts,
@@ -14,6 +16,7 @@ const {
   getPostById,
   createPostComment,
   getCreatorsPosts,
+  followPost,
 } = require("../controllers/postControllers.js");
 const createResponseObj = require("../utils/createResponseObj.js");
 
@@ -65,9 +68,14 @@ router.post(
     try {
       const userId = req.user.id;
       const newcomment = await createPostComment(postId, userId, req.body);
+      await postFollowers.query().insert({ user_id: userId, post_id: +postId });
+
       const response = createResponseObj(
         newcomment,
-        { message: "Comment created Successfully" },
+        {
+          message:
+            "Comment created successfully. Now you are following this post",
+        },
         201
       );
       res.status(201).send(response);
@@ -193,5 +201,34 @@ router.get("/self", checkRole(ROLE_NAME.CREATOR), async (req, res) => {
     });
   }
 });
+
+router.post(
+  "/:id/follow",
+  checkRole(ROLE_NAME.USER, ROLE_NAME.CREATOR),
+  async (req, res) => {
+    const postId = +req.params.id;
+    const userId = req.user.id;
+    console.log("postId", postId, "userId", userId);
+    try {
+      const result = await followPost(postId, userId);
+      if (!result) {
+        return res.status(404).send({
+          message: `Post with id ${postId} not found`,
+        });
+      }
+      const response = createResponseObj(
+        result,
+        { message: "Now you are following this post" },
+        201
+      );
+      return res.status(201).send(response);
+    } catch (err) {
+      console.error("error", err);
+      res.status(500).send({
+        message: "Something went wrong.",
+      });
+    }
+  }
+);
 
 module.exports = router;

@@ -3,6 +3,7 @@ const Comment = require("../models/commentModel");
 const Image = require("../models/imageModel");
 const PostImage = require("../models/postImageModel");
 const formateDate = require("../utils/formateDate");
+const postFollowers = require("../models/postFollowersModel");
 
 const getPosts = async (limit, offset, withComments = false) => {
   try {
@@ -154,6 +155,18 @@ const getCreatorsPosts = async (userId) => {
   }
 };
 
+const followPost = async (postId, userId) => {
+  try {
+    const follow = await postFollowers.query().insert({
+      post_id: postId,
+      user_id: userId,
+    });
+    return follow;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
 module.exports = {
   createPost,
   updatePost,
@@ -162,4 +175,5 @@ module.exports = {
   getPostById,
   createPostComment,
   getCreatorsPosts,
+  followPost,
 };

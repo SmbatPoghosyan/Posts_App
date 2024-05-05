@@ -112,14 +112,12 @@
 							"mode": "formdata",
 							"formdata": [
 								{
-									"key": "images",
+									"key": "image",
 									"contentType": "",
 									"type": "file",
 									"src": [
-										"/C:/Users/user/Desktop/download (1).jpg",
-										"/C:/Users/user/Desktop/download (2).jpg",
-										"/C:/Users/user/Desktop/download.jpg",
-										"/C:/Users/user/Desktop/image1.png"
+										"/C:/Users/Hp/Pictures/Screenshots/Screenshot (176).png",
+										"/C:/Users/Hp/Pictures/Screenshots/Screenshot (183).png"
 									]
 								},
 								{
@@ -142,7 +140,7 @@
 								},
 								{
 									"key": "creation_date",
-									"value": "2024-03-23",
+									"value": "creation_date",
 									"contentType": "application/json",
 									"type": "text"
 								}
@@ -297,6 +295,27 @@
 								"posts",
 								"1",
 								"follow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unfollow Post",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/posts/1/unfollow",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"posts",
+								"1",
+								"unfollow"
 							]
 						}
 					},

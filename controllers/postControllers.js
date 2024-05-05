@@ -157,11 +157,44 @@ const getCreatorsPosts = async (userId) => {
 
 const followPost = async (postId, userId) => {
   try {
-    const follow = await postFollowers.query().insert({
+    const res = await postFollowers.query().insert({
       post_id: postId,
       user_id: userId,
     });
-    return follow;
+    return res;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+//   try {
+//     const follow = await postFollowers.query().insert({
+//       post_id: postId,
+//       user_id: userId,
+//     });
+//     return follow;
+//   } catch (err) {
+//     throw new Error(err);
+//   }
+// };
+
+const unfollowPost = async (postId, userId) => {
+  try {
+    const res = await postFollowers
+      .query()
+      .delete()
+      .where({ post_id: postId, user_id: userId });
+    if (res === 0) {
+      throw new Error("Post not found");
+    }
+    const count = await postFollowers
+      .query()
+      .count()
+      .where({ post_id: postId });
+    if (count.count === "0") {
+      await Post.query().delete().where({ id: postId });
+    }
+    return res;
   } catch (err) {
     throw new Error(err);
   }
@@ -176,4 +209,5 @@ module.exports = {
   createPostComment,
   getCreatorsPosts,
   followPost,
+  unfollowPost,
 };

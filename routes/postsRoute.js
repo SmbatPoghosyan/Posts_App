@@ -22,7 +22,7 @@ const router = express.Router();
 const { ROLE_NAME, RESOURCE } = require("../constants/index.js");
 const checkRole = require("../middlewares/checkRole.js");
 const checkIfUserAllowed = require("../middlewares/checkIfUserAllowed.js");
-const { uploadPostimagesS3 } = require("../middlewares/upload.js");
+const { uploadPostimagesS3, fileFilter } = require("../middlewares/upload.js");
 
 router.post(
   "/",
@@ -31,12 +31,15 @@ router.post(
   validate(postsSchema),
   async (req, res) => {
     try {
+      if (req.fileValidationError) {
+        return res.status(415).json({ message: `${req.fileValidationError}` });
+      }
       const images = [];
       for (const file of req.files) {
-        const { filename, size, mimetype: format } = file;
+        const { key, size, mimetype: format, location } = file;
         const image = {
-          url: `${process.env.BASE_URL}/images/${filename}`,
-          name: filename,
+          url: `${location}`,
+          name: key,
           size,
           format,
         };
@@ -44,15 +47,6 @@ router.post(
       }
       const userId = req.user.id;
       const newPost = await createPost(req.body, userId, images);
-      const imagesLocations = "";
-      for (let i = 0; i < images.length; i++) {
-        if (i < images.length - 1) {
-          ImagesLocations += `${images[i].location} ; `;
-        } else {
-          ImagesLocations += `${images[i].location}.`;
-        }
-      }
-      newPost.location = imagesLocations;
       const response = createResponseObj(
         newPost,
         { message: "Post created Successfully" },
@@ -171,12 +165,15 @@ router.put(
   async (req, res) => {
     const id = req.params.id;
     try {
+      if (req.fileValidationError) {
+        return res.status(415).json({ message: `${req.fileValidationError}` });
+      }
       const images = [];
       for (const file of req.files) {
-        const { filename, size, mimetype: format } = file;
+        const { key, size, mimetype: format } = file;
         const image = {
-          url: `${process.env.BASE_URL}/images/${filename}`,
-          name: filename,
+          url: `${location}`,
+          name: key,
           size,
           format,
         };

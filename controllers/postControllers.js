@@ -56,8 +56,8 @@ const getPosts = async (limit, offset, withComments = false) => {
 };
 
 const createPost = async (post, userId, images) => {
-  post.user_id = userId;
   try {
+    post.user_id = userId;
     let newImagespath = "";
     const newPost = await Post.query().insert(post);
     const post_id = newPost.id;

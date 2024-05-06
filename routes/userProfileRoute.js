@@ -30,14 +30,16 @@ router.post(
   validate(createUserProfilesSchema),
   async (req, res) => {
     try {
-      const { filename, size, mimetype: format } = req.file;
+      req.body.age = Number(req.body.age);
+      const { key, size, mimetype: format, location } = req.file;
       const image = {
-        url: `${process.env.BASE_URL}/images/${filename}`,
-        name: filename,
+        url: `${location}`,
+        name: key,
         size,
         format,
       };
-      const newUserProfile = await createUserProfile(req.body,image);
+      userId = req.user.id;
+      const newUserProfile = await createUserProfile(req.body, userId, image);
       const response = createResponseObj(
         newUserProfile,
         { message: "UserProfile created successfully" },
@@ -116,21 +118,20 @@ router.put(
 router.put(
   "/:id/avatar",
   checkIfUserAllowed(RESOURCE.USERPROFILE),
-  uploadAvatarS3.single("avatar"),
   resizeAndCheckAvatar,
+  uploadAvatarS3.single("avatar"),
   validate(updateUserProfilesSchema),
   async (req, res) => {
     const id = req.params.id;
     try {
-      const { filename, size, mimetype: format } = req.file;
+      const { key, size, mimetype: format } = req.file;
       const image = {
-        url: `${process.env.BASE_URL}/images/${filename}`,
-        name: filename,
+        url: `${req.file.location}`,
+        name: key,
         size,
         format,
       };
       const uploadedProfileAvatar = await uploadProfileAvatar(id, image);
-      uploadProfileAvatar.location = req.file.location;
       const response = createResponseObj(
         uploadedProfileAvatar,
         { message: `UserProfile with id ${id} updated successfully` },

@@ -5,8 +5,9 @@ const {
   createUserProfilesSchema,
 } = require("../vallidations/userProfilesValidation");
 
-const createUserProfile = async (profile, image) => {
+const createUserProfile = async (profile, userId, image) => {
   try {
+    profile.user_id = userId;
     const newImage = await Image.query().insert(image);
     const image_id = newImage.id; 
     profile.avatar = image_id;

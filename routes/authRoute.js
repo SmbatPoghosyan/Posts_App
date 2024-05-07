@@ -36,7 +36,6 @@ router.post("/signup", validate(signupSchema), async (req, res) => {
     );
     res.status(200).send(responseObj);
   } catch (err) {
-    console.error("error", err);
     res.status(500).send({
       message: "User with this username or email already exsists!",
     });

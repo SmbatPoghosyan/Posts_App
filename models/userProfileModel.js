@@ -35,7 +35,7 @@ class UserProfile extends Model {
           to: "users.id",
         },
       },
-      avatar: {
+      userAvatar: {
         relation: Model.BelongsToOneRelation,
         modelClass: Image,
         join: {

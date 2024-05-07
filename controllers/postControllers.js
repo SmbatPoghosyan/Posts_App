@@ -3,6 +3,7 @@ const Comment = require("../models/commentModel");
 const Image = require("../models/imageModel");
 const PostImage = require("../models/postImageModel");
 const formateDate = require("../utils/formateDate");
+const PostFollowers = require("../models/postFollowersModel");
 
 const getPosts = async (limit, offset, withComments = false) => {
   try {
@@ -23,7 +24,6 @@ const getPosts = async (limit, offset, withComments = false) => {
         .modifyGraph("comments.user", (builder) => {
           builder.select("id", "username");
         });
-      console.log(post.creation_date);
 
       posts.forEach((post) => {
         post.creation_date = formateDate(post.creation_date);
@@ -56,15 +56,23 @@ const getPosts = async (limit, offset, withComments = false) => {
   }
 };
 
-const createPost = async (post, userId, image) => {
-  post.user_id = userId;
+const createPost = async (post, userId, images) => {
   try {
-    const newImage = await Image.query().insert(image);
+    post.user_id = userId;
+    let newImagespath = "";
     const newPost = await Post.query().insert(post);
-    const image_id = newImage.id;
     const post_id = newPost.id;
-    await PostImage.query().insert({ image_id, post_id });
-    newPost.images = [newImage];
+    for (let i = 0; i < images.length; i++) {
+      const newImage = await Image.query().insert(images[i]);
+      const image_id = newImage.id;
+      await PostImage.query().insert({ image_id, post_id });
+      if (i < images.length - 1) {
+        newImagespath += `${images[i].url} ; `;
+      } else {
+        newImagespath += `${images[i].url}.`;
+      }
+    }
+    newPost.images = [newImagespath];
     return newPost;
   } catch (err) {
     throw new Error(err);
@@ -149,6 +157,53 @@ const getCreatorsPosts = async (userId) => {
   try {
     const posts = await Post.query().find({ user_id: userId });
     return posts;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+const followPost = async (postId, userId) => {
+  try {
+    const res = await PostFollowers.query().insert({
+      post_id: postId,
+      user_id: userId,
+    });
+    return res;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+const unfollowPost = async (postId, userId) => {
+  try {
+    const res = await PostFollowers.query()
+      .delete()
+      .where({ post_id: postId, user_id: userId });
+    if (res === 0) {
+      throw new Error("Post not found");
+    }
+    return res;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+const uploadPostImages = async (id, images) => {
+  try {
+    let newImagespath = "";
+    const post_id = id;
+    for (let i = 0; i < images.length; i++) {
+      const newImage = await Image.query().insert(images[i]);
+      const image_id = newImage.id;
+      await PostImage.query().insert({ image_id, post_id });
+      if (i < images.length - 1) {
+        newImagespath += `${images[i].url} ; `;
+      } else {
+        newImagespath += `${images[i].url}.`;
+      }
+    }
+    const post = await Post.query().findById(id).withGraphFetched("images");
+    return post;
   } catch (err) {
     throw new Error(err);
   }

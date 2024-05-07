@@ -3,6 +3,8 @@ const {
   postsSchema,
   patchSchema,
 } = require("../vallidations/postsValidation.js");
+
+const postFollowers = require("../models/postFollowersModel");
 const { commentSchema } = require("../vallidations/commentsVallidations.js");
 
 const validate = require("../vallidations");
@@ -14,7 +16,6 @@ const {
   getPostById,
   createPostComment,
   getCreatorsPosts,
-  uploadPostImages,
 } = require("../controllers/postControllers.js");
 const createResponseObj = require("../utils/createResponseObj.js");
 
@@ -27,8 +28,7 @@ const { uploadPostimagesS3, fileFilter } = require("../middlewares/upload.js");
 router.post(
   "/",
   checkRole(ROLE_NAME.CREATOR),
-  uploadPostimagesS3.array("images", 5),
-  validate(postsSchema),
+  upload.single("image1"),
   async (req, res) => {
     try {
       if (req.fileValidationError) {
@@ -71,9 +71,14 @@ router.post(
     try {
       const userId = req.user.id;
       const newcomment = await createPostComment(postId, userId, req.body);
+      await followPost(postId, userId);
+
       const response = createResponseObj(
         newcomment,
-        { message: "Comment created Successfully" },
+        {
+          message:
+            "Comment created successfully. Now you are following this post",
+        },
         201
       );
       res.status(201).send(response);
@@ -252,5 +257,63 @@ router.get("/self", checkRole(ROLE_NAME.CREATOR), async (req, res) => {
     });
   }
 });
+
+router.post(
+  "/:id/follow",
+  checkRole(ROLE_NAME.USER, ROLE_NAME.CREATOR),
+  async (req, res) => {
+    const postId = Number(req.params.id);
+    const userId = req.user.id;
+    try {
+      const post = await followPost(postId, userId);
+      if (!post) {
+        return res.status(404).send({
+          message: `Post with id ${postId} not found`,
+        });
+      }
+      const response = createResponseObj(
+        post,
+        { message: "Now you are following this post" },
+        201
+      );
+      return res.status(201).send(response);
+    } catch (err) {
+      console.error("error", err);
+      res.status(500).send({
+        message: "Something went wrong.",
+      });
+    }
+  }
+);
+
+router.delete(
+  "/:id/unfollow",
+  checkRole(ROLE_NAME.USER, ROLE_NAME.CREATOR),
+  async (req, res) => {
+    const postId = Number(req.params.id);
+
+    const userId = req.user.id;
+    try {
+      const postFollowers = await unfollowPost(postId, userId);
+      if (!postFollowers) {
+        return res.status(404).send({
+          message: `Post with id ${postId} not found`,
+        });
+      }
+
+      const response = createResponseObj(
+        postFollowers,
+        { message: "You are no longer following this post." },
+        200
+      );
+      return res.status(200).send(response);
+    } catch (err) {
+      console.error("error", err);
+      res.status(500).send({
+        message: "Something went wrong.",
+      });
+    }
+  }
+);
 
 module.exports = router;

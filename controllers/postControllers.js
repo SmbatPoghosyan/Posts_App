@@ -3,6 +3,7 @@ const Comment = require("../models/commentModel");
 const Image = require("../models/imageModel");
 const PostImage = require("../models/postImageModel");
 const formateDate = require("../utils/formateDate");
+const PostFollowers = require("../models/postFollowersModel");
 
 const getPosts = async (limit, offset, withComments = false) => {
   try {
@@ -161,10 +162,36 @@ const getCreatorsPosts = async (userId) => {
   }
 };
 
+const followPost = async (postId, userId) => {
+  try {
+    const res = await PostFollowers.query().insert({
+      post_id: postId,
+      user_id: userId,
+    });
+    return res;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+const unfollowPost = async (postId, userId) => {
+  try {
+    const res = await PostFollowers.query()
+      .delete()
+      .where({ post_id: postId, user_id: userId });
+    if (res === 0) {
+      throw new Error("Post not found");
+    }
+    return res;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
 const uploadPostImages = async (id, images) => {
   try {
     let newImagespath = "";
-    const post_id = id
+    const post_id = id;
     for (let i = 0; i < images.length; i++) {
       const newImage = await Image.query().insert(images[i]);
       const image_id = newImage.id;
@@ -175,9 +202,7 @@ const uploadPostImages = async (id, images) => {
         newImagespath += `${images[i].url}.`;
       }
     }
-    const post = await Post.query()
-        .findById(id)
-        .withGraphFetched("images")
+    const post = await Post.query().findById(id).withGraphFetched("images");
     return post;
   } catch (err) {
     throw new Error(err);
@@ -192,5 +217,4 @@ module.exports = {
   getPostById,
   createPostComment,
   getCreatorsPosts,
-  uploadPostImages
 };

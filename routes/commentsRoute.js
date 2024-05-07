@@ -55,6 +55,38 @@ router.post(
   }
 );
 
+/**
+ * @swagger
+ *    post:
+ *     summary: Create a new comment
+ *     tags: [Comments]
+ *     security:
+ *       - BearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               post_id:
+ *                 type: string
+ *
+ *     responses:
+ *       201:
+ *         description: Comment created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *
+ *       500:
+ *         description: Internal server error
+ */
+
 router.get("/", async (req, res) => {
   const page = Number(req.query.page) || 1;
   const limit = Number(req.query.limit) || 10;
@@ -74,6 +106,39 @@ router.get("/", async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ *     get:
+ *     summary: Get a list of comments
+ *     tags: [Comments]
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *         description: Page number
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *         description: Number of items per page
+ *     responses:
+ *       200:
+ *         description: List of comments
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: string
+ *
+ *       500:
+ *         description: Internal server error
+ */
+
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
   try {
@@ -92,6 +157,36 @@ router.get("/:id", async (req, res) => {
     });
   }
 });
+
+/**
+ * @swagger
+ *   /comments/{id}:
+ *   get:
+ *     summary: Get a comment by ID
+ *     tags: [Comments]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the comment to get
+ *     responses:
+ *       200:
+ *         description: Comment found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *
+ *       404:
+ *         description: Comment not found
+ *       500:
+ *         description: Internal server error
+ */
 
 router.put(
   "/:id",
@@ -123,6 +218,45 @@ router.put(
   }
 );
 
+/**
+ * @swagger
+ *   put:
+ *     summary: Update a comment by ID
+ *     tags: [Comments]
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the comment to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *
+ *     responses:
+ *       200:
+ *         description: Comment updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *
+ *       404:
+ *         description: Comment not found
+ *       500:
+ *         description: Internal server error
+ */
+
 router.delete(
   "/:id",
   checkRole(
@@ -152,5 +286,28 @@ router.delete(
     }
   }
 );
+
+/**
+ * @swagger
+ *   delete:
+ *     summary: Delete a comment by ID
+ *     tags: [Comments]
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the comment to delete
+ *     responses:
+ *       200:
+ *         description: Comment deleted successfully
+ *       404:
+ *         description: Comment not found
+ *       500:
+ *         description: Internal server error
+ */
 
 module.exports = router;

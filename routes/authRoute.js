@@ -6,6 +6,7 @@ const {
   signinSchema,
   signupSchema,
   resetPasswordSchema,
+  newPasswordSchema,
 } = require("../vallidations/authValidations");
 const { updateUser } = require("../controllers/usersControllers");
 const { signin, signup, resetPassword } = require("../services/authService");
@@ -16,7 +17,7 @@ const User = require("../models/userModel");
 
 const resetPasswordHTML = require("../htmlPages/resetPassword");
 const { v4: uuidv4 } = require("uuid");
-const code = uuidv4();
+const redis = require("../config/redisConfig");
 
 router.post("/signup", validate(signupSchema), async (req, res) => {
   const data = req.body;
@@ -97,23 +98,27 @@ router.post("/verify", async (req, res) => {
 
 router.post("/forgot", validate(resetPasswordSchema), async (req, res) => {
   try {
+    const code = uuidv4();
     const recipient = req.body.email;
+
     const userQuery = User.query();
     if (recipient) {
       userQuery.where("email", recipient);
     }
     const user = await userQuery.first();
+
     const recipient_name = user.username;
     const id = user.id;
-    const result = await resetPassword(
+
+    const sendSucces = await resetPassword(
       recipient,
       recipient_name,
       emailTemplate,
-      code,
-      id
+      code
     );
-    const sendSucces = result.sendSucces;
-    if (sendSucces) {
+
+    const resultOfRedis = await redis.set(code, id, "EX", 3600);
+    if (sendSucces && resultOfRedis) {
       res.status(200).send({ message: "Email was succesfully send." });
     } else {
       res.status(500).send({ message: "Email was not send!" });
@@ -124,32 +129,48 @@ router.post("/forgot", validate(resetPasswordSchema), async (req, res) => {
   }
 });
 
-router.get("/recover-password/:id", async (req, res) => {
-  if (req.query.code === code) {
-    res.send(
-      resetPasswordHTML.replace("${code}", code).replace("${id}", req.params.id)
-    );
-  } else {
-    res.send({ message: "Wrong code" });
-  }
-});
-
-router.post("/recover-password/:id", async (req, res) => {
-  const data = { password: req.body.newPassword };
-  const id = Number(req.params.id);
+router.get("/recover-password", async (req, res) => {
+  const code = req.query.code;
   try {
-    if (req.body.newPassword === req.body.repeatPassword) {
-      const result = await updateUser(id, data);
-      if (!result) {
-        res.send("Could not update user");
-      } else {
-        res.status(200).send("User password was updated successfully");
-      }
+    const id = await redis.get(code);
+    console.log("id", id);
+    if (id) {
+      res.status(200).send(resetPasswordHTML.replace("${code}", code));
+    } else {
+      res
+        .status(404)
+        .send({ message: "The code for reset password not found!" });
     }
   } catch (err) {
     console.error(err);
     throw new Error(err);
   }
 });
+
+router.post(
+  "/recover-password",
+  validate(newPasswordSchema),
+  async (req, res) => {
+    const data = { password: req.body.newPassword };
+    const code = req.query.code;
+
+    try {
+      const id = await redis.get(code);
+      if (req.body.newPassword === req.body.repeatPassword) {
+        const result = await updateUser(id, data);
+        if (!result) {
+          res.send("Could not update user");
+        } else {
+          res.status(200).send("User password was updated successfully");
+        }
+      }else{
+        res.status(500).send("New password and it's repeat are different")
+      }
+    } catch (err) {
+      console.error(err);
+      throw new Error(err);
+    }
+  }
+);
 
 module.exports = router;

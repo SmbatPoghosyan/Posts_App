@@ -76,10 +76,9 @@ const resetPassword = async (
   recipient,
   recipient_name,
   emailTemplate,
-  code,
-  id
+  code
 ) => {
-  const resetPasswordURL = `http://localhost:3000/auth/recover-password/${id}?code=${code}`;
+  const resetPasswordURL = `http://localhost:3000/auth/recover-password?code=${code}`;
   try {
     const sendSucces = await sendEmail(
       recipient,
@@ -87,7 +86,7 @@ const resetPassword = async (
       recipient_name,
       emailTemplate
     );
-    return { sendSucces, code };
+    return sendSucces;
   } catch (error) {
     console.error(error);
   }

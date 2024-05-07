@@ -61,7 +61,7 @@ const resetPasswordHTML = `
             <div class="container">
                 <h2>Reset Password</h2>
 
-                <form id="resetForm" action="/auth/recover-password/\${id}?code=\${code}" method="post">
+                <form id="resetForm" action="/auth/recover-password?code=\${code}" method="post">
                     <label for="newPassword">New Password:</label>
                     <input type="password" id="newPassword" name="newPassword" required><br><br>
                     <label for="repeatPassword">Repeat New Password:</label>

@@ -28,7 +28,7 @@ const { uploadPostimagesS3, fileFilter } = require("../middlewares/upload.js");
 router.post(
   "/",
   checkRole(ROLE_NAME.CREATOR),
-  uploadPostimagesS3.single("image1"),
+  uploadPostimagesS3.array("images", 5),
   async (req, res) => {
     try {
       if (req.fileValidationError) {
@@ -424,6 +424,100 @@ router.put(
   }
 );
 
+/**
+ * @swagger
+ *  /posts/{id}:
+ *    put:
+ *     summary: Update a post by ID
+ *     tags: [Posts]
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the post to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *               content:
+ *                 type: string
+ *             required:
+ *               - title
+ *               - content
+ *     responses:
+ *       200:
+ *         description: Post updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *       404:
+ *         description: Post not found
+ *       500:
+ *         description: Internal server error
+ */
+
+router.put(
+  "/:id/images",
+  checkRole(ROLE_NAME.CREATOR),
+  checkIfUserAllowed(RESOURCE.POST),
+  uploadPostimagesS3.array("images", 5),
+  validate(patchSchema),
+  async (req, res) => {
+    const id = req.params.id;
+    try {
+      if (req.fileValidationError) {
+        return res.status(415).json({ message: `${req.fileValidationError}` });
+      }
+      const images = [];
+      for (const file of req.files) {
+        const { key, size, mimetype: format } = file;
+        const image = {
+          url: `${location}`,
+          name: key,
+          size,
+          format,
+        };
+        images.push(image);
+      }
+      const uploadedPostImages = await uploadPostImages(id, images);
+      const imagesLocations = "";
+      for (let i = 0; i < images.length; i++) {
+        if (i < images.length - 1) {
+          imagesLocations += `${images[i].location} ; `;
+        } else {
+          imagesLocations += `${images[i].location}.`;
+        }
+      }
+      uploadedPostImages.location = imagesLocations;
+      if (!uploadedPostImages) {
+        return res.status(404).send({
+          message: `Post with id ${id} not found`,
+        });
+      }
+      const response = createResponseObj(
+        uploadedPostImages,
+        { message: `Post with id ${id} updated successfully` },
+        200
+      );
+      return res.status(200).send(response);
+    } catch (err) {
+      console.error("error", err);
+      res.status(500).send({
+        message: "Something went wrong.",
+      });
+    }
+  }
+);
+
 router.delete(
   "/:id",
   checkRole(ROLE_NAME.ADMIN, ROLE_NAME.SUPERADMIN, ROLE_NAME.CREATOR),
@@ -579,5 +673,35 @@ router.delete(
     }
   }
 );
+
+/**
+ * @swagger
+ * /posts/self:
+ *   get:
+ *     summary: Get posts created by the authenticated user
+ *     tags: [Posts]
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of posts created by the user
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: string
+ *                   title:
+ *                     type: string
+ *                   content:
+ *                     type: string
+ *       404:
+ *         description: User has not created any posts
+ *       500:
+ *         description: Internal server error
+ */
 
 module.exports = router;

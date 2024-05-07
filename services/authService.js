@@ -3,6 +3,7 @@ const { ROLE_ID } = require("../constants");
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
+const { sendEmail } = require("../services/sendEmailService");
 
 dotenv.config();
 
@@ -67,12 +68,33 @@ const signup = async (
     return newUser;
   } catch (err) {
     console.error(err, err.message);
-    console.error(err, err.message);
     throw new Error(err);
+  }
+};
+
+const resetPassword = async (
+  recipient,
+  recipient_name,
+  emailTemplate,
+  code
+) => {
+  const resetPasswordURL = `http://localhost:3000/auth/recover-password?code=${code}`;
+  try {
+    const sendSucces = await sendEmail(
+      recipient,
+      resetPasswordURL,
+      recipient_name,
+      emailTemplate
+    );
+    return sendSucces;
+  } catch (err) {
+    console.error(err);
+    throw new Error(err)
   }
 };
 
 module.exports = {
   signin,
   signup,
+  resetPassword,
 };

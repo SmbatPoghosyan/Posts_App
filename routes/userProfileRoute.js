@@ -10,6 +10,7 @@ const {
   getUserProfileById,
   updateUserProfile,
   deleteUserPorfile,
+  uploadProfileAvatar,
 } = require("../controllers/user_profilesControllers");
 const createResponseObj = require("../utils/createResponseObj");
 const validate = require("../vallidations/index");
@@ -17,23 +18,42 @@ const validate = require("../vallidations/index");
 const router = express.Router();
 const { RESOURCE } = require("../constants");
 const checkIfUserAllowed = require("../middlewares/checkIfUserAllowed.js");
+const {
+  uploadAvatarS3,
+  resizeAndCheckAvatar,
+} = require("../middlewares/upload.js");
 
-router.post("/", validate(createUserProfilesSchema), async (req, res) => {
-  try {
-    const newUserProfile = await createUserProfile(req.body);
-    const response = createResponseObj(
-      newUserProfile,
-      { message: "UserProfile created successfully" },
-      201
-    );
-    res.status(201).send(response);
-  } catch (err) {
-    console.error("error", err);
-    res.status(500).send({
-      message: "Something went wrong.",
-    });
+router.post(
+  "/",
+  uploadAvatarS3.single("avatar"),
+  resizeAndCheckAvatar,
+  validate(createUserProfilesSchema),
+  async (req, res) => {
+    try {
+      req.body.age = Number(req.body.age);
+      const { key, size, mimetype: format, location } = req.file;
+      const image = {
+        url: `${location}`,
+        name: key,
+        size,
+        format,
+      };
+      userId = req.user.id;
+      const newUserProfile = await createUserProfile(req.body, userId, image);
+      const response = createResponseObj(
+        newUserProfile,
+        { message: "UserProfile created successfully" },
+        201
+      );
+      res.status(201).send(response);
+    } catch (err) {
+      console.error("error", err);
+      res.status(500).send({
+        message: "Something went wrong.",
+      });
+    }
   }
-});
+);
 
 /**
  * @swagger
@@ -118,7 +138,7 @@ router.get("/:id", async (req, res) => {
     const userProfile = await getUserProfileById(id);
     if (!userProfile) {
       return res.status(404).send({
-        message: `UserProfile with id ${id} not found`,
+        message: `User profile with id ${id} not found`,
       });
     }
     const response = createResponseObj(userProfile, {}, 200);
@@ -173,10 +193,10 @@ router.put(
     const id = req.params.id;
     try {
       const updatedUserProfile = await updateUserProfile(id, req.body);
-      if (!updatedUserProfile) {
-        return res
-          .status(404)
-          .send({ message: `UserProfile with id ${id} not found` });
+      if (!userProfile) {
+        return res.status(404).send({
+          message: `User profile with id ${id} not found`,
+        });
       }
       const response = createResponseObj(
         updatedUserProfile,
@@ -238,6 +258,38 @@ router.put(
  *       500:
  *         description: Internal server error
  */
+
+router.put(
+  "/:id/avatar",
+  checkIfUserAllowed(RESOURCE.USERPROFILE),
+  resizeAndCheckAvatar,
+  uploadAvatarS3.single("avatar"),
+  validate(updateUserProfilesSchema),
+  async (req, res) => {
+    const id = req.params.id;
+    try {
+      const { key, size, mimetype: format } = req.file;
+      const image = {
+        url: `${req.file.location}`,
+        name: key,
+        size,
+        format,
+      };
+      const uploadedProfileAvatar = await uploadProfileAvatar(id, image);
+      const response = createResponseObj(
+        uploadedProfileAvatar,
+        { message: `UserProfile with id ${id} updated successfully` },
+        200
+      );
+      res.status(200).send(response);
+    } catch (err) {
+      console.error("error", err);
+      res.status(500).send({
+        message: "Something went wrong.",
+      });
+    }
+  }
+);
 
 router.delete(
   "/:id",

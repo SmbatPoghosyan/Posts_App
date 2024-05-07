@@ -34,8 +34,14 @@ const checkIfUserAllowed = (resource) => async (req, res, next) => {
           userRole !== ROLE_NAME.ADMIN &&
           userRole !== ROLE_NAME.SUPERADMIN
         ) {
-          currentResource = await User.query().findById(id);
-          break;
+          if (req.body.hasOwnProperty("role_id")) {
+            return res.status(400).send({
+              message: "You are not allowed to update or delete your role",
+            });
+          } else {
+            currentResource = await User.query().findById(id);
+            break;
+          }
         }
       case RESOURCE.USERPROFILE:
         currentResource = await UserProfile.query().findById(id);

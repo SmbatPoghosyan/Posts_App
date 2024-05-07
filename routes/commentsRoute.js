@@ -33,6 +33,12 @@ router.post(
         res.status(404).send({ message: `Post with id ${id} not found!` });
         return;
       }
+      const followedPost = await followPost(id, data.user_id);
+      if (!followedPost) {
+        return res.status(404).send({
+          message: `Post with id ${postId} not found`,
+        });
+      }
       const newcomment = await createComment(data);
       const response = createResponseObj(
         newcomment,

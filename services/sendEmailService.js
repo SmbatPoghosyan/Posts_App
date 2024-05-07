@@ -1,6 +1,4 @@
 const nodemailer = require("nodemailer");
-const dotenv = require("dotenv");
-dotenv.config();
 
 const sendEmail = async (recipient, sendingEmail, recipient_name, template) => {
   const transporter = nodemailer.createTransport({
@@ -24,8 +22,8 @@ const sendEmail = async (recipient, sendingEmail, recipient_name, template) => {
     const info = await transporter.sendMail(mailOptions);
     console.log(`Email sent: ${info.response}`);
     return true;
-  } catch (error) {
-    throw new Error(error);
+  } catch (err) {
+    throw new Error(err);
   }
 };
 

@@ -10,6 +10,7 @@ const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 const path = require("path");
 
+require("./config/redis.js");
 require("./config/db");
 const passportConfig = require("./config/passport");
 

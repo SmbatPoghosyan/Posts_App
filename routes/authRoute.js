@@ -17,7 +17,7 @@ const User = require("../models/userModel");
 
 const resetPasswordHTML = require("../htmlPages/resetPassword");
 const { v4: uuidv4 } = require("uuid");
-const redis = require("../config/redisConfig");
+const redis = require("../config/redis");
 
 router.post("/signup", validate(signupSchema), async (req, res) => {
   const data = req.body;
@@ -100,7 +100,7 @@ router.post("/signin", validate(signinSchema), async (req, res) => {
     }
     console.error("error", err);
     res.status(500).send({
-      message: "Something went wrong.",
+      message: errorMessage,
     });
   }
 });
@@ -197,7 +197,7 @@ router.post("/forgot", validate(resetPasswordSchema), async (req, res) => {
       res.status(500).send({ message: "Email was not send!" });
     }
   } catch (err) {
-    console.log("error", err);
+    console.error("error", err);
     res.status(500).send({ message: "Something went wrong" });
   }
 });
@@ -206,7 +206,6 @@ router.get("/recover-password", async (req, res) => {
   const code = req.query.code;
   try {
     const id = await redis.get(code);
-    console.log("id", id);
     if (id) {
       res.status(200).send(resetPasswordHTML.replace("${code}", code));
     } else {
@@ -215,8 +214,8 @@ router.get("/recover-password", async (req, res) => {
         .send({ message: "The code for reset password not found!" });
     }
   } catch (err) {
-    console.error(err);
-    throw new Error(err);
+    console.error("error", err);
+    res.status(500).send({ message: "Something went wrong" });
   }
 });
 
@@ -236,12 +235,12 @@ router.post(
         } else {
           res.status(200).send("User password was updated successfully");
         }
-      }else{
-        res.status(500).send("New password and it's repeat are different")
+      } else {
+        res.status(500).send("New password and it's repeat are different");
       }
     } catch (err) {
-      console.error(err);
-      throw new Error(err);
+      console.error("error", err);
+      res.status(500).send({ message: "Something went wrong" });
     }
   }
 );

@@ -37,6 +37,7 @@ The post app allows users to **create**, **read**, **update**, **delete** posts,
   - passport: Authentication middleware for Node.js
   - passport-jwt: Passport strategy for authenticating with a JSON Web Token
   - pg: PostgreSQL client for Node.js
+  - ioredis: Client for integrating with Redis
 
 ## Installation
 
@@ -65,6 +66,12 @@ If there are problems with installation, please inform us about it.
 - Delete a post: Make a DELETE request to `/posts/:id` to remove a post.
 - Leave a comment: Make a POST request to `/posts/:id/comments` with the comment content.
 
+- Create a new user: Make a POST request to `/users` with the user information in the request body
+- Get an information abouth user: Make a GET request to `/users/:id` to retrieve a specific user.
+- Update an user information: Make a PUT request to `/users/:id` with the updated user information.
+- Delete an user: Make a DELETE request to `/users/:id` to remove an user.
+
+
 ## Running App
 
 To run the app type `npm start` in terminal.
@@ -86,6 +93,20 @@ To integrate with AWS S3 for file storage, follow these steps:
    - AWS_SECRET_ACCESS_KEY
 
 Make sure to install the required packages for AWS integration using npm:
+
+## Redis Integration
+
+To use Redis database, follow this stages
+
+1. Register for a Redis account
+2. By default it will give you 1 free database but you can create paid database clicking "New database" button
+in the upper right corner
+3. From left menu click on "Databases" and find the database, you want to use and click on it
+4. In "General" seqtion find "Public endpoint" it is you database's host and port (format HOST:PORT)
+5. Scroll down to the "Sequrity" section and copy your password
+6. Update your Redis config in your _.env_ file (example for Redis config you can find in _.env.example_ file)
+
+Make sure to install the required packages for Redis running ~npm install ioredis~ or 3rd stage of instalation [Installation](#installation)
 
 ```bash
 npm install aws-sdk multer multer-s3 

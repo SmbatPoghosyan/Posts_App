@@ -87,8 +87,9 @@ const resetPassword = async (
       emailTemplate
     );
     return sendSucces;
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error(err);
+    throw new Error(err)
   }
 };
 

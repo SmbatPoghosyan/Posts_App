@@ -1,6 +1,6 @@
 const createUserProfilesSchema = {
   type: "object",
-  required: ["firstname", "lastname", "age", "gender", "user_id"],
+  required: ["firstname", "lastname", "age", "gender"],
   properties: {
     firstname: {
       type: "string",
@@ -13,12 +13,12 @@ const createUserProfilesSchema = {
       maxLength: 50,
     },
     user_id: {
-      type: "number",
-      minimum: 1,
-      maximum: 2,
+      type: "string",
+      minLength: 1,
     },
     age: {
-      type: "number",
+      type: "string",
+      minLength: 1,
     },
     gender: {
       type: "string",
@@ -49,11 +49,6 @@ const updateUserProfilesSchema = {
       type: "string",
       minLength: 1,
       maxLength: 10,
-    },
-    user_id: {
-      type: "number",
-      minimum: 1,
-      maximum: 4,
     },
   },
   additionalProperties: false,

@@ -24,7 +24,6 @@ const getPosts = async (limit, offset, withComments = false) => {
         .modifyGraph("comments.user", (builder) => {
           builder.select("id", "username");
         });
-      console.log(post.creation_date);
 
       posts.forEach((post) => {
         post.creation_date = formateDate(post.creation_date);
@@ -57,15 +56,23 @@ const getPosts = async (limit, offset, withComments = false) => {
   }
 };
 
-const createPost = async (post, userId, image) => {
-  post.user_id = userId;
+const createPost = async (post, userId, images) => {
   try {
-    const newImage = await Image.query().insert(image);
+    post.user_id = userId;
+    let newImagespath = "";
     const newPost = await Post.query().insert(post);
-    const image_id = newImage.id;
     const post_id = newPost.id;
-    await PostImage.query().insert({ image_id, post_id });
-    newPost.images = [newImage];
+    for (let i = 0; i < images.length; i++) {
+      const newImage = await Image.query().insert(images[i]);
+      const image_id = newImage.id;
+      await PostImage.query().insert({ image_id, post_id });
+      if (i < images.length - 1) {
+        newImagespath += `${images[i].url} ; `;
+      } else {
+        newImagespath += `${images[i].url}.`;
+      }
+    }
+    newPost.images = [newImagespath];
     return newPost;
   } catch (err) {
     throw new Error(err);
@@ -181,6 +188,27 @@ const unfollowPost = async (postId, userId) => {
   }
 };
 
+const uploadPostImages = async (id, images) => {
+  try {
+    let newImagespath = "";
+    const post_id = id;
+    for (let i = 0; i < images.length; i++) {
+      const newImage = await Image.query().insert(images[i]);
+      const image_id = newImage.id;
+      await PostImage.query().insert({ image_id, post_id });
+      if (i < images.length - 1) {
+        newImagespath += `${images[i].url} ; `;
+      } else {
+        newImagespath += `${images[i].url}.`;
+      }
+    }
+    const post = await Post.query().findById(id).withGraphFetched("images");
+    return post;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
 module.exports = {
   createPost,
   updatePost,
@@ -189,6 +217,4 @@ module.exports = {
   getPostById,
   createPostComment,
   getCreatorsPosts,
-  followPost,
-  unfollowPost,
 };

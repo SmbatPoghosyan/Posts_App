@@ -70,6 +70,26 @@ If there are problems with installation, please inform us about it.
 To run the app type `npm start` in terminal.
 To run app in _developer mode_ type `npm run dev` in terminal (will run app using **nodemon**).
 
+## AWS Integration
+
+To integrate with AWS S3 for file storage, follow these steps:
+
+1. Register for an AWS account.
+2. Navigate to the AWS Management Console and create a new S3 bucket. Specify the bucket name and enable ACLs. Click "Create bucket".
+3. After creating the bucket, navigate to your account name on the right side and select the "Security credentials" section.
+4. Scroll down to the "Access keys" section and click "Create access key".
+5. Save the Access key and Secret access key (note that the Secret access key will only be visible once, so make sure to save it securely).
+6. Update the appropriate variables in your _.env_ file with the following information:
+   - AWS Region
+   - AWS_S3_BUCKET_NAME
+   - AWS_ACCESS_KEY_ID
+   - AWS_SECRET_ACCESS_KEY
+
+Make sure to install the required packages for AWS integration using npm:
+
+```bash
+npm install aws-sdk multer multer-s3 
+
 ## Contributing
 
 Thank you for your interest in contributing to this project. At this time, we are not accepting external contributions. This project is currently maintained by the core development team. If you have suggestions or find issues, please feel free to write about that to our email.
@@ -79,3 +99,4 @@ We appreciate your understanding and support.
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+```

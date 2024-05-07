@@ -51,6 +51,7 @@ router.post(
 
 /**
  * @swagger
+ *  /comments:
  *    post:
  *     summary: Create a new comment
  *     tags: [Comments]
@@ -102,6 +103,7 @@ router.get("/", async (req, res) => {
 
 /**
  * @swagger
+ *  /comments:
  *     get:
  *     summary: Get a list of comments
  *     tags: [Comments]
@@ -214,6 +216,7 @@ router.put(
 
 /**
  * @swagger
+ *  /comments/{id}:
  *   put:
  *     summary: Update a comment by ID
  *     tags: [Comments]
@@ -283,6 +286,7 @@ router.delete(
 
 /**
  * @swagger
+ *  /comments/{id}:
  *   delete:
  *     summary: Delete a comment by ID
  *     tags: [Comments]

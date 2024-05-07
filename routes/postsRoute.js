@@ -190,6 +190,7 @@ router.get("/", async (req, res) => {
 
 /**
  * @swagger
+ *  /posts:
  *    get:
  *     summary: Get a list of posts
  *     tags: [Posts]
@@ -282,7 +283,6 @@ router.get("/:id", async (req, res) => {
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Post'
  *       404:
  *         description: Post not found
  *       500:
@@ -321,7 +321,8 @@ router.put(
 
 /**
  * @swagger
- * put:
+ *  /posts/{id}:
+ *    put:
  *     summary: Update a post by ID
  *     tags: [Posts]
  *     security:
@@ -353,7 +354,6 @@ router.put(
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Post'
  *       404:
  *         description: Post not found
  *       500:
@@ -390,6 +390,7 @@ router.delete(
 
 /**
  * @swagger
+ *  /posts/{id}:
  *  delete:
  *     summary: Delete a post by ID
  *     tags: [Posts]

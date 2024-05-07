@@ -50,7 +50,7 @@ router.post(
 
 /**
  * @swagger
- * /users:
+ *  /users:
  *   post:
  *     summary: Create a new user
  *     tags: [Users]
@@ -126,6 +126,7 @@ router.get(
 
 /**
  * @swagger
+ *  /users:
  *  get:
  *     summary: Get a list of users
  *     tags: [Users]
@@ -200,7 +201,7 @@ router.get(
 
 /**
  * @swagger
- * /users/{id}:
+ *  /users/{id}:
  *   get:
  *     summary: Get a user by ID
  *     tags: [Users]
@@ -264,6 +265,7 @@ router.put(
 
 /**
  * @swagger
+ *  /users/{id}:
  *    put:
  *     summary: Update a user by ID
  *     tags: [Users]
@@ -333,7 +335,8 @@ router.delete("/:id", checkIfUserAllowed(RESOURCE.USER), async (req, res) => {
 
 /**
  * @swagger
- * delete:
+ *   /users/{id}:
+ *   delete:
  *     summary: Delete a user by ID
  *     tags: [Users]
  *     security:

@@ -87,6 +87,7 @@ router.get("/", async (req, res) => {
 
 /**
  * @swagger
+ * /userProfiles:
  *   get:
  *     summary: Get all user profiles
  *     tags: [User Profiles]
@@ -194,6 +195,7 @@ router.put(
 
 /**
  * @swagger
+ * /userProfiles/{id}:
  *   put:
  *     summary: Update a user profile by ID
  *     tags: [User Profiles]
@@ -264,6 +266,7 @@ router.delete(
 
 /**
  * @swagger
+ * /userProfiles/{id}:
  *   delete:
  *     summary: Delete a user profile by ID
  *     tags: [User Profiles]

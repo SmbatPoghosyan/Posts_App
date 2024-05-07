@@ -3,7 +3,7 @@ const Comment = require("../models/commentModel");
 const Image = require("../models/imageModel");
 const PostImage = require("../models/postImageModel");
 const formateDate = require("../utils/formateDate");
-const postFollowers = require("../models/postFollowersModel");
+const PostFollowers = require("../models/postFollowersModel");
 
 const getPosts = async (limit, offset, withComments = false) => {
   try {
@@ -157,7 +157,7 @@ const getCreatorsPosts = async (userId) => {
 
 const followPost = async (postId, userId) => {
   try {
-    const res = await postFollowers.query().insert({
+    const res = await PostFollowers.query().insert({
       post_id: postId,
       user_id: userId,
     });
@@ -167,32 +167,13 @@ const followPost = async (postId, userId) => {
   }
 };
 
-//   try {
-//     const follow = await postFollowers.query().insert({
-//       post_id: postId,
-//       user_id: userId,
-//     });
-//     return follow;
-//   } catch (err) {
-//     throw new Error(err);
-//   }
-// };
-
 const unfollowPost = async (postId, userId) => {
   try {
-    const res = await postFollowers
-      .query()
+    const res = await PostFollowers.query()
       .delete()
       .where({ post_id: postId, user_id: userId });
     if (res === 0) {
       throw new Error("Post not found");
-    }
-    const count = await postFollowers
-      .query()
-      .count()
-      .where({ post_id: postId });
-    if (count.count === "0") {
-      await Post.query().delete().where({ id: postId });
     }
     return res;
   } catch (err) {

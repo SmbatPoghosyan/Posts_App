@@ -69,7 +69,7 @@ router.post(
     try {
       const userId = req.user.id;
       const newcomment = await createPostComment(postId, userId, req.body);
-      await postFollowers.query().insert({ user_id: userId, post_id: +postId });
+      await followPost(postId, userId);
 
       const response = createResponseObj(
         newcomment,

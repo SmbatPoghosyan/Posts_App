@@ -34,6 +34,44 @@ router.post("/signup", validate(signupSchema), async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /signup:
+ *   post:
+ *     summary: Register a new user
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *                 format: password
+ *               username:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: User successfully registered
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *                 username:
+ *                   type: string
+ *       500:
+ *         description: User with this username or email already exists
+ */
+
 router.post("/signin", validate(signinSchema), async (req, res) => {
   const data = req.body;
   const { email, password, username } = data;
@@ -58,6 +96,42 @@ router.post("/signin", validate(signinSchema), async (req, res) => {
     });
   }
 });
+
+/**
+ * @swagger
+ * /auth/signin:
+ *   post:
+ *     summary: Log in with existing user credentials
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *                 format: password
+ *               username:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: User successfully logged in
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 user:
+ *                   $ref: '#/components/schemas/User'
+ *                 token:
+ *                   type: string
+ *       500:
+ *         description: Wrong email/username or password
+ */
 
 router.post("/verify", async (req, res) => {
   try {

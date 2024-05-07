@@ -44,8 +44,18 @@ The post app allows users to **create**, **read**, **update**, **delete** posts,
 2. Clone the repository to your local machine.
 3. Run `npm install` to install all node modules and dependencies.
 4. Copy _.env.example_ file and make it _.env_ to have your own _.env_ file and change all variables to valid data.
-5. Make new database, or use existing empty one and change **database** field to your databae_name in _knexfile.js_.
+5. Make new database, or use existing empty one and change **database** field to your databae*name in \_knexfile.js*.
 6. Access the application in your browser at `http://localhost:3000`.
+7. To use email verification route you need to update you google account configs
+   - Go to your _myaccount.google.com_ (manage your google account button under your profile picture).
+   - Go to **Security**.
+   - Select **2-Step Verification** and turn it on.
+   - Scroll down and click on **App passwords** and create one (you will use it instead of your google account password).
+   - Thats all you need, now come back to the code and use your **email addres** and **App password** in your .env
+
+Go by this link if you want get more information [Google help centre](https://support.google.com/mail/answer/185833?hl=en).
+
+If there are problems with installation, please inform us about it.
 
 ## Usage
 
@@ -80,13 +90,11 @@ Make sure to install the required packages for AWS integration using npm:
 ```bash
 npm install aws-sdk multer multer-s3 
 
-
 ## Contributing
 
 Thank you for your interest in contributing to this project. At this time, we are not accepting external contributions. This project is currently maintained by the core development team. If you have suggestions or find issues, please feel free to write about that to our email.
 
 We appreciate your understanding and support.
-
 
 ## License
 

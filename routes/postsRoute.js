@@ -28,7 +28,7 @@ const { uploadPostimagesS3, fileFilter } = require("../middlewares/upload.js");
 router.post(
   "/",
   checkRole(ROLE_NAME.CREATOR),
-  upload.single("image1"),
+  uploadPostimagesS3.single("image1"),
   async (req, res) => {
     try {
       if (req.fileValidationError) {

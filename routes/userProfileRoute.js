@@ -92,43 +92,6 @@ router.post(
  *         description: Internal server error
  */
 
-/**
- * @swagger
- * /userProfiles:
- *   post:
- *     summary: Create a new user profile
- *     tags: [User Profiles]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               username:
- *                 type: string
- *               email:
- *                 type: string
- *
- *     responses:
- *       201:
- *         description: User profile created successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 id:
- *                   type: string
- *                 username:
- *                   type: string
- *                 email:
- *                   type: string
- *
- *       500:
- *         description: Internal server error
- */
-
 router.get("/", async (req, res) => {
   try {
     const userProfiles = await getUserProfiles();
@@ -144,6 +107,7 @@ router.get("/", async (req, res) => {
 
 /**
  * @swagger
+ * /userProfiles:
  *   get:
  *     summary: Get all user profiles
  *     tags: [User Profiles]
@@ -249,72 +213,9 @@ router.put(
   }
 );
 
-router.put(
-  "/:id/avatar",
-  checkIfUserAllowed(RESOURCE.USERPROFILE),
-  resizeAndCheckAvatar,
-  uploadAvatarS3.single("avatar"),
-  validate(updateUserProfilesSchema),
-  async (req, res) => {
-    const id = req.params.id;
-    try {
-      const { key, size, mimetype: format } = req.file;
-      const image = {
-        url: `${req.file.location}`,
-        name: key,
-        size,
-        format,
-      };
-      const uploadedProfileAvatar = await uploadProfileAvatar(id, image);
-      const response = createResponseObj(
-        uploadedProfileAvatar,
-        { message: `UserProfile with id ${id} updated successfully` },
-        200
-      );
-      res.status(200).send(response);
-    } catch (err) {
-      console.error("error", err);
-      res.status(500).send({
-        message: "Something went wrong.",
-      });
-    }
-  }
-);
-
-router.put(
-  "/:id/avatar",
-  checkIfUserAllowed(RESOURCE.USERPROFILE),
-  resizeAndCheckAvatar,
-  uploadAvatarS3.single("avatar"),
-  validate(updateUserProfilesSchema),
-  async (req, res) => {
-    const id = req.params.id;
-    try {
-      const { key, size, mimetype: format } = req.file;
-      const image = {
-        url: `${req.file.location}`,
-        name: key,
-        size,
-        format,
-      };
-      const uploadedProfileAvatar = await uploadProfileAvatar(id, image);
-      const response = createResponseObj(
-        uploadedProfileAvatar,
-        { message: `UserProfile with id ${id} updated successfully` },
-        200
-      );
-      res.status(200).send(response);
-    } catch (err) {
-      console.error("error", err);
-      res.status(500).send({
-        message: "Something went wrong.",
-      });
-    }
-  }
-);
-
 /**
  * @swagger
+ * /userProfiles/{id}:
  *   put:
  *     summary: Update a user profile by ID
  *     tags: [User Profiles]
@@ -358,6 +259,116 @@ router.put(
  *         description: Internal server error
  */
 
+router.put(
+  "/:id/avatar",
+  checkIfUserAllowed(RESOURCE.USERPROFILE),
+  resizeAndCheckAvatar,
+  uploadAvatarS3.single("avatar"),
+  validate(updateUserProfilesSchema),
+  async (req, res) => {
+    const id = req.params.id;
+    try {
+      const { key, size, mimetype: format } = req.file;
+      const image = {
+        url: `${req.file.location}`,
+        name: key,
+        size,
+        format,
+      };
+      const uploadedProfileAvatar = await uploadProfileAvatar(id, image);
+      const response = createResponseObj(
+        uploadedProfileAvatar,
+        { message: `UserProfile with id ${id} updated successfully` },
+        200
+      );
+      res.status(200).send(response);
+    } catch (err) {
+      console.error("error", err);
+      res.status(500).send({
+        message: "Something went wrong.",
+      });
+    }
+  }
+);
+
+/**
+ * @swagger
+ * /userProfiles/{id}:
+ *   put:
+ *     summary: Update a user profile by ID
+ *     tags: [User Profiles]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the user profile to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *
+ *     responses:
+ *       200:
+ *         description: User profile updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                 username:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *
+ *       404:
+ *         description: User profile not found
+ *       500:
+ *         description: Internal server error
+ */
+
+router.put(
+  "/:id/avatar",
+  checkIfUserAllowed(RESOURCE.USERPROFILE),
+  resizeAndCheckAvatar,
+  uploadAvatarS3.single("avatar"),
+  validate(updateUserProfilesSchema),
+  async (req, res) => {
+    const id = req.params.id;
+    try {
+      const { key, size, mimetype: format } = req.file;
+      const image = {
+        url: `${req.file.location}`,
+        name: key,
+        size,
+        format,
+      };
+      const uploadedProfileAvatar = await uploadProfileAvatar(id, image);
+      const response = createResponseObj(
+        uploadedProfileAvatar,
+        { message: `UserProfile with id ${id} updated successfully` },
+        200
+      );
+      res.status(200).send(response);
+    } catch (err) {
+      console.error("error", err);
+      res.status(500).send({
+        message: "Something went wrong.",
+      });
+    }
+  }
+);
+
 router.delete(
   "/:id",
   checkIfUserAllowed(RESOURCE.USERPROFILE),
@@ -385,6 +396,7 @@ router.delete(
 
 /**
  * @swagger
+ * /userProfiles/{id}:
  *   delete:
  *     summary: Delete a user profile by ID
  *     tags: [User Profiles]

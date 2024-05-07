@@ -41,6 +41,51 @@ router.post(
   }
 );
 
+/**
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: Operations related to users
+ */
+
+/**
+ * @swagger
+ *  /users:
+ *   post:
+ *     summary: Create a new user
+ *     tags: [Users]
+ *     security:
+ *       - BearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *             required:
+ *               - username
+ *               - password
+ *     responses:
+ *       201:
+ *         description: User created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                 username:
+ *                   type: string
+ *       500:
+ *         description: Internal server error
+ */
+
 router.get(
   "/",
   checkRole(ROLE_NAME.SUPERADMIN, ROLE_NAME.ADMIN),
@@ -79,6 +124,52 @@ router.get(
   }
 );
 
+/**
+ * @swagger
+ *  /users:
+ *  get:
+ *     summary: Get a list of users
+ *     tags: [Users]
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *         description: Page number
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *         description: Number of items per page
+ *     responses:
+ *       200:
+ *         description: List of users
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 users:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: string
+ *                       username:
+ *                         type: string
+ *                 totalUsers:
+ *                   type: integer
+ *                 currentPage:
+ *                   type: integer
+ *                 limit:
+ *                   type: integer
+ *       500:
+ *         description: Internal server error
+ */
+
 router.get(
   "/:id",
   checkRole(ROLE_NAME.SUPERADMIN, ROLE_NAME.ADMIN),
@@ -108,6 +199,39 @@ router.get(
   }
 );
 
+/**
+ * @swagger
+ *  /users/{id}:
+ *   get:
+ *     summary: Get a user by ID
+ *     tags: [Users]
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the user to get
+ *     responses:
+ *       200:
+ *         description: User found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                 username:
+ *                   type: string
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Internal server error
+ */
+
 router.put(
   "/:id",
   checkIfUserAllowed(RESOURCE.USER),
@@ -116,7 +240,6 @@ router.put(
     const id = req.params.id;
     const data = req.body;
     try {
-
       const updatedUser = await updateUser(id, data);
       if (!updatedUser) {
         return res.status(404).send({
@@ -140,9 +263,56 @@ router.put(
   }
 );
 
+/**
+ * @swagger
+ *  /users/{id}:
+ *    put:
+ *     summary: Update a user by ID
+ *     tags: [Users]
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the user to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *             required:
+ *               - username
+ *               - password
+ *     responses:
+ *       200:
+ *         description: User updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                 username:
+ *                   type: string
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Internal server error
+ */
+
 router.delete("/:id", checkIfUserAllowed(RESOURCE.USER), async (req, res) => {
   const userId = req.params.id;
-    try {
+  try {
     const result = await deleteUser(userId);
     if (!result) {
       return res.status(404).send({
@@ -162,5 +332,29 @@ router.delete("/:id", checkIfUserAllowed(RESOURCE.USER), async (req, res) => {
     });
   }
 });
+
+/**
+ * @swagger
+ *   /users/{id}:
+ *   delete:
+ *     summary: Delete a user by ID
+ *     tags: [Users]
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the user to delete
+ *     responses:
+ *       200:
+ *         description: User deleted successfully
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Internal server error
+ */
 
 module.exports = router;

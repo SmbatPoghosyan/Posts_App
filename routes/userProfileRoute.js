@@ -55,6 +55,43 @@ router.post(
   }
 );
 
+/**
+ * @swagger
+ * /userProfiles:
+ *   post:
+ *     summary: Create a new user profile
+ *     tags: [User Profiles]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *
+ *     responses:
+ *       201:
+ *         description: User profile created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                 username:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *
+ *       500:
+ *         description: Internal server error
+ */
+
 router.get("/", async (req, res) => {
   try {
     const userProfiles = await getUserProfiles();
@@ -67,6 +104,33 @@ router.get("/", async (req, res) => {
     });
   }
 });
+
+/**
+ * @swagger
+ * /userProfiles:
+ *   get:
+ *     summary: Get all user profiles
+ *     tags: [User Profiles]
+ *     responses:
+ *       200:
+ *         description: List of user profiles
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: string
+ *                   username:
+ *                     type: string
+ *                   email:
+ *                     type: string
+ *
+ *       500:
+ *         description: Internal server error
+ */
 
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
@@ -86,6 +150,40 @@ router.get("/:id", async (req, res) => {
     });
   }
 });
+
+/**
+ * @swagger
+ *   /userProfiles/{id}:
+ *   get:
+ *     summary: Get a user profile by ID
+ *     tags: [User Profiles]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the user profile to get
+ *     responses:
+ *       200:
+ *         description: User profile found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                 username:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *
+ *       404:
+ *         description: User profile not found
+ *       500:
+ *         description: Internal server error
+ */
 
 router.put(
   "/:id",
@@ -114,6 +212,52 @@ router.put(
     }
   }
 );
+
+/**
+ * @swagger
+ * /userProfiles/{id}:
+ *   put:
+ *     summary: Update a user profile by ID
+ *     tags: [User Profiles]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the user profile to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *
+ *     responses:
+ *       200:
+ *         description: User profile updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                 username:
+ *                   type: string
+ *                 email:
+ *                   type: string
+ *
+ *       404:
+ *         description: User profile not found
+ *       500:
+ *         description: Internal server error
+ */
 
 router.put(
   "/:id/avatar",
@@ -171,5 +315,27 @@ router.delete(
     }
   }
 );
+
+/**
+ * @swagger
+ * /userProfiles/{id}:
+ *   delete:
+ *     summary: Delete a user profile by ID
+ *     tags: [User Profiles]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID of the user profile to delete
+ *     responses:
+ *       200:
+ *         description: User profile deleted successfully
+ *       404:
+ *         description: User profile not found
+ *       500:
+ *         description: Internal server error
+ */
 
 module.exports = router;

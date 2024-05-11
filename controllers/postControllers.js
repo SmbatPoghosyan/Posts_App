@@ -217,4 +217,6 @@ module.exports = {
   getPostById,
   createPostComment,
   getCreatorsPosts,
+  followPost,
+  unfollowPost,
 };

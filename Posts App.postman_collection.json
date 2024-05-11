@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "ca7efa0b-7cc3-4145-b86e-2c4a8a9b366e",
+		"_postman_id": "f3037548-94d0-4fb3-a333-6b8a9d86bc78",
 		"name": "Posts App",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "34321123"
+		"_exporter_id": "33815673"
 	},
 	"item": [
 		{
@@ -72,7 +72,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/posts/1/?withComments=true",
+							"raw": "http://localhost:3000/posts/8/?withComments=true",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -80,7 +80,7 @@
 							"port": "3000",
 							"path": [
 								"posts",
-								"1",
+								"8",
 								""
 							],
 							"query": [
@@ -112,12 +112,12 @@
 							"mode": "formdata",
 							"formdata": [
 								{
-									"key": "image",
+									"key": "images",
 									"contentType": "",
 									"type": "file",
 									"src": [
-										"/C:/Users/Hp/Pictures/Screenshots/Screenshot (176).png",
-										"/C:/Users/Hp/Pictures/Screenshots/Screenshot (183).png"
+										"/home/smbat/Downloads/1715417452896-1714679244509-nkar.jpg",
+										"/home/smbat/Downloads/1715417148688-1715097855325-6.png"
 									]
 								},
 								{
@@ -140,7 +140,7 @@
 								},
 								{
 									"key": "creation_date",
-									"value": "creation_date",
+									"value": "2024-05-11",
 									"contentType": "application/json",
 									"type": "text"
 								}
@@ -285,7 +285,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/posts/1/follow",
+							"raw": "http://localhost:3000/posts/8/follow",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -293,7 +293,7 @@
 							"port": "3000",
 							"path": [
 								"posts",
-								"1",
+								"8",
 								"follow"
 							]
 						}
@@ -303,10 +303,20 @@
 				{
 					"name": "Unfollow Post",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/posts/1/unfollow",
+							"raw": "http://localhost:3000/posts/8/unfollow",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -314,7 +324,7 @@
 							"port": "3000",
 							"path": [
 								"posts",
-								"1",
+								"8",
 								"unfollow"
 							]
 						}
@@ -363,7 +373,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"creator123\",\n    \"email\": \"petofrankyan@gmail.com\",\n    \"password\": \"Creator$123\"\n}",
+							"raw": "{\n    \"email\": \"smbat.heroco+4@gmail.com\",\n    \"password\": \"Creator$122343\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -392,7 +402,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"creator123\",\n    \"email\": \"petofrankyan@gmail.com\",\n    \"password\": \"Creator$123\"\n}",
+							"raw": "{\n    \"username\": \"creator123\",\n    \"email\": \"smbat.heroco+3@gmail.com\",\n    \"password\": \"Creator$123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -421,7 +431,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"code\":\"b2edea2e-3d98-4366-abb3-76bb82a8f0a0\" \r\n}\r\n\r\n",
+							"raw": "{\r\n  \"code\":\"675f077d-4034-44b0-807a-722d26b54af6\" \r\n}\r\n\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -460,7 +470,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"example@mail.com\"\r\n}",
+							"raw": "{\r\n    \"email\": \"smbat.heroco+3@gmail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -533,7 +543,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\n    \"username\": \"creator12342\",\n    \"email\": \"smbat.heroco+4@gmail.com\",\n    \"password\": \"Creator$122343\",\n    \"role_id\": 2\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -601,7 +611,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"creator\",\r\n    \"role_id\": 2\r\n}",
+							"raw": "{\r\n    \"username\": \"creatorR\",\r\n    \"role_id\": 2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -609,7 +619,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/users/6",
+							"raw": "http://localhost:3000/users/12",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -617,7 +627,7 @@
 							"port": "3000",
 							"path": [
 								"users",
-								"6"
+								"12"
 							]
 						}
 					},
@@ -639,7 +649,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/users/4",
+							"raw": "http://localhost:3000/users/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -647,7 +657,7 @@
 							"port": "3000",
 							"path": [
 								"users",
-								"4"
+								"3"
 							]
 						}
 					},
@@ -715,7 +725,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"post_id\": 2,\r\n    \"comment\": \"This is my first test comment\",\r\n    \"creation_date\": \"2024-04-22\"\r\n}",
+							"raw": "{\r\n    \"post_id\": 8,\r\n    \"comment\": \"This is my first test comment\",\r\n    \"creation_date\": \"2024-04-22\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -930,13 +940,39 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"firstname\": \"TestFirstName\", \r\n    \"lastname\": \"TestLastName\", \r\n    \"age\": 20, \r\n    \"gender\": \"male\", \r\n    \"user_id\": 11\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "firstname",
+									"value": " TestFirstName",
+									"type": "text"
+								},
+								{
+									"key": "lastname",
+									"value": " TestLastName",
+									"type": "text"
+								},
+								{
+									"key": "age",
+									"value": " 20",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": " male",
+									"type": "text"
+								},
+								{
+									"key": "user_id",
+									"value": " 12",
+									"type": "text"
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/home/smbat/Downloads/1715097855325-6.png"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "http://localhost:3000/user_profiles",
@@ -1079,7 +1115,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMSwiZW1haWwiOiJwZXRvZnJhbmt5YW5AZ21haWwuY29tIiwidXNlcm5hbWUiOiJjcmVhdG9yMTIzIiwicm9sZSI6MiwiaWF0IjoxNzE0NDczNDA4LCJleHAiOjE3MTQ0NzcwMDh9.mCD99z7wyp0W4xDaLsehJyfmmc6-lcdw1kuHhhXlMjg",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -1092,12 +1128,12 @@
 								{
 									"key": "avatar",
 									"type": "file",
-									"src": "/C:/Users/user/Desktop/download.jpg"
+									"src": "/home/smbat/Downloads/1714679244509-nkar.jpg"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/user_profiles/2/avatar",
+							"raw": "http://localhost:3000/user_profiles/1/avatar",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1105,7 +1141,7 @@
 							"port": "3000",
 							"path": [
 								"user_profiles",
-								"2",
+								"1",
 								"avatar"
 							]
 						}

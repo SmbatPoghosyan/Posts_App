@@ -189,8 +189,6 @@ router.post("/verify", async (req, res) => {
  *         description: You successfully verified your email.
  *       401:
  *         description: Invalid code!
- *       401:
- *         description: Code is empty!
  *       500:
  *         description: Something went wrong!
  */

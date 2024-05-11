@@ -16,6 +16,8 @@ const {
   getPostById,
   createPostComment,
   getCreatorsPosts,
+  followPost,
+  unfollowPost,
 } = require("../controllers/postControllers.js");
 const createResponseObj = require("../utils/createResponseObj.js");
 

@@ -10,6 +10,7 @@ const {
   deleteComment,
   getCommentById,
 } = require("../controllers/commentControllers.js");
+const { followPost } = require("../controllers/postControllers.js");
 const createResponseObj = require("../utils/createResponseObj.js");
 const {
   commentPostSchema,

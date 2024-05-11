@@ -262,8 +262,8 @@ router.put(
 router.put(
   "/:id/avatar",
   checkIfUserAllowed(RESOURCE.USERPROFILE),
-  resizeAndCheckAvatar,
   uploadAvatarS3.single("avatar"),
+  resizeAndCheckAvatar,
   validate(updateUserProfilesSchema),
   async (req, res) => {
     const id = req.params.id;
@@ -340,8 +340,8 @@ router.put(
 router.put(
   "/:id/avatar",
   checkIfUserAllowed(RESOURCE.USERPROFILE),
-  resizeAndCheckAvatar,
   uploadAvatarS3.single("avatar"),
+  resizeAndCheckAvatar,
   validate(updateUserProfilesSchema),
   async (req, res) => {
     const id = req.params.id;

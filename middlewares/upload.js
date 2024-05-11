@@ -63,6 +63,8 @@ const collectStream = (stream) =>
 
 const resizeAndCheckAvatar = async (req, res, next) => {
   try {
+    console.log("file", req.file);
+
     const getObjectParams = {
       Bucket: req.file.bucket,
       Key: req.file.key,

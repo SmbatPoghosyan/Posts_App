@@ -7,12 +7,14 @@
 } */
 
 const createResponseObj = (data, metadata, statusCode, success = true) => {
+  if (data?.password) delete data.password;
+
   return {
     data,
     meta: metadata,
     status: statusCode,
-    success
-  }
-}
+    success,
+  };
+};
 
-module.exports = createResponseObj
+module.exports = createResponseObj;

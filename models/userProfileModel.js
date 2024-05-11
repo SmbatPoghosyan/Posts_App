@@ -1,10 +1,9 @@
 const { Model } = require("objection");
 
-class Comment extends Model {
+class UserProfile extends Model {
   static get tableName() {
-    return "comments";
+    return "user_profiles";
   }
-
   static get idColumn() {
     return "id";
   }
@@ -12,39 +11,40 @@ class Comment extends Model {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["user_id", "post_id", "comment"],
+      required: ["user_id", "firstname", "lastname", "age", "gender"],
       properties: {
         id: { type: "integer" },
         user_id: { type: "integer" },
-        post_id: { type: "integer" },
-        comment: { type: "string", minLength: 1 },
-        creation_date: { type: "string", format: "date" },
+        firstname: { type: "string", minLength: 1, maxLength: 50 },
+        lastname: { type: "string", minLength: 1, maxLength: 50 },
+        age: { type: "integer" },
+        gender: { type: "string", minLength: 1, maxLength: 10 },
       },
     };
   }
 
   static get relationMappings() {
     const User = require("./userModel");
-    const Post = require("./postModel");
+    const Image = require("./imageModel");
     return {
       user: {
         relation: Model.BelongsToOneRelation,
         modelClass: User,
         join: {
-          from: "comments.user_id",
+          from: "user_profiles.user_id",
           to: "users.id",
         },
       },
-      post: {
+      userAvatar: {
         relation: Model.BelongsToOneRelation,
-        modelClass: Post,
+        modelClass: Image,
         join: {
-          from: "comments.post_id",
-          to: "posts.id",
+          from: "user_profiles.avatar",
+          to: "images.id",
         },
       },
     };
   }
 }
 
-module.exports = Comment;
+module.exports = UserProfile;

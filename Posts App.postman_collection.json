@@ -460,7 +460,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"test_user_1\"\r\n}",
+							"raw": "{\r\n    \"email\": \"example@mail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

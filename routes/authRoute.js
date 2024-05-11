@@ -44,7 +44,7 @@ router.post("/signup", validate(signupSchema), async (req, res) => {
 
 /**
  * @swagger
- * /signup:
+ * /auth/signup:
  *   post:
  *     summary: Register a new user
  *     tags: [Authentication]
@@ -169,6 +169,30 @@ router.post("/verify", async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /auth/verify:
+ *   post:
+ *     summary: Verify your account
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               verification_code:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: You successfully verified your email.
+ *       401:
+ *         description: Invalid code!
+ *       500:
+ *         description: Something went wrong!
+ */
+
 router.post("/forgot", validate(resetPasswordSchema), async (req, res) => {
   try {
     const code = uuidv4();
@@ -192,15 +216,39 @@ router.post("/forgot", validate(resetPasswordSchema), async (req, res) => {
 
     const resultOfRedis = await redis.set(code, id, "EX", 3600);
     if (sendSucces && resultOfRedis) {
-      res.status(200).send({ message: "Email was succesfully send." });
+      res.status(250).send({ message: "Email was succesfully send." });
     } else {
-      res.status(500).send({ message: "Email was not send!" });
+      res.status(502).send({ message: "Email was not send!" });
     }
   } catch (err) {
     console.error("error", err);
     res.status(500).send({ message: "Something went wrong" });
   }
 });
+
+/**
+ * @swagger
+ * /auth/forgot:
+ *   post:
+ *     summary: Recover password
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *     responses:
+ *       250:
+ *         description: Email was succesfully send.
+ *       500:
+ *         description: Something went wrong!
+ *       502:
+ *         description: Email was not send!
+ */
 
 router.get("/recover-password", async (req, res) => {
   const code = req.query.code;

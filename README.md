@@ -71,7 +71,6 @@ If there are problems with installation, please inform us about it.
 - Update an user information: Make a PUT request to `/users/:id` with the updated user information.
 - Delete an user: Make a DELETE request to `/users/:id` to remove an user.
 
-
 ## Running App
 
 To run the app type `npm start` in terminal.
@@ -94,22 +93,22 @@ To integrate with AWS S3 for file storage, follow these steps:
 
 Make sure to install the required packages for AWS integration using npm:
 
+```bash
+npm install aws-sdk multer multer-s3
+```
+
 ## Redis Integration
 
 To use Redis database, follow this stages
 
 1. Register for a Redis account
-2. By default it will give you 1 free database but you can create paid database clicking "New database" button
-in the upper right corner
+2. By default it will give you 1 free database but you can create paid database clicking "New database" button .in the upper right corner
 3. From left menu click on "Databases" and find the database, you want to use and click on it
 4. In "General" seqtion find "Public endpoint" it is you database's host and port (format HOST:PORT)
-5. Scroll down to the "Sequrity" section and copy your password
+5. Scroll down to the "Security" section and copy your password
 6. Update your Redis config in your _.env_ file (example for Redis config you can find in _.env.example_ file)
 
 Make sure to install the required packages for Redis running ~npm install ioredis~ or 3rd stage of instalation [Installation](#installation)
-
-```bash
-npm install aws-sdk multer multer-s3 
 
 ## Contributing
 
@@ -120,4 +119,3 @@ We appreciate your understanding and support.
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```

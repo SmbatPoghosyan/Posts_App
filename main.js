@@ -69,7 +69,10 @@ app.use(
   passportConfig.authenticate("jwt", { session: false }),
   userProfileRouter
 );
+
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use(cors());
 
 app.listen(PORT, () => {
   console.log(`server is running on localhost:${PORT}`);

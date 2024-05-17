@@ -9,6 +9,7 @@ const userProfileRouter = require("./routes/userProfileRoute");
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 const path = require("path");
+const cors = require("cors");
 
 require("./config/redis.js");
 require("./config/db");
@@ -18,6 +19,8 @@ dotenv.config();
 
 const PORT = process.env.PORT;
 const app = express();
+
+app.use(cors());
 
 const options = {
   definition: {
@@ -71,8 +74,6 @@ app.use(
 );
 
 app.use(express.static(path.join(__dirname, "public")));
-
-app.use(cors());
 
 app.listen(PORT, () => {
   console.log(`server is running on localhost:${PORT}`);

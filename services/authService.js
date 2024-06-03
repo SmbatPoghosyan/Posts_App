@@ -20,6 +20,16 @@ const signin = async (email, password, username) => {
 
     const user = await userQuery.first();
 
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    if (user.is_active === false) {
+      throw new Error(
+        "User is not active. You did'nt verify your email. If you did, please contact support."
+      );
+    }
+
     const hashedPassword = user.password;
 
     const isSame = await bcrypt.compare(password, hashedPassword);
@@ -89,7 +99,7 @@ const resetPassword = async (
     return sendSucces;
   } catch (err) {
     console.error(err);
-    throw new Error(err)
+    throw new Error(err);
   }
 };
 

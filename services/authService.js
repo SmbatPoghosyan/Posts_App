@@ -24,6 +24,12 @@ const signin = async (email, password, username) => {
       throw new Error("User not found");
     }
 
+    if (user.is_active === false) {
+      throw new Error(
+        "User is not active. You did'nt verify your email. If you did, please contact support."
+      );
+    }
+
     const hashedPassword = user.password;
 
     const isSame = await bcrypt.compare(password, hashedPassword);

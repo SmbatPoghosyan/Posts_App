@@ -110,9 +110,6 @@ To use Redis database, follow this stages
 
 Make sure to install the required packages for Redis running ~npm install ioredis~ or 3rd stage of instalation [Installation](#installation)
 
-```bash
-npm install aws-sdk multer multer-s3 
-
 ## Contributing
 
 Thank you for your interest in contributing to this project. At this time, we are not accepting external contributions. This project is currently maintained by the core development team. If you have suggestions or find issues, please feel free to write about that to our email.
@@ -122,5 +119,3 @@ We appreciate your understanding and support.
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-```

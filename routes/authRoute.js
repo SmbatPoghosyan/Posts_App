@@ -24,6 +24,13 @@ router.post("/signup", validate(signupSchema), async (req, res) => {
   const { email, password, username } = data;
 
   try {
+    const doesUserExist = await User.findOne({ email });
+
+    if (doesUserExist) {
+      return res
+        .status(400)
+        .send({ message: "User with this email already exists!" });
+    }
     const currentCode = await sendVerificationEmail(data.email, data.username);
     const newUser = await signup(email, password, username, currentCode);
     newUser.verification_code = currentCode;

@@ -20,6 +20,10 @@ const signin = async (email, password, username) => {
 
     const user = await userQuery.first();
 
+    if (!user) {
+      throw new Error("User not found");
+    }
+
     const hashedPassword = user.password;
 
     const isSame = await bcrypt.compare(password, hashedPassword);
@@ -89,7 +93,7 @@ const resetPassword = async (
     return sendSucces;
   } catch (err) {
     console.error(err);
-    throw new Error(err)
+    throw new Error(err);
   }
 };
 

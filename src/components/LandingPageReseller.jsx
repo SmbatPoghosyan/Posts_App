@@ -1,57 +1,89 @@
 import React, { useState } from 'react';
 import { motion as Motion, AnimatePresence } from 'framer-motion';
 
-/* --------------------------------------------------------------------
-   LOGO — TEMP WORD-MARK
-   --------------------------------------------------------------------
-   Swap the <div> below with:
-   <img src={require('../assets/logo.png')} alt="AutoLink Global" className="h-12 w-auto" />
-   once you have a final logo file.
----------------------------------------------------------------------*/
-const BrandLogo = () => (
-  <div className="text-3xl md:text-4xl font-extrabold tracking-tight select-none">
-    <span className="text-red-600">AutoLink</span>{' '}
-    <span className="text-white">Global</span>
+/* ---------------------------------------------------------------------
+  LOGO ‐ Placeholder word‑mark
+  ---------------------------------------------------------------------
+  • Uses styled text so the build never fails due to missing image assets.
+  • When your final logo file is ready, simply swap the <div> below with
+    <img src={require('../assets/logo.png')} alt="AutoLink Global" className="h-14 md:h-16 mb-8" />
+    or import logo from '../assets/logo.png';
+*/
+const Logo = () => (
+  <div className="select-none text-3xl md:text-4xl font-extrabold leading-none tracking-wide mb-8">
+    AutoLink<span className="text-red-600">Global</span>
   </div>
 );
 
-/* --------------------------------------------------------------------
-   FAQ ACCORDION
----------------------------------------------------------------------*/
-const faqContent = [
-  { q: 'What makes AutoLink Global different from other wholesalers?', a: 'We combine OEM-grade sourcing, Dubai free-zone logistics, and bulk-buy pricing to slash your landed costs without sacrificing quality.' },
-  { q: 'Do you only sell in full-container loads?', a: 'For launch we prioritise FCL orders to unlock the best freight rates. Smaller mixed pallets will be supported later in 2025.' },
-  { q: 'Which brands do your parts cover?', a: 'Our initial catalog focuses on Toyota, Honda, Ford F-Series, GM pickups, and Tesla body panels & lamps.' },
-  { q: 'Are your lamps DOT/SAE compliant?', a: 'Yes. All lighting products carry DOT and SAE stamps and ship with photometric test reports on request.' },
-  { q: 'How long does delivery to the US take?', a: 'Average door-to-door lead-time is 7-10 calendar days once the container leaves Dubai.' },
-  { q: 'Can I track my shipment?', a: 'Absolutely—live milestone tracking and automated email updates are standard.' },
-  { q: 'What payment terms do you offer?', a: 'Initial orders are prepaid. Net-30 terms are available after your second successful shipment.' },
-  { q: 'Is there a minimum order value?', a: 'USD 40k per container allows us to keep freight cost per SKU ultra-low.' },
-  { q: 'Do you provide return or damage allowances?', a: 'We include a 1.5 % breakage credit on every invoice and handle on-arrival claims within 48 hours.' },
-  { q: 'Can I request custom branding or packaging?', a: 'Yes—private-label cartons and laser-etched part numbers are available for volume programs.' },
-  { q: 'Do you stock electric-vehicle components?', a: 'Our 2025 roadmap adds EV cooling modules, charge ports, and battery trays.' },
-  { q: 'How do I apply for a reseller account?', a: 'Click “Book a Quick Call” or send a reseller application to accounts@autolinkglobal.com.' },
-  { q: 'Which Incoterms do you ship under?', a: 'Default terms are DDP to your door in the US (we handle customs). CIF and FOB quotes available on request.' },
-  { q: 'Can you drop-ship directly to my customer?', a: 'Yes—we provide blind drop-shipping with your paperwork, no extra fee.' },
-  { q: 'Is technical support available?', a: 'Our parts techs can cross-reference OEM numbers and provide fit-ment guidance 7 days a week.' },
+/* ---------------------------------------------------------------------
+  FAQ  – minimal, collapsible accordion so users aren’t overwhelmed
+--------------------------------------------------------------------- */
+const faqItems = [
+  {
+    q: 'What types of auto parts do you specialise in?',
+    a: 'Our MVP focuses on high-demand body panels and lighting (headlamps, tail-lamps, bumpers, fenders) from trusted Taiwanese OEM-approved factories.'
+  },
+  { q: 'Are your parts OEM or aftermarket?',
+    a: 'All items meet or exceed SAE/DOT standards and are produced in ISO-certified facilities, giving you OEM-level fit and finish at aftermarket pricing.'
+  },
+  { q: 'What is the typical lead time to the US?',
+    a: 'Thanks to our Dubai hub, most orders arrive at a US port or your dock within 7-10 business days of container departure.'
+  },
+  { q: 'Is there a minimum order quantity (MOQ)?',
+    a: 'Yes. To secure factory-direct pricing we currently operate on full-container or skid-lot quantities (≈ USD 40k). Mixed-model containers are allowed.'
+  },
+  { q: 'Can I mix different models/part numbers in one container?',
+    a: 'Absolutely. We’ll work with you to build a mixed SKU manifest so you can stock a sensible spread of high-turn items.'
+  },
+  { q: 'How do payments work?',
+    a: 'Customer funds are deposited into escrow. Once your shipment is confirmed on board, funds are released to us and production/dispatch begins.'
+  },
+  { q: 'Do you offer credit terms?',
+    a: 'For the MVP we operate on escrow/pre-paid terms. Credit programs will roll out after consistent order history (≈3 containers).'
+  },
+  { q: 'What warranty do you provide?',
+    a: 'We back every part with a standard 12-month warranty against manufacturing defects. Extended plans available for volume clients.'
+  },
+  { q: 'Are returns accepted?',
+    a: 'Yes—if a part arrives damaged or does not fit the specified vehicle, we arrange replacement or credit. Full return guidelines are in the supply agreement.'
+  },
+  { q: 'Which US ports do you ship to?',
+    a: 'Los Angeles, Long Beach, Houston, Newark (NY/NJ) and Savannah. Inland drayage to your facility can be quoted on request.'
+  },
+  { q: 'Can I brand the packaging with my logo?',
+    a: 'Private-label options are available for repeat clients. MOQ for custom prints is typically 300 units per part number.'
+  },
+  { q: 'How are duties and customs handled?',
+    a: 'Our forwarder files all ISF and entry paperwork. Duties (2.5 % ad valorem on most parts) are billed at cost; we’ll guide you through every step.'
+  },
+  { q: 'Do you provide fitment data or catalog feeds?',
+    a: 'Yes—CSV/XML fitment tables (year/make/model) and hi-res imagery are included so you can update your webshop instantly.'
+  },
+  { q: 'Is drop-shipping to my customers possible?',
+    a: 'Large-parcel drop-ship from our US 3PL is slated for phase 2. Join the wait-list and we’ll notify you when live.'
+  },
+  { q: 'How do I get started?',
+    a: 'Click “Book a Quick Call” to schedule a 15-minute discovery session. We’ll review your part list, map savings, and design your first container load.'
+  }
 ];
 
-const AccordionItem = ({ item, isOpen, onClick }) => (
+const FAQItem = ({ q, a, idx, isOpen, onToggle }) => (
   <div className="border-b border-gray-200">
     <button
-      onClick={onClick}
-      className="w-full flex justify-between items-center py-4 text-left focus:outline-none"
+      onClick={() => onToggle(idx)}
+      className="w-full flex justify-between items-center py-4 text-left focus:outline-none group"
     >
-      <span className="font-medium">{item.q}</span>
+      <span className="font-medium text-gray-800 group-hover:text-red-600 transition">
+        {q}
+      </span>
       <Motion.span
-        animate={{ rotate: isOpen ? 90 : 0 }}
+        className="text-red-600 transform"
+        animate={{ rotate: isOpen ? 45 : 0 }}
         transition={{ duration: 0.2 }}
-        className="ml-3 text-red-600"
       >
-        ▶
+        +
       </Motion.span>
     </button>
-
     <AnimatePresence initial={false}>
       {isOpen && (
         <Motion.div
@@ -59,10 +91,10 @@ const AccordionItem = ({ item, isOpen, onClick }) => (
           initial={{ height: 0, opacity: 0 }}
           animate={{ height: 'auto', opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
-          transition={{ duration: 0.25 }}
-          className="pb-4 pr-6 text-gray-700"
+          transition={{ duration: 0.25, ease: 'easeInOut' }}
+          className="overflow-hidden pb-4 pr-2 text-gray-600"
         >
-          {item.a}
+          {a}
         </Motion.div>
       )}
     </AnimatePresence>
@@ -71,70 +103,101 @@ const AccordionItem = ({ item, isOpen, onClick }) => (
 
 const FAQSection = () => {
   const [openIdx, setOpenIdx] = useState(null);
+  const toggle = (idx) => setOpenIdx(idx === openIdx ? null : idx);
+
   return (
-    <section className="py-12 bg-white">
-      <div className="container mx-auto px-6 max-w-4xl">
-        <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
-        {faqContent.map((item, i) => (
-          <AccordionItem
-            key={i}
-            item={item}
-            isOpen={openIdx === i}
-            onClick={() => setOpenIdx(openIdx === i ? null : i)}
-          />
-        ))}
+    <section className="bg-white py-12 px-6" id="faq">
+      <div className="container mx-auto max-w-4xl">
+        <h2 className="text-2xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
+        <div className="divide-y divide-gray-200">
+          {faqItems.map((item, idx) => (
+            <FAQItem
+              key={idx}
+              idx={idx}
+              {...item}
+              isOpen={idx === openIdx}
+              onToggle={toggle}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
 };
 
-/* --------------------------------------------------------------------
-   MAIN LANDING PAGE
----------------------------------------------------------------------*/
+/* ---------------------------------------------------------------------
+  LANDING PAGE COMPONENT
+--------------------------------------------------------------------- */
 function LandingPageReseller() {
   return (
-    <div className="font-sans text-gray-800 selection:bg-red-600 selection:text-white">
-
+    <div className="font-sans text-gray-800 scroll-smooth">
       {/* Hero */}
       <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-16 px-6">
-        <div className="container mx-auto flex flex-col items-center text-center">
-          <BrandLogo />
+        <div className="container mx-auto text-center flex flex-col items-center">
+          <Logo />
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Rev Up Your Auto Business</h1>
-          <p className="text-xl mb-8 max-w-2xl">
-            Quality parts, unbeatable prices, lightning-fast delivery.<br className="hidden md:block" />
+          <p className="text-xl mb-8 max-w-2xl mx-auto">
+            Quality parts, unbeatable prices, and lightning-fast delivery.
+            <br className="hidden md:block" />
             AutoLink Global gives your shop the competitive edge.
           </p>
-
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Motion.a
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <a
               href="/catalog.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-red-600 text-white px-5 py-3 rounded-md text-lg font-semibold hover:bg-red-700 transition"
-              whileHover={{ scale: 1.05 }}
-              download
             >
               Download Catalog
-            </Motion.a>
-
+            </a>
             <a
-              href="mailto:sales@autolinkglobal.com"
+              href="mailto:sales@autolinkglobal.com?subject=Parts%20Inquiry"
               className="bg-white text-gray-900 px-5 py-3 rounded-md text-lg font-semibold hover:bg-gray-100 transition"
             >
               Contact Sales
-            </a>
-
-            <a
-              href="#book-call"
-              className="bg-transparent border border-white text-white px-5 py-3 rounded-md text-lg font-semibold hover:bg-white hover:text-red-600 transition"
-            >
-              Book a Quick Call
             </a>
           </div>
         </div>
       </section>
 
-      {/* ... (Why Choose Us, Categories, How It Works, Success Stories remain unchanged) ... */}
+      {/* Why Choose Us */}
+      <section className="py-12 bg-white text-gray-900">
+        <div className="container mx-auto px-6">
+          <h2 className="text-2xl font-bold mb-8 text-center">Why Choose AutoLink Global?</h2>
+          <div className="md:flex md:space-x-8 space-y-8 md:space-y-0">
+            <div className="flex-1 bg-gray-100 p-6 rounded-xl shadow-sm">
+              <h3 className="text-xl font-semibold mb-2">OEM-Level Quality</h3>
+              <p>All parts meet or exceed SAE/DOT standards and come with a solid warranty.</p>
+            </div>
+            <div className="flex-1 bg-gray-100 p-6 rounded-xl shadow-sm">
+              <h3 className="text-xl font-semibold mb-2">Direct-from-Factory Pricing</h3>
+              <p>Skip the middle-man. Our Taiwan partnerships let you save 10-15% on average.</p>
+            </div>
+            <div className="flex-1 bg-gray-100 p-6 rounded-xl shadow-sm">
+              <h3 className="text-xl font-semibold mb-2">7–10 Day Delivery</h3>
+              <p>Strategic Dubai hub = lightning-fast US delivery without customs headaches.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      {/* FAQ */}
+      {/* CTA */}
+      <section className="py-16 bg-gray-900 text-center text-white px-6">
+        <h2 className="text-3xl font-bold mb-4">Ready to turbo-charge profits?</h2>
+        <p className="text-lg mb-8 max-w-xl mx-auto">
+          Join dozens of US body shops already saving on premium parts.
+        </p>
+        <a
+          href="https://calendly.com/autolinkglobal/quick-call"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block bg-red-600 text-white px-7 py-4 rounded-md text-lg font-semibold hover:bg-red-700 transition"
+        >
+          Book a Quick Call
+        </a>
+      </section>
+
+      {/* FAQ – collapsible */}
       <FAQSection />
 
       {/* Footer */}

@@ -38,4 +38,4 @@ A simple GitHub Actions workflow installs dependencies and verifies the build on
 │  └─ assets/                   # place logo.png here
 ```
 
-The landing page includes a FAQ accordion, download link to `catalog.pdf`, contact links and animated CTAs.
+The landing page features a hero header, "Why Choose Us" highlights, a call-to-action section, and a collapsible FAQ accordion with working download and contact links.

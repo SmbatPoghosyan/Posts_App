@@ -181,29 +181,22 @@ function LandingPageReseller() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16 bg-gray-900 text-center text-white px-6">
+      {/* CTA with Calendly widget */}
+      <section id="book-call" className="py-16 bg-gray-900 text-center text-white px-6">
         <h2 className="text-3xl font-bold mb-4">Ready to turbo-charge profits?</h2>
-        <p className="text-lg mb-8 max-w-xl mx-auto">
+        <p className="text-lg mb-4 max-w-xl mx-auto">
           Join dozens of US body shops already saving on premium parts.
         </p>
-        <a
-          href="https://calendly.com/autolinkglobal/quick-call"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block bg-red-600 text-white px-7 py-4 rounded-md text-lg font-semibold hover:bg-red-700 transition"
-        >
-          Book a Quick Call
-        </a>
-      </section>
-
-      {/* Calendly booking widget */}
-      <section id="book-call" className="py-16 bg-white">
-        <div className="container mx-auto px-6 flex justify-center">
+        <p className="mb-8 max-w-xl mx-auto">
+          Pick a convenient time below for a quick discovery call. We’ll review
+          your parts list and show exactly how AutoLink Global can slash your
+          costs.
+        </p>
+        <div className="flex justify-center">
           <div
             className="calendly-inline-widget"
             data-url="https://calendly.com/sampogosyan1995/30min?text_color=dc2626&primary_color=151d2b"
-            style={{ minWidth: '320px', height: '700px' }}
+            style={{ width: '370px', height: '700px' }}
           />
         </div>
       </section>

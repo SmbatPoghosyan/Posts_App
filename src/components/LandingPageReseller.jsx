@@ -26,8 +26,8 @@ const faqItems = [
   { q: 'Are your parts OEM or aftermarket?',
     a: 'All items meet or exceed SAE/DOT standards and are produced in ISO-certified facilities, giving you OEM-level fit and finish at aftermarket pricing.'
   },
-  { q: 'What is the typical lead time to the US?',
-    a: 'Thanks to our Dubai hub, most orders arrive at a US port or your dock within 7-10 business days of container departure.'
+  { q: 'How long does delivery to the US take?',
+    a: 'Our strategic Dubai hub ensures very fast shipping to your door without customs headaches.'
   },
   { q: 'Is there a minimum order quantity (MOQ)?',
     a: 'Yes. To secure factory-direct pricing we currently operate on full-container or skid-lot quantities (≈ USD 40k). Mixed-model containers are allowed.'
@@ -109,7 +109,7 @@ const FAQSection = () => {
     <section className="bg-white py-12 px-6" id="faq">
       <div className="container mx-auto max-w-4xl">
         <h2 className="text-2xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
-        <div className="divide-y divide-gray-200">
+        <div className="divide-y divide-gray-200 max-h-96 overflow-y-auto rounded-md">
           {faqItems.map((item, idx) => (
             <FAQItem
               key={idx}
@@ -174,24 +174,38 @@ function LandingPageReseller() {
               <p>Skip the middle-man. Our Taiwan partnerships let you save 10-15% on average.</p>
             </div>
             <div className="flex-1 bg-gray-100 p-6 rounded-xl shadow-sm">
-              <h3 className="text-xl font-semibold mb-2">7–10 Day Delivery</h3>
-              <p>Strategic Dubai hub = lightning-fast US delivery without customs headaches.</p>
+              <h3 className="text-xl font-semibold mb-2">Fast Delivery</h3>
+              <p>Our strategic Dubai hub ensures quick shipping to the US without customs headaches.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA with Calendly widget */}
+      {/* CTA linking to booking section */}
+      <section className="py-16 bg-gray-900 text-center text-white px-6">
+        <h2 className="text-3xl font-bold mb-4">Ready to turbo-charge profits?</h2>
+        <p className="text-lg mb-8 max-w-xl mx-auto">
+          Join dozens of US body shops already saving on premium parts.
+        </p>
+        <a
+          href="#book-call"
+          className="inline-block bg-red-600 text-white px-7 py-4 rounded-md text-lg font-semibold hover:bg-red-700 transition"
+        >
+          Book a Quick Call
+        </a>
+      </section>
+
+      {/* FAQ – collapsible */}
+      <FAQSection />
+
+      {/* Booking section with Calendly */}
       <section id="book-call" className="py-16 bg-gray-900 text-center text-white px-6">
-        <h2 className="text-4xl font-extrabold text-red-500 mb-4">
-          Book Your Free Discovery Call
-        </h2>
+        <h2 className="text-4xl font-extrabold text-red-500 mb-4">Book Your Free Discovery Call</h2>
         <p className="text-lg mb-4 max-w-xl mx-auto">
           Spend 15 minutes with our team to learn how you can save big on premium parts.
         </p>
         <p className="mb-8 max-w-xl mx-auto">
-          Choose a time that works for you—we’ll review your parts list and map
-          out exact savings with AutoLink Global.
+          Choose a time that works for you—we’ll review your parts list and map out exact savings with AutoLink Global.
         </p>
         <div className="flex justify-center">
           <div
@@ -201,9 +215,6 @@ function LandingPageReseller() {
           />
         </div>
       </section>
-
-      {/* FAQ – collapsible */}
-      <FAQSection />
 
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-400 text-sm py-4 text-center">

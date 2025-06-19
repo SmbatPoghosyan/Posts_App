@@ -38,5 +38,5 @@ A simple GitHub Actions workflow installs dependencies and verifies the build on
 │  └─ assets/                   # place logo.png here
 ```
 
-The landing page features a hero header, "Why Choose Us" highlights, a call-to-action section, and a collapsible FAQ accordion with working download and contact links.
-An inline Calendly widget is embedded so visitors can book a call without leaving the page.
+The landing page features a hero header, "Why Choose Us" highlights, a call-to-action section that scrolls to the booking area, and a collapsible FAQ accordion with working download and contact links.
+An inline Calendly widget in the booking section lets visitors schedule a call without leaving the site.

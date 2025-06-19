@@ -183,14 +183,15 @@ function LandingPageReseller() {
 
       {/* CTA with Calendly widget */}
       <section id="book-call" className="py-16 bg-gray-900 text-center text-white px-6">
-        <h2 className="text-3xl font-bold mb-4">Ready to turbo-charge profits?</h2>
+        <h2 className="text-4xl font-extrabold text-red-500 mb-4">
+          Book Your Free Discovery Call
+        </h2>
         <p className="text-lg mb-4 max-w-xl mx-auto">
-          Join dozens of US body shops already saving on premium parts.
+          Spend 15 minutes with our team to learn how you can save big on premium parts.
         </p>
         <p className="mb-8 max-w-xl mx-auto">
-          Pick a convenient time below for a quick discovery call. We’ll review
-          your parts list and show exactly how AutoLink Global can slash your
-          costs.
+          Choose a time that works for you—we’ll review your parts list and map
+          out exact savings with AutoLink Global.
         </p>
         <div className="flex justify-center">
           <div

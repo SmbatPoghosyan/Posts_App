@@ -197,6 +197,17 @@ function LandingPageReseller() {
         </a>
       </section>
 
+      {/* Calendly booking widget */}
+      <section id="book-call" className="py-16 bg-white">
+        <div className="container mx-auto px-6 flex justify-center">
+          <div
+            className="calendly-inline-widget"
+            data-url="https://calendly.com/sampogosyan1995/30min?text_color=dc2626&primary_color=151d2b"
+            style={{ minWidth: '320px', height: '700px' }}
+          />
+        </div>
+      </section>
+
       {/* FAQ – collapsible */}
       <FAQSection />
 

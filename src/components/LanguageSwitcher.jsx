@@ -1,21 +1,34 @@
 import { useTranslation } from 'react-i18next';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function LanguageSwitcher() {
   const { i18n } = useTranslation();
-  const changeLanguage = (e) => {
-    i18n.changeLanguage(e.target.value);
-    document.documentElement.lang = e.target.value;
+  const navigate = useNavigate();
+  const { lang } = useParams();
+
+  const setLang = (lng) => {
+    if (lng !== lang) {
+      i18n.changeLanguage(lng);
+      navigate(`/${lng}`);
+    }
   };
 
   return (
-    <select
-      value={i18n.language}
-      onChange={changeLanguage}
-      className="bg-gray-100 text-gray-800 px-2 py-1 rounded-md text-sm"
-    >
-      <option value="en">EN</option>
-      <option value="es">ES</option>
-    </select>
+    <div className="flex border rounded-full overflow-hidden bg-white text-gray-800 text-sm">
+      {['en', 'es'].map((lng) => (
+        <button
+          key={lng}
+          type="button"
+          onClick={() => setLang(lng)}
+          className={`px-3 py-1 focus:outline-none transition-colors ${
+            lang === lng ? 'bg-primary-600 text-white' : 'bg-white text-gray-800'
+          }`}
+          aria-pressed={lang === lng}
+        >
+          {lng.toUpperCase()}
+        </button>
+      ))}
+    </div>
   );
 }
 

@@ -2,10 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+}
+
 /* Custom scrollbar styling for the FAQ section */
 .faq-scroll {
   scrollbar-width: thin;
-  scrollbar-color: #dc2626 #f3f4f6;
+  scrollbar-color: var(--color-primary-600) #f3f4f6;
   padding-right: 16px; /* Add padding to make space for the scrollbar */
   box-sizing: content-box; /* Ensure padding doesn't affect the width */
 }
@@ -20,12 +26,12 @@
 }
 
 .faq-scroll::-webkit-scrollbar-thumb {
-  background-color: #dc2626;
+  background-color: var(--color-primary-600);
   border-radius: 4px;
 }
 
 .faq-scroll::-webkit-scrollbar-thumb:hover {
-  background-color: #b91c1c;
+  background-color: var(--color-primary-700);
 }
 
 .faq-scroll::-webkit-scrollbar {
@@ -34,7 +40,7 @@
 }
 
 .faq-scroll::-webkit-scrollbar-thumb {
-  background-color: #dc2626;
+  background-color: var(--color-primary-600);
   border-radius: 4px;
 }
 

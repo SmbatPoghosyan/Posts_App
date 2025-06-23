@@ -50,3 +50,15 @@ An inline Calendly widget in the booking section lets visitors schedule a call w
 
 The site is pre-rendered for fast load times. Key meta tags (description, keywords and Open Graph) are included in `index.html` for better search engine visibility. When adding images, remember to include descriptive `alt` text. Use concise, keyword-rich headings and keep copy focused on how AutoLink Global benefits resellers.
 Meta tags now include robots, canonical, Open Graph (with locale and site name) and Twitter data.
+
+## Deployment
+
+1. Push this repo to a Git provider such as GitHub.
+2. Create a **Netlify** account and choose **New site from Git**.
+3. When prompted for the build settings use:
+   - **Build command:** `pnpm run build`
+   - **Publish directory:** `dist`
+   Netlify reads the `netlify.toml` file for these defaults.
+4. After the first deploy Netlify hosts the site at a `<sitename>.netlify.app` URL.
+5. To use your Namecheap domain, add it in Netlify's **Domain management** section and follow the instructions to point your nameservers to Netlify.
+6. Once DNS propagates your domain will serve the production build over HTTPS.

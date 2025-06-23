@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion as Motion, AnimatePresence } from 'framer-motion';
 
 /* ---------------------------------------------------------------------
@@ -131,6 +131,40 @@ const FAQSection = () => {
   LANDING PAGE COMPONENT
 --------------------------------------------------------------------- */
 function LandingPageReseller() {
+  const calendlyRef = useRef(null);
+
+  useEffect(() => {
+    const initCalendly = () => {
+      if (window.Calendly && calendlyRef.current) {
+        window.Calendly.initInlineWidget({
+          url: 'https://calendly.com/sampogosyan1995/30min?text_color=dc2626&primary_color=151d2b',
+          parentElement: calendlyRef.current,
+        });
+      }
+    };
+
+    if (window.Calendly) {
+      initCalendly();
+      return undefined;
+    }
+
+    const script = document.querySelector(
+      'script[src="https://assets.calendly.com/assets/external/widget.js"]',
+    );
+    if (script) {
+      script.addEventListener('load', initCalendly);
+      return () => script.removeEventListener('load', initCalendly);
+    }
+
+    const newScript = document.createElement('script');
+    newScript.src =
+      'https://assets.calendly.com/assets/external/widget.js';
+    newScript.async = true;
+    newScript.onload = initCalendly;
+    document.body.appendChild(newScript);
+    return () => newScript.removeEventListener('load', initCalendly);
+  }, []);
+
   return (
     <div className="font-sans text-gray-800 scroll-smooth">
       {/* Hero */}
@@ -214,8 +248,7 @@ function LandingPageReseller() {
           </p>
           <div className="flex justify-center">
             <div
-              className="calendly-inline-widget"
-              data-url="https://calendly.com/sampogosyan1995/30min?text_color=dc2626&primary_color=151d2b"
+              ref={calendlyRef}
               style={{ width: '370px', height: '700px' }}
             />
           </div>

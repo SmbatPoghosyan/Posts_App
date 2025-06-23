@@ -134,90 +134,93 @@ function LandingPageReseller() {
   return (
     <div className="font-sans text-gray-800 scroll-smooth">
       {/* Hero */}
-      <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-16 px-6">
-        <div className="container mx-auto text-center flex flex-col items-center">
-          <Logo />
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Rev Up Your Auto Business</h1>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Quality parts, unbeatable prices, and lightning-fast delivery.
-            <br className="hidden md:block" />
-            AutoLink Global gives your shop the competitive edge.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <a
-              href="/catalog.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-red-600 text-white px-5 py-3 rounded-md text-lg font-semibold hover:bg-red-700 transition"
-            >
-              Download Catalog
-            </a>
-            <a
-              href="mailto:sales@autolinkglobal.com?subject=Parts%20Inquiry"
-              className="bg-white text-gray-900 px-5 py-3 rounded-md text-lg font-semibold hover:bg-gray-100 transition"
-            >
-              Contact Sales
-            </a>
+      <header>
+        <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-16 px-6">
+          <div className="container mx-auto text-center flex flex-col items-center">
+            <Logo />
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Wholesale OEM Auto Parts Direct from Factory</h1>
+            <p className="text-xl mb-8 max-w-2xl mx-auto">
+              Factory-direct pricing, OEM quality and fast shipping from Dubai.
+              <br className="hidden md:block" />
+              AutoLink Global gives wholesale resellers a competitive edge.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <a
+                href="/catalog.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-red-600 text-white px-5 py-3 rounded-md text-lg font-semibold hover:bg-red-700 transition"
+              >
+                Download Catalog
+              </a>
+              <a
+                href="mailto:sales@autolinkglobal.com?subject=Parts%20Inquiry"
+                className="bg-white text-gray-900 px-5 py-3 rounded-md text-lg font-semibold hover:bg-gray-100 transition"
+              >
+                Contact Sales
+              </a>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </header>
 
+      <main>
       {/* Why Choose Us */}
-      <section className="py-12 bg-white text-gray-900">
-        <div className="container mx-auto px-6">
-          <h2 className="text-2xl font-bold mb-8 text-center">Why Choose AutoLink Global?</h2>
-          <div className="md:flex md:space-x-8 space-y-8 md:space-y-0">
-            <div className="flex-1 bg-gray-100 p-6 rounded-xl shadow-sm">
-              <h3 className="text-xl font-semibold mb-2">OEM-Level Quality</h3>
-              <p>All parts meet or exceed SAE/DOT standards and come with a solid warranty.</p>
-            </div>
-            <div className="flex-1 bg-gray-100 p-6 rounded-xl shadow-sm">
-              <h3 className="text-xl font-semibold mb-2">Direct-from-Factory Pricing</h3>
-              <p>Skip the middle-man. Our Taiwan partnerships let you save 10-15% on average.</p>
-            </div>
-            <div className="flex-1 bg-gray-100 p-6 rounded-xl shadow-sm">
-              <h3 className="text-xl font-semibold mb-2">Fast Delivery</h3>
-              <p>Our strategic Dubai hub ensures quick shipping to the US without customs headaches.</p>
+        <section className="py-12 bg-white text-gray-900">
+          <div className="container mx-auto px-6">
+            <h2 className="text-2xl font-bold mb-8 text-center">Why Choose AutoLink Global for Auto Parts?</h2>
+            <div className="md:flex md:space-x-8 space-y-8 md:space-y-0">
+              <div className="flex-1 bg-gray-100 p-6 rounded-xl shadow-sm">
+                <h3 className="text-xl font-semibold mb-2">OEM-Level Quality</h3>
+                <p>All parts meet or exceed SAE/DOT standards and come with a solid warranty.</p>
+              </div>
+              <div className="flex-1 bg-gray-100 p-6 rounded-xl shadow-sm">
+                <h3 className="text-xl font-semibold mb-2">Direct-from-Factory Pricing</h3>
+                <p>Skip the middle-man. Our Taiwan partnerships let you save 10-15% on average.</p>
+              </div>
+              <div className="flex-1 bg-gray-100 p-6 rounded-xl shadow-sm">
+                <h3 className="text-xl font-semibold mb-2">Fast Delivery</h3>
+                <p>Our strategic Dubai hub ensures quick shipping to the US without customs headaches.</p>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA linking to booking section */}
-      <section className="py-16 bg-gray-900 text-center text-white px-6">
-        <h2 className="text-3xl font-bold mb-4">Ready to turbo-charge profits?</h2>
-        <p className="text-lg mb-8 max-w-xl mx-auto">
-          Join dozens of US body shops already saving on premium parts.
-        </p>
-        <a
-          href="#book-call"
-          className="inline-block bg-red-600 text-white px-7 py-4 rounded-md text-lg font-semibold hover:bg-red-700 transition"
-        >
-          Book a Quick Call
-        </a>
-      </section>
+        {/* CTA linking to booking section */}
+        <section className="py-16 bg-gray-900 text-center text-white px-6">
+          <h2 className="text-3xl font-bold mb-4">Ready to turbo-charge profits?</h2>
+          <p className="text-lg mb-8 max-w-xl mx-auto">
+            Join dozens of US body shops already saving on premium parts.
+          </p>
+          <a
+            href="#book-call"
+            className="inline-block bg-red-600 text-white px-7 py-4 rounded-md text-lg font-semibold hover:bg-red-700 transition"
+          >
+            Book a Quick Call
+          </a>
+        </section>
 
-      {/* FAQ – collapsible */}
-      <FAQSection />
+        {/* FAQ – collapsible */}
+        <FAQSection />
 
-      {/* Booking section with Calendly */}
-      <section id="book-call" className="py-16 bg-gray-900 text-center text-white px-6">
-        <h2 className="text-4xl font-extrabold text-red-500 mb-4">Book Your Free Discovery Call</h2>
-        <p className="text-lg mb-4 max-w-xl mx-auto">
-          Spend 15 minutes with our team to learn how you can save big on premium parts.
-        </p>
-        <p className="mb-8 max-w-xl mx-auto">
-          Choose a time that works for you—we’ll review your parts list and map out exact savings with AutoLink Global.
-        </p>
-        <div className="flex justify-center">
-          <div
-            className="calendly-inline-widget"
-            data-url="https://calendly.com/sampogosyan1995/30min?text_color=dc2626&primary_color=151d2b"
-            style={{ width: '370px', height: '700px' }}
-          />
-        </div>
-      </section>
-
+        {/* Booking section with Calendly */}
+        <section id="book-call" className="py-16 bg-gray-900 text-center text-white px-6">
+          <h2 className="text-4xl font-extrabold text-red-500 mb-4">Book Your Free Discovery Call</h2>
+          <p className="text-lg mb-4 max-w-xl mx-auto">
+            Spend 15 minutes with our team to learn how you can save big on premium parts.
+          </p>
+          <p className="mb-8 max-w-xl mx-auto">
+            Choose a time that works for you—we’ll review your parts list and map out exact savings with AutoLink Global.
+          </p>
+          <div className="flex justify-center">
+            <div
+              className="calendly-inline-widget"
+              data-url="https://calendly.com/sampogosyan1995/30min?text_color=dc2626&primary_color=151d2b"
+              style={{ width: '370px', height: '700px' }}
+            />
+          </div>
+        </section>
+      </main>
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-400 text-sm py-4 text-center">
         © 2025 AutoLink Global. All rights reserved.

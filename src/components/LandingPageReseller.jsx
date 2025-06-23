@@ -13,7 +13,7 @@ import LanguageSwitcher from './LanguageSwitcher';
 */
 const Logo = () => (
   <div className="select-none text-3xl md:text-4xl font-extrabold leading-none tracking-wide mb-8">
-    AutoLink<span className="text-red-600">Global</span>
+    AutoLink<span className="text-primary-600">Global</span>
   </div>
 );
 
@@ -27,11 +27,11 @@ const FAQItem = ({ q, a, idx, isOpen, onToggle }) => (
       onClick={() => onToggle(idx)}
       className="w-full flex justify-between items-center py-4 text-left focus:outline-none group"
     >
-      <span className="font-medium text-gray-800 group-hover:text-red-600 transition">
+      <span className="font-medium text-gray-800 group-hover:text-primary-600 transition">
         {q}
       </span>
       <Motion.span
-        className="text-red-600 transform"
+        className="text-primary-600 transform"
         animate={{ rotate: isOpen ? 45 : 0 }}
         transition={{ duration: 0.2 }}
       >
@@ -94,7 +94,7 @@ function LandingPageReseller() {
     const initCalendly = () => {
       if (window.Calendly && calendlyRef.current) {
         window.Calendly.initInlineWidget({
-          url: 'https://calendly.com/sampogosyan1995/30min?text_color=dc2626&primary_color=151d2b',
+          url: 'https://calendly.com/sampogosyan1995/30min?text_color=2563eb&primary_color=151d2b',
           parentElement: calendlyRef.current,
         });
       }
@@ -126,7 +126,7 @@ function LandingPageReseller() {
     <div className="font-sans text-gray-800 scroll-smooth">
       {/* Hero */}
       <header>
-        <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-16 px-6">
+        <section className="relative bg-gradient-to-br from-white via-blue-50 to-white text-gray-900 py-16 px-6">
           <div className="absolute top-4 right-4">
             <LanguageSwitcher />
           </div>
@@ -143,7 +143,7 @@ function LandingPageReseller() {
                 href="/catalog.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-red-600 text-white px-5 py-3 rounded-md text-lg font-semibold hover:bg-red-700 transition"
+                className="bg-primary-600 text-white px-5 py-3 rounded-md text-lg font-semibold hover:bg-primary-700 transition"
               >
                 {t('hero.download')}
               </a>
@@ -181,14 +181,14 @@ function LandingPageReseller() {
         </section>
 
         {/* CTA linking to booking section */}
-        <section className="py-16 bg-gray-900 text-center text-white px-6">
+        <section className="py-16 bg-blue-50 text-center text-gray-900 px-6">
           <h2 className="text-3xl font-bold mb-4">{t('cta.title')}</h2>
           <p className="text-lg mb-8 max-w-xl mx-auto">
             {t('cta.subtitle')}
           </p>
           <a
             href="#book-call"
-            className="inline-block bg-red-600 text-white px-7 py-4 rounded-md text-lg font-semibold hover:bg-red-700 transition"
+            className="inline-block bg-primary-600 text-white px-7 py-4 rounded-md text-lg font-semibold hover:bg-primary-700 transition"
           >
             {t('cta.button')}
           </a>
@@ -198,8 +198,8 @@ function LandingPageReseller() {
         <FAQSection />
 
         {/* Booking section with Calendly */}
-        <section id="book-call" className="py-16 bg-gray-900 text-center text-white px-6">
-          <h2 className="text-4xl font-extrabold text-red-500 mb-4">{t('booking.title')}</h2>
+        <section id="book-call" className="py-16 bg-gray-50 text-center text-gray-900 px-6">
+          <h2 className="text-4xl font-extrabold text-primary-500 mb-4">{t('booking.title')}</h2>
           <p className="text-lg mb-4 max-w-xl mx-auto">
             {t('booking.subtitle1')}
           </p>
@@ -215,7 +215,7 @@ function LandingPageReseller() {
         </section>
       </main>
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-400 text-sm py-4 text-center">
+      <footer className="bg-gray-100 text-gray-600 text-sm py-4 text-center">
         {t('footer.text')}
       </footer>
     </div>

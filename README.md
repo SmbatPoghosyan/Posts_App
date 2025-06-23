@@ -29,6 +29,10 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 A simple GitHub Actions workflow installs dependencies and verifies the build on every push.
 
+## Theming
+
+Primary colors are defined as CSS variables in `src/index.css` and exposed to Tailwind as `text-primary-*` and `bg-primary-*` utility classes. Update the `--color-primary-*` values to quickly change the site's color scheme.
+
 ## File structure
 
 ```

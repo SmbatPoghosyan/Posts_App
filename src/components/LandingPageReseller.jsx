@@ -109,7 +109,9 @@ const FAQSection = () => {
     <section className="bg-white py-12 px-6" id="faq">
       <div className="container mx-auto max-w-4xl">
         <h2 className="text-2xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
-        <div className="divide-y divide-gray-200 max-h-96 overflow-y-auto rounded-md">
+        <div
+          className="divide-y divide-gray-200 max-h-96 overflow-y-auto overflow-x-hidden rounded-md faq-scroll"
+        >
           {faqItems.map((item, idx) => (
             <FAQItem
               key={idx}

@@ -126,7 +126,7 @@ function LandingPageReseller() {
     <div className="font-sans text-gray-800 scroll-smooth">
       {/* Hero */}
       <header>
-        <section className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-16 px-6">
+        <section className="relative bg-gradient-to-br from-white via-blue-50 to-white text-gray-900 py-16 px-6">
           <div className="absolute top-4 right-4">
             <LanguageSwitcher />
           </div>
@@ -181,7 +181,7 @@ function LandingPageReseller() {
         </section>
 
         {/* CTA linking to booking section */}
-        <section className="py-16 bg-gray-900 text-center text-white px-6">
+        <section className="py-16 bg-blue-50 text-center text-gray-900 px-6">
           <h2 className="text-3xl font-bold mb-4">{t('cta.title')}</h2>
           <p className="text-lg mb-8 max-w-xl mx-auto">
             {t('cta.subtitle')}
@@ -198,7 +198,7 @@ function LandingPageReseller() {
         <FAQSection />
 
         {/* Booking section with Calendly */}
-        <section id="book-call" className="py-16 bg-gray-900 text-center text-white px-6">
+        <section id="book-call" className="py-16 bg-gray-50 text-center text-gray-900 px-6">
           <h2 className="text-4xl font-extrabold text-primary-500 mb-4">{t('booking.title')}</h2>
           <p className="text-lg mb-4 max-w-xl mx-auto">
             {t('booking.subtitle1')}
@@ -215,7 +215,7 @@ function LandingPageReseller() {
         </section>
       </main>
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-400 text-sm py-4 text-center">
+      <footer className="bg-gray-100 text-gray-600 text-sm py-4 text-center">
         {t('footer.text')}
       </footer>
     </div>

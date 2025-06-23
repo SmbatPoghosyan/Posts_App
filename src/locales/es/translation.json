@@ -1,0 +1,102 @@
+{
+  "hero": {
+    "title": "Piezas de automóvil OEM al por mayor directamente de fábrica",
+    "tagline1": "Precios directos de fábrica, calidad OEM y envíos rápidos desde Dubái.",
+    "tagline2": "AutoLink Global brinda a los distribuidores mayoristas una ventaja competitiva.",
+    "download": "Descargar Catálogo",
+    "contact": "Contactar Ventas"
+  },
+  "choose": {
+    "title": "¿Por qué elegir AutoLink Global para repuestos?",
+    "oem": {
+      "title": "Calidad de nivel OEM",
+      "desc": "Todas las piezas cumplen o superan las normas SAE/DOT y cuentan con una sólida garantía."
+    },
+    "price": {
+      "title": "Precios directos de fábrica",
+      "desc": "Elimine intermediarios. Nuestras alianzas en Taiwán le permiten ahorrar entre un 10 y un 15 % en promedio."
+    },
+    "delivery": {
+      "title": "Entrega Rápida",
+      "desc": "Nuestro centro estratégico en Dubái garantiza envíos rápidos a EE. UU. sin complicaciones aduaneras."
+    }
+  },
+  "cta": {
+    "title": "¿Listo para impulsar sus ganancias?",
+    "subtitle": "Únase a decenas de talleres estadounidenses que ya ahorran en piezas de primera.",
+    "button": "Reservar una Llamada Rápida"
+  },
+  "faq": {
+    "title": "Preguntas Frecuentes",
+    "items": [
+      {
+        "q": "¿En qué tipos de repuestos automotrices están especializados?",
+        "a": "Nuestro MVP se centra en paneles de carrocería y sistemas de iluminación de alta demanda (faros, luces traseras, parachoques, guardabarros) de fábricas taiwanesas de confianza aprobadas por OEM."
+      },
+      {
+        "q": "¿Sus piezas son OEM o aftermarket?",
+        "a": "Todos los artículos cumplen o superan las normas SAE/DOT y se producen en instalaciones certificadas ISO, lo que le brinda ajuste y acabado de nivel OEM a precio de aftermarket."
+      },
+      {
+        "q": "¿Cuánto tarda el envío a Estados Unidos?",
+        "a": "Nuestro centro estratégico en Dubái asegura envíos muy rápidos a su puerta sin problemas de aduanas."
+      },
+      {
+        "q": "¿Existe una cantidad mínima de pedido (MOQ)?",
+        "a": "Sí. Para garantizar precios directos de fábrica actualmente operamos con contenedores completos o lotes por skid (≈ USD 40k). Se permiten contenedores con modelos mixtos."
+      },
+      {
+        "q": "¿Puedo mezclar distintos modelos/números de parte en un mismo contenedor?",
+        "a": "Por supuesto. Trabajaremos con usted para elaborar un manifiesto de SKU mezcladas para que pueda tener un inventario equilibrado de artículos de alta rotación."
+      },
+      {
+        "q": "¿Cómo funcionan los pagos?",
+        "a": "Los fondos del cliente se depositan en una cuenta escrow. Una vez que su envío está confirmado a bordo, los fondos se liberan y comienza la producción/despacho."
+      },
+      {
+        "q": "¿Ofrecen términos de crédito?",
+        "a": "Para el MVP trabajamos con términos en escrow/prepago. Los programas de crédito se lanzarán tras un historial de pedidos consistente (≈3 contenedores)."
+      },
+      {
+        "q": "¿Qué garantía ofrecen?",
+        "a": "Respaldamos cada pieza con una garantía estándar de 12 meses contra defectos de fabricación. Planes extendidos disponibles para clientes con volumen."
+      },
+      {
+        "q": "¿Aceptan devoluciones?",
+        "a": "Sí. Si una pieza llega dañada o no encaja en el vehículo especificado, organizamos el reemplazo o el crédito. Las pautas completas de devolución están en el acuerdo de suministro."
+      },
+      {
+        "q": "¿A qué puertos de EE. UU. envían?",
+        "a": "Los Ángeles, Long Beach, Houston, Newark (NY/NJ) y Savannah. El transporte interior a su instalación puede cotizarse a petición."
+      },
+      {
+        "q": "¿Puedo personalizar el embalaje con mi logo?",
+        "a": "Las opciones de marca propia están disponibles para clientes recurrentes. El MOQ para impresiones personalizadas suele ser de 300 unidades por número de parte."
+      },
+      {
+        "q": "¿Cómo se gestionan los aranceles y la aduana?",
+        "a": "Nuestro agente se encarga de presentar toda la documentación ISF y de entrada. Los aranceles (2.5 % ad valorem en la mayoría de las piezas) se facturan al costo; le guiaremos en cada paso."
+      },
+      {
+        "q": "¿Proporcionan datos de compatibilidad o feeds de catálogo?",
+        "a": "Sí. Se incluyen tablas de compatibilidad CSV/XML (año, marca, modelo) e imágenes de alta resolución para que pueda actualizar su tienda en línea al instante."
+      },
+      {
+        "q": "¿Es posible el envío directo a mis clientes?",
+        "a": "El envío directo de paquetes voluminosos desde nuestro 3PL en EE. UU. está previsto para la fase 2. Únase a la lista de espera y le avisaremos cuando esté disponible."
+      },
+      {
+        "q": "¿Cómo empiezo?",
+        "a": "Haga clic en «Reservar una Llamada Rápida» para programar una sesión de descubrimiento de 15 minutos. Revisaremos su lista de piezas, mapearemos los ahorros y diseñaremos su primer contenedor."
+      }
+    ]
+  },
+  "booking": {
+    "title": "Reserve su Llamada de Descubrimiento Gratis",
+    "subtitle1": "Dedique 15 minutos con nuestro equipo para descubrir cómo puede ahorrar a lo grande en piezas de primera.",
+    "subtitle2": "Elija la hora que le sea conveniente; revisaremos su lista de piezas y calcularemos el ahorro exacto con AutoLink Global."
+  },
+  "footer": {
+    "text": "© 2025 AutoLink Global. Todos los derechos reservados."
+  }
+}

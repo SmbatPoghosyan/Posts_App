@@ -38,15 +38,7 @@ function ContactModal({ onClose }) {
       return trimmed;
     });
 
-    setActive((prev) => {
-      const next = new Set(prev);
-      if (prev.has(text)) {
-        next.delete(text);
-      } else {
-        next.add(text);
-      }
-      return next;
-    });
+  // active suggestions are recalculated in syncActiveFromMessage
   };
 
   const handleSubmit = (e) => {
@@ -64,7 +56,7 @@ function ContactModal({ onClose }) {
       onClick={onClose}
     >
       <div
-        className="relative bg-amber-50 font-serif border-2 border-amber-200 rounded-lg p-6 w-11/12 max-w-md shadow-xl"
+        className="relative bg-blue-50 font-serif border-2 border-blue-200 rounded-lg p-6 w-11/12 max-w-md shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -78,7 +70,7 @@ function ContactModal({ onClose }) {
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
-            className="w-full border border-amber-300 bg-amber-100 rounded-md p-2 placeholder-brown-600"
+            className="w-full border border-blue-300 bg-blue-100 rounded-md p-2 placeholder-primary-600"
             placeholder={t('contactModal.name')}
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -86,14 +78,14 @@ function ContactModal({ onClose }) {
           />
           <input
             type="email"
-            className="w-full border border-amber-300 bg-amber-100 rounded-md p-2 placeholder-brown-600"
+            className="w-full border border-blue-300 bg-blue-100 rounded-md p-2 placeholder-primary-600"
             placeholder={t('contactModal.email')}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
           <textarea
-            className="w-full border border-amber-300 bg-amber-100 rounded-md p-2 placeholder-brown-600"
+            className="w-full border border-blue-300 bg-blue-100 rounded-md p-2 placeholder-primary-600"
             rows="4"
             placeholder={t('contactModal.messagePlaceholder')}
             value={message}

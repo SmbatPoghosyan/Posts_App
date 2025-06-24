@@ -60,7 +60,7 @@ function StatsSection() {
                 <Bar dataKey="market" fill="#2563eb" />
               </BarChart>
             </ResponsiveContainer>
-            <p className="mt-2 font-medium">Global OEM Market Growth</p>
+            <p className="mt-2 font-medium">{t('insights.barLabel')}</p>
           </div>
           <div className="bg-white p-4 rounded shadow-md">
             <ResponsiveContainer width="100%" height={250}>
@@ -72,7 +72,7 @@ function StatsSection() {
                 <Line type="monotone" dataKey="savings" stroke="#2563eb" />
               </LineChart>
             </ResponsiveContainer>
-            <p className="mt-2 font-medium">Average Savings per Container (%)</p>
+            <p className="mt-2 font-medium">{t('insights.lineLabel')}</p>
           </div>
           <div className="bg-white p-4 rounded shadow-md">
             <ResponsiveContainer width="100%" height={250}>
@@ -91,7 +91,7 @@ function StatsSection() {
                 <Tooltip />
               </PieChart>
             </ResponsiveContainer>
-            <p className="mt-2 font-medium">Top Part Categories</p>
+            <p className="mt-2 font-medium">{t('insights.pieLabel')}</p>
           </div>
         </div>
       </div>

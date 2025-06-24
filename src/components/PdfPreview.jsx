@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
+import pdfWorker from 'pdfjs-dist/build/pdf.worker.min?url';
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.js',
-  import.meta.url
-).toString();
+// Ensure the PDF.js worker is loaded correctly by Vite
+pdfjs.GlobalWorkerOptions.workerSrc = pdfWorker;
 
 function PdfPreview({ file, onClose }) {
   const [numPages, setNumPages] = useState(null);

@@ -4,6 +4,7 @@ import { motion as Motion, AnimatePresence } from 'framer-motion';
 import LanguageSwitcher from './LanguageSwitcher';
 import logoMain from '../../public/logo_main.png';
 import PdfPreview from './PdfPreview';
+import StatsSection from './StatsSection';
 
 /* ---------------------------------------------------------------------
   LOGO ‐ Updated to use logo_main.png
@@ -187,6 +188,8 @@ function LandingPageReseller() {
             {t('cta.button')}
           </a>
         </section>
+
+        <StatsSection />
 
         {/* FAQ – collapsible */}
         <FAQSection />

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { motion as Motion, AnimatePresence } from 'framer-motion';
+import { motion as Motion, AnimatePresence, Reorder } from 'framer-motion';
+import confetti from 'canvas-confetti';
 import LanguageSwitcher from './LanguageSwitcher';
 import logoMain from '../../public/logo_main.png';
 import PdfPreview from './PdfPreview';
@@ -90,141 +91,200 @@ const FAQSection = () => {
   INTERACTIVE DEMO COMPONENTS
 --------------------------------------------------------------------- */
 
-const ParallaxDemo = () => {
+const DragUnlockDemo = () => {
   const { t } = useTranslation();
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const onMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 30;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 30;
-    setOffset({ x, y });
+  const [unlocked, setUnlocked] = useState(false);
+  const handleDragEnd = (_, info) => {
+    const zone = document.getElementById('drop-zone');
+    if (!zone) return;
+    const rect = zone.getBoundingClientRect();
+    const { x, y } = info.point;
+    if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+      setUnlocked(true);
+    }
   };
-  return (
-    <section className="py-16 bg-white text-center" onMouseLeave={() => setOffset({ x: 0, y: 0 })}>
-      <h2 className="text-2xl font-bold mb-4">{t('interactive.parallax.title')}</h2>
-      <p className="mb-6 text-gray-600">{t('interactive.parallax.desc')}</p>
-      <div
-        onMouseMove={onMove}
-        className="mx-auto h-48 w-80 overflow-hidden rounded-lg relative bg-gradient-to-tr from-primary-500 to-primary-700"
-      >
-        <img
-          src={logoMain}
-          alt="logo"
-          className="absolute inset-0 m-auto w-32 transform transition-transform"
-          style={{ transform: `translate(${offset.x}px, ${offset.y}px)` }}
-        />
-      </div>
-    </section>
-  );
-};
-
-const CounterDemo = () => {
-  const { t } = useTranslation();
-  const ref = useRef(null);
-  const [started, setStarted] = useState(false);
-  const [counts, setCounts] = useState([0, 0, 0]);
-  const targets = useRef([50, 200, 500]);
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setStarted(true);
-        obs.disconnect();
-      }
-    });
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!started) return;
-    targets.current.forEach((target, idx) => {
-      let current = 0;
-      const step = Math.ceil(target / 40);
-      const id = setInterval(() => {
-        current += step;
-        setCounts((c) => c.map((v, i) => (i === idx ? Math.min(current, target) : v)));
-        if (current >= target) clearInterval(id);
-      }, 50);
-    });
-  }, [started]);
-
-  return (
-    <section ref={ref} className="py-16 bg-gray-50 text-center">
-      <h2 className="text-2xl font-bold mb-4">{t('interactive.counter.title')}</h2>
-      <p className="mb-6 text-gray-600">{t('interactive.counter.desc')}</p>
-      <div className="flex justify-center gap-8">
-        {counts.map((n, i) => (
-          <div key={i} className="text-4xl font-extrabold text-primary-600 w-16">
-            {n}
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-};
-
-const HoverCardsDemo = () => {
-  const { t } = useTranslation();
   return (
     <section className="py-16 bg-white text-center">
-      <h2 className="text-2xl font-bold mb-4">{t('interactive.cards.title')}</h2>
-      <p className="mb-6 text-gray-600">{t('interactive.cards.desc')}</p>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto px-6">
-        {[1, 2, 3].map((n) => (
-          <div
-            key={n}
-            className="p-8 bg-gray-100 rounded-lg transform transition-transform hover:rotate-1 hover:scale-105"
+      <h2 className="text-2xl font-bold mb-4">{t('interactive.unlock.title')}</h2>
+      <p className="mb-6 text-gray-600">{t('interactive.unlock.desc')}</p>
+      <div className="flex justify-center items-center space-x-8">
+        {!unlocked && (
+          <Motion.div
+            drag
+            dragMomentum={false}
+            onDragEnd={handleDragEnd}
+            className="cursor-grab p-4 bg-primary-600 text-white rounded-full select-none"
           >
-            Card {n}
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-};
-
-const TiltDemo = () => {
-  const { t } = useTranslation();
-  const [rotate, setRotate] = useState({ x: 0, y: 0 });
-  const onMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -20;
-    setRotate({ x, y });
-  };
-  return (
-    <section className="py-16 bg-gray-50 text-center" onMouseLeave={() => setRotate({ x: 0, y: 0 })}>
-      <h2 className="text-2xl font-bold mb-4">{t('interactive.tilt.title')}</h2>
-      <p className="mb-6 text-gray-600">{t('interactive.tilt.desc')}</p>
-      <div className="flex justify-center">
+            🔑
+          </Motion.div>
+        )}
         <div
-          onMouseMove={onMove}
-          className="w-64 h-40 bg-white shadow-lg rounded-lg flex items-center justify-center"
-          style={{ transform: `rotateX(${rotate.y}deg) rotateY(${rotate.x}deg)` }}
+          id="drop-zone"
+          className="w-24 h-24 flex items-center justify-center border-2 border-dashed border-primary-600 rounded-lg"
         >
-          <img src={logoMain} alt="logo" className="w-24" />
+          {unlocked ? t('interactive.unlock.message') : '🔒'}
         </div>
       </div>
     </section>
   );
 };
 
-const ThemeToggleDemo = ({ dark, setDark }) => {
+const SortCardsDemo = () => {
   const { t } = useTranslation();
+  const [items, setItems] = useState(['A', 'B', 'C']);
   return (
-    <section className="py-16 bg-white text-center">
-      <h2 className="text-2xl font-bold mb-4">{t('interactive.theme.title')}</h2>
-      <p className="mb-6 text-gray-600">{t('interactive.theme.desc')}</p>
-      <button
-        onClick={() => setDark((v) => !v)}
-        className="px-6 py-3 bg-primary-600 text-white rounded-md"
+    <section className="py-16 bg-gray-50 text-center">
+      <h2 className="text-2xl font-bold mb-4">{t('interactive.sort.title')}</h2>
+      <p className="mb-6 text-gray-600">{t('interactive.sort.desc')}</p>
+      <Reorder.Group
+        axis="y"
+        values={items}
+        onReorder={setItems}
+        className="flex flex-col items-center space-y-4"
       >
-        {dark ? 'Light' : 'Dark'}
-      </button>
+        {items.map((it) => (
+          <Reorder.Item
+            key={it}
+            value={it}
+            className="w-24 p-4 bg-white shadow rounded-md cursor-grab"
+          >
+            {it}
+          </Reorder.Item>
+        ))}
+      </Reorder.Group>
     </section>
   );
 };
+
+const ScratchOffDemo = () => {
+  const { t } = useTranslation();
+  const canvasRef = useRef(null);
+  const [revealed, setRevealed] = useState(false);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#9CA3AF';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }, []);
+
+  const scratch = (e) => {
+    if (revealed) return;
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.beginPath();
+    ctx.arc(x, y, 15, 0, Math.PI * 2);
+    ctx.fill();
+
+    const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    let cleared = 0;
+    for (let i = 3; i < pixels.length; i += 4) {
+      if (pixels[i] === 0) cleared++;
+    }
+    if (cleared / (canvas.width * canvas.height) > 0.5) {
+      setRevealed(true);
+    }
+  };
+
+  return (
+    <section className="py-16 bg-white text-center">
+      <h2 className="text-2xl font-bold mb-4">{t('interactive.scratch.title')}</h2>
+      <p className="mb-6 text-gray-600">{t('interactive.scratch.desc')}</p>
+      <div className="relative inline-block">
+        <div className="absolute inset-0 flex items-center justify-center text-xl font-semibold pointer-events-none">
+          {revealed && t('interactive.scratch.revealed')}
+        </div>
+        <canvas
+          ref={canvasRef}
+          width={300}
+          height={150}
+          onPointerMove={scratch}
+          className="border rounded-md select-none"
+        />
+      </div>
+    </section>
+  );
+};
+
+const DrawBoardDemo = () => {
+  const { t } = useTranslation();
+  const canvasRef = useRef(null);
+  const drawing = useRef(false);
+
+  const start = () => {
+    drawing.current = true;
+  };
+  const end = () => {
+    drawing.current = false;
+    const ctx = canvasRef.current.getContext('2d');
+    ctx.beginPath();
+  };
+  const draw = (e) => {
+    if (!drawing.current) return;
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    const rect = canvas.getBoundingClientRect();
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = '#2563eb';
+    ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+  };
+
+  return (
+    <section className="py-16 bg-gray-50 text-center">
+      <h2 className="text-2xl font-bold mb-4">{t('interactive.draw.title')}</h2>
+      <p className="mb-6 text-gray-600">{t('interactive.draw.desc')}</p>
+      <canvas
+        ref={canvasRef}
+        width={320}
+        height={200}
+        onPointerDown={start}
+        onPointerUp={end}
+        onPointerLeave={end}
+        onPointerMove={draw}
+        className="border rounded-md bg-white mx-auto select-none"
+      />
+    </section>
+  );
+};
+
+const ConfettiSliderDemo = () => {
+  const { t } = useTranslation();
+  const [val, setVal] = useState(0);
+  const handleChange = (e) => {
+    const v = Number(e.target.value);
+    setVal(v);
+    if (v === 100) {
+      confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+    }
+  };
+  return (
+    <section className="py-16 bg-white text-center">
+      <h2 className="text-2xl font-bold mb-4">{t('interactive.confetti.title')}</h2>
+      <p className="mb-6 text-gray-600">{t('interactive.confetti.desc')}</p>
+      <input
+        type="range"
+        min="0"
+        max="100"
+        value={val}
+        onChange={handleChange}
+        className="w-64 accent-primary-600"
+      />
+    </section>
+  );
+};
+
+
+
+
 
 /* ---------------------------------------------------------------------
   LANDING PAGE COMPONENT
@@ -233,12 +293,6 @@ function LandingPageReseller() {
   const { t } = useTranslation();
   const calendlyRef = useRef(null);
   const [showCatalog, setShowCatalog] = useState(false);
-  const [dark, setDark] = useState(false);
-
-  useEffect(() => {
-    const cl = document.documentElement.classList;
-    dark ? cl.add('dark') : cl.remove('dark');
-  }, [dark]);
 
   useEffect(() => {
     if (!calendlyRef.current) return;
@@ -335,11 +389,11 @@ function LandingPageReseller() {
         </section>
 
         {/* Interactive Demo Sections */}
-        <ParallaxDemo />
-        <CounterDemo />
-        <HoverCardsDemo />
-        <TiltDemo />
-        <ThemeToggleDemo dark={dark} setDark={setDark} />
+        <DragUnlockDemo />
+        <SortCardsDemo />
+        <ScratchOffDemo />
+        <DrawBoardDemo />
+        <ConfettiSliderDemo />
 
         {/* FAQ – collapsible */}
         <FAQSection />

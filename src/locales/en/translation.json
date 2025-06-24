@@ -101,25 +101,27 @@
   },
   "interactive": {
     "title": "Interactive Demos",
-    "parallax": {
-      "title": "Parallax Image",
-      "desc": "Move your mouse around to shift the landscape."
+    "unlock": {
+      "title": "Drag to Unlock",
+      "desc": "Drag the key into the box to reveal the message.",
+      "message": "Welcome!"
     },
-    "counter": {
-      "title": "Animated Counter",
-      "desc": "Numbers count up when visible."
+    "sort": {
+      "title": "Reorder Cards",
+      "desc": "Drag the cards into any order."
     },
-    "cards": {
-      "title": "Hover Cards",
-      "desc": "Hover each card to see the animation."
+    "scratch": {
+      "title": "Scratch Off",
+      "desc": "Drag to uncover the hidden offer.",
+      "revealed": "You found it!"
     },
-    "tilt": {
-      "title": "Tilt Effect",
-      "desc": "Move your mouse over the card."
+    "draw": {
+      "title": "Doodle Board",
+      "desc": "Draw something by dragging your mouse."
     },
-    "theme": {
-      "title": "Dark Mode Toggle",
-      "desc": "Click to switch between light and dark."
+    "confetti": {
+      "title": "Confetti Slider",
+      "desc": "Drag the slider to the end to celebrate!"
     }
   }
 }

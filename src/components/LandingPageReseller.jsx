@@ -2,19 +2,21 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion as Motion, AnimatePresence } from 'framer-motion';
 import LanguageSwitcher from './LanguageSwitcher';
+import logoMain from '../../public/logo_main.png';
 
 /* ---------------------------------------------------------------------
-  LOGO ‐ Placeholder word‑mark
+  LOGO ‐ Updated to use logo_main.png
   ---------------------------------------------------------------------
-  • Uses styled text so the build never fails due to missing image assets.
-  • When your final logo file is ready, simply swap the <div> below with
-    <img src={require('../assets/logo.png')} alt="AutoLink Global" className="h-14 md:h-16 mb-8" />
-    or import logo from '../assets/logo.png';
+  • Replaces the placeholder word-mark with the actual logo image.
+  • Ensures the logo is positioned and sized appropriately.
 */
+
 const Logo = () => (
-  <div className="select-none text-3xl md:text-4xl font-extrabold leading-none tracking-wide mb-8">
-    AutoLink<span className="text-primary-600">Global</span>
-  </div>
+  <img
+    src={logoMain}
+    alt="AutoLink Global"
+    className="h-36 md:h-48 mx-auto"
+  />
 );
 
 /* ---------------------------------------------------------------------
@@ -91,36 +93,25 @@ function LandingPageReseller() {
   const calendlyRef = useRef(null);
 
   useEffect(() => {
-    const initCalendly = () => {
-      if (window.Calendly && calendlyRef.current) {
-        window.Calendly.initInlineWidget({
-          url: 'https://calendly.com/sampogosyan1995/30min?text_color=2563eb&primary_color=151d2b',
-          parentElement: calendlyRef.current,
-        });
-      }
-    };
+    if (!calendlyRef.current) return;
+
+    // Prevent duplicate injection
+    if (calendlyRef.current.querySelector('iframe')) {
+      console.log('Calendly already initialized. Skipping.');
+      return;
+    }
 
     if (window.Calendly) {
-      initCalendly();
-      return undefined;
+      window.Calendly.initInlineWidget({
+        url: 'https://calendly.com/sampogosyan1995/30min?text_color=2563eb&primary_color=151d2b',
+        parentElement: calendlyRef.current,
+      });
+      console.log('Calendly initialized.');
+    } else {
+      console.warn('Calendly script not found.');
     }
-
-    const script = document.querySelector(
-      'script[src="https://assets.calendly.com/assets/external/widget.js"]',
-    );
-    if (script) {
-      script.addEventListener('load', initCalendly);
-      return () => script.removeEventListener('load', initCalendly);
-    }
-
-    const newScript = document.createElement('script');
-    newScript.src =
-      'https://assets.calendly.com/assets/external/widget.js';
-    newScript.async = true;
-    newScript.onload = initCalendly;
-    document.body.appendChild(newScript);
-    return () => newScript.removeEventListener('load', initCalendly);
   }, []);
+
 
   return (
     <div className="font-sans text-gray-800 scroll-smooth">

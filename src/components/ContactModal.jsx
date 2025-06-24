@@ -6,6 +6,7 @@ function ContactModal({ onClose }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [active, setActive] = useState(new Set());
   const suggestions = t('contactModal.suggestions', { returnObjects: true });
 
   useEffect(() => {
@@ -16,8 +17,36 @@ function ContactModal({ onClose }) {
     return () => document.removeEventListener('keydown', handler);
   }, [onClose]);
 
+  const syncActiveFromMessage = (val) => {
+    const newSet = new Set(
+      suggestions.filter((s) => val.includes(s)),
+    );
+    setActive(newSet);
+  };
+
   const applySuggestion = (text) => {
-    setMessage((prev) => (prev ? `${prev} ${text}` : text));
+    setMessage((prev) => {
+      if (active.has(text)) {
+        const regex = new RegExp(`\\s*${text.replace(/([.*+?^${}()|[\]\\])/g, '\\$1')}\\s*`);
+        const cleaned = prev.replace(regex, ' ').replace(/\s+/g, ' ').trim();
+        syncActiveFromMessage(cleaned);
+        return cleaned;
+      }
+      const next = prev ? `${prev} ${text}` : text;
+      const trimmed = next.trim();
+      syncActiveFromMessage(trimmed);
+      return trimmed;
+    });
+
+    setActive((prev) => {
+      const next = new Set(prev);
+      if (prev.has(text)) {
+        next.delete(text);
+      } else {
+        next.add(text);
+      }
+      return next;
+    });
   };
 
   const handleSubmit = (e) => {
@@ -35,7 +64,7 @@ function ContactModal({ onClose }) {
       onClick={onClose}
     >
       <div
-        className="relative bg-white rounded-lg p-6 w-11/12 max-w-md shadow-lg"
+        className="relative bg-amber-50 font-serif border-2 border-amber-200 rounded-lg p-6 w-11/12 max-w-md shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -49,7 +78,7 @@ function ContactModal({ onClose }) {
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
-            className="w-full border rounded-md p-2"
+            className="w-full border border-amber-300 bg-amber-100 rounded-md p-2 placeholder-brown-600"
             placeholder={t('contactModal.name')}
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -57,18 +86,22 @@ function ContactModal({ onClose }) {
           />
           <input
             type="email"
-            className="w-full border rounded-md p-2"
+            className="w-full border border-amber-300 bg-amber-100 rounded-md p-2 placeholder-brown-600"
             placeholder={t('contactModal.email')}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
           <textarea
-            className="w-full border rounded-md p-2"
+            className="w-full border border-amber-300 bg-amber-100 rounded-md p-2 placeholder-brown-600"
             rows="4"
             placeholder={t('contactModal.messagePlaceholder')}
             value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            onChange={(e) => {
+              const val = e.target.value;
+              setMessage(val);
+              syncActiveFromMessage(val);
+            }}
             required
           />
           <div className="flex flex-wrap gap-2">
@@ -77,7 +110,7 @@ function ContactModal({ onClose }) {
                 key={idx}
                 type="button"
                 onClick={() => applySuggestion(text)}
-                className="text-sm bg-gray-100 hover:bg-primary-600 hover:text-white transition px-3 py-1 rounded-full"
+                className={`text-sm px-3 py-1 rounded-full transition border cursor-pointer ${active.has(text) ? 'bg-primary-600 text-white border-primary-700' : 'bg-gray-100 hover:bg-primary-600 hover:text-white border-transparent'}`}
               >
                 {text}
               </button>

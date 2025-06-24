@@ -1,27 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { Document, Page, pdfjs } from 'react-pdf';
-import pdfWorker from 'pdfjs-dist/build/pdf.worker.min?url';
-
-// Ensure the PDF.js worker is loaded correctly by Vite
-pdfjs.GlobalWorkerOptions.workerSrc = pdfWorker;
+import React, { useEffect } from 'react';
+import { Worker, Viewer } from '@react-pdf-viewer/core';
+import '@react-pdf-viewer/core/lib/styles/index.css';
+import workerUrl from 'pdfjs-dist/build/pdf.worker.min.js?url';
 
 function PdfPreview({ file, onClose }) {
-  const [numPages, setNumPages] = useState(null);
-  const [pageWidth, setPageWidth] = useState(Math.min(800, window.innerWidth * 0.8));
-
   useEffect(() => {
-    const handleResize = () => {
-      setPageWidth(Math.min(800, window.innerWidth * 0.8));
-    };
-    window.addEventListener('resize', handleResize);
     const handleKey = (e) => {
       if (e.key === 'Escape') onClose();
     };
     document.addEventListener('keydown', handleKey);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      document.removeEventListener('keydown', handleKey);
-    };
+    return () => document.removeEventListener('keydown', handleKey);
   }, [onClose]);
 
   return (
@@ -30,7 +18,7 @@ function PdfPreview({ file, onClose }) {
       onClick={onClose}
     >
       <div
-        className="relative bg-white p-4 rounded-md max-h-[90vh] overflow-y-auto"
+        className="relative bg-white p-4 rounded-md max-h-[90vh] w-[80vw] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -40,11 +28,9 @@ function PdfPreview({ file, onClose }) {
         >
           ×
         </button>
-        <Document file={file} onLoadSuccess={({ numPages }) => setNumPages(numPages)}>
-          {Array.from(new Array(numPages || 0), (el, index) => (
-            <Page key={index} pageNumber={index + 1} width={pageWidth} className="mb-4" />
-          ))}
-        </Document>
+        <Worker workerUrl={workerUrl}>
+          <Viewer fileUrl={file} />
+        </Worker>
       </div>
     </div>
   );

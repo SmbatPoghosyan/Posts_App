@@ -3,15 +3,26 @@ import { Worker, Viewer } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import workerUrl from 'pdfjs-dist/build/pdf.worker.min.js?url';
 
-const renderLoader = (percentages) => (
+const renderLoader = () => (
   <div className="flex flex-col items-center justify-center p-8 text-primary-600">
-    <div className="relative w-16 h-16">
-      <div className="absolute inset-0 border-4 border-primary-600 border-t-transparent border-b-transparent rounded-full animate-spin" />
-      <div className="absolute inset-0 flex items-center justify-center text-3xl">
-        🛞
-      </div>
-    </div>
-    <span className="mt-3 font-semibold">{Math.round(percentages)}%</span>
+    <svg
+      className="w-16 h-16 animate-spin"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
+      <circle cx="12" cy="12" r="10" className="opacity-30" />
+      <circle cx="12" cy="12" r="4" />
+      <line x1="12" y1="2" x2="12" y2="6" />
+      <line x1="12" y1="18" x2="12" y2="22" />
+      <line x1="2" y1="12" x2="6" y2="12" />
+      <line x1="18" y1="12" x2="22" y2="12" />
+      <line x1="4.93" y1="4.93" x2="7.76" y2="7.76" />
+      <line x1="19.07" y1="19.07" x2="16.24" y2="16.24" />
+      <line x1="4.93" y1="19.07" x2="7.76" y2="16.24" />
+      <line x1="19.07" y1="4.93" x2="16.24" y2="7.76" />
+    </svg>
   </div>
 );
 

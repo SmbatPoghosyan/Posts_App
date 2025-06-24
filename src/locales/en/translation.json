@@ -103,6 +103,19 @@
     "subtitle1": "Spend 15 minutes with our team to learn how you can save big on premium parts.",
     "subtitle2": "Choose a time that works for you—we’ll review your parts list and map out exact savings with AutoLink Global."
   },
+  "contactModal": {
+    "title": "Contact Sales",
+    "name": "Your Name",
+    "email": "Your Email",
+    "message": "Message",
+    "messagePlaceholder": "Tell us about the parts you need...",
+    "suggestions": [
+      "I need pricing for these part numbers.",
+      "Please send shipping options and times.",
+      "I would like to become a reseller."
+    ],
+    "submit": "Send Message"
+  },
   "footer": {
     "text": "© 2025 AutoLink Global. All rights reserved."
   }

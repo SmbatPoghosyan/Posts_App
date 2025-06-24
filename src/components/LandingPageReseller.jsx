@@ -5,6 +5,7 @@ import LanguageSwitcher from './LanguageSwitcher';
 import logoMain from '../../public/logo_main.png';
 import PdfPreview from './PdfPreview';
 import StatsSection from './StatsSection';
+import ContactModal from './ContactModal';
 
 /* ---------------------------------------------------------------------
   LOGO ‐ Updated to use logo_main.png
@@ -94,6 +95,7 @@ function LandingPageReseller() {
   const { t } = useTranslation();
   const calendlyRef = useRef(null);
   const [showCatalog, setShowCatalog] = useState(false);
+  const [showContact, setShowContact] = useState(false);
 
   useEffect(() => {
     if (!calendlyRef.current) return;
@@ -121,6 +123,9 @@ function LandingPageReseller() {
       {showCatalog && (
         <PdfPreview file="/catalog.pdf" onClose={() => setShowCatalog(false)} />
       )}
+      {showContact && (
+        <ContactModal onClose={() => setShowContact(false)} />
+      )}
       {/* Hero */}
       <header>
         <section className="relative bg-gradient-to-br from-white via-blue-50 to-white text-gray-900 py-16 px-6">
@@ -142,12 +147,12 @@ function LandingPageReseller() {
               >
                 {t('hero.view')}
               </button>
-              <a
-                href="mailto:sales@autolinkglobal.com?subject=Parts%20Inquiry"
+              <button
+                onClick={() => setShowContact(true)}
                 className="bg-white text-gray-900 px-5 py-3 rounded-md text-lg font-semibold hover:bg-gray-100 transition"
               >
                 {t('hero.contact')}
-              </a>
+              </button>
             </div>
           </div>
         </section>

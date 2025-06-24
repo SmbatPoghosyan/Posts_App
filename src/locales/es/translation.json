@@ -103,6 +103,19 @@
     "subtitle1": "Dedique 15 minutos con nuestro equipo para descubrir cómo puede ahorrar a lo grande en piezas de primera.",
     "subtitle2": "Elija la hora que le sea conveniente; revisaremos su lista de piezas y calcularemos el ahorro exacto con AutoLink Global."
   },
+  "contactModal": {
+    "title": "Contactar Ventas",
+    "name": "Tu Nombre",
+    "email": "Tu Correo",
+    "message": "Mensaje",
+    "messagePlaceholder": "Cuéntanos qué piezas necesitas...",
+    "suggestions": [
+      "Necesito precios para estos números de parte.",
+      "Por favor envíen opciones y tiempos de envío.",
+      "Quisiera ser distribuidor."
+    ],
+    "submit": "Enviar Mensaje"
+  },
   "footer": {
     "text": "© 2025 AutoLink Global. Todos los derechos reservados."
   }

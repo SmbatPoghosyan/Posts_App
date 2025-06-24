@@ -1,109 +1,109 @@
 {
   "hero": {
-    "title": "Wholesale OEM Auto Parts Direct from Factory",
-    "tagline1": "Factory-direct pricing, OEM quality and fast shipping from Dubai.",
-    "tagline2": "AutoLink Global gives wholesale resellers a competitive edge.",
-    "view": "View Catalog",
-    "contact": "Contact Sales"
+    "title": "批发OEM汽车零件直接从工厂",
+    "tagline1": "迪拜的工厂定向定价，OEM质量和快速运输。",
+    "tagline2": "Autolink Global为批发转售商提供了竞争优势。",
+    "view": "查看目录",
+    "contact": "联系销售"
   },
   "choose": {
-    "title": "Why Choose AutoLink Global for Auto Parts?",
+    "title": "为什么选择自动链接全球用于汽车零件？",
     "oem": {
-      "title": "OEM-Level Quality",
-      "desc": "All parts meet or exceed SAE/DOT standards and come with a solid warranty."
+      "title": "OEM级质量",
+      "desc": "所有零件都满足或超过SAE/DOT标准，并提供坚实的保修。"
     },
     "price": {
-      "title": "Direct-from-Factory Pricing",
-      "desc": "Skip the middle-man. Our Taiwan partnerships let you save 10-15% on average."
+      "title": "直接依赖于现实的定价",
+      "desc": "跳过中间人。我们的台湾合作伙伴关系可让您平均节省10-15％。"
     },
     "delivery": {
-      "title": "Fast Delivery",
-      "desc": "Our strategic Dubai hub ensures quick shipping to the US without customs headaches."
+      "title": "快速交货",
+      "desc": "我们的战略迪拜集线器可确保在没有海关头痛的情况下快速运送到美国。"
     }
   },
   "cta": {
-    "title": "Ready to turbo-charge profits?",
-    "subtitle": "Join dozens of US body shops already saving on premium parts.",
-    "button": "Book a Quick Call"
+    "title": "准备好涡轮增益吗？",
+    "subtitle": "加入数十家已经节省高级零件的车身商店。",
+    "button": "预订快速通话"
   },
   "insights": {
-    "title": "Market Snapshot",
-    "subtitle": "OEM parts demand keeps climbing. Here are a few highlights.",
-    "barLabel": "Global OEM Market Growth",
-    "lineLabel": "Average Savings per Container (%)",
-    "pieLabel": "Top Part Categories"
+    "title": "市场快照",
+    "subtitle": "OEM零件需求不断攀爬。这是一些亮点。",
+    "barLabel": "全球OEM市场增长",
+    "lineLabel": "每个容器的平均节省（％）",
+    "pieLabel": "顶部类别"
   },
   "faq": {
-    "title": "Frequently Asked Questions",
+    "title": "常见问题",
     "items": [
       {
-        "q": "What types of auto parts do you specialise in?",
-        "a": "Our MVP focuses on high-demand body panels and lighting (headlamps, tail-lamps, bumpers, fenders) from trusted Taiwanese OEM-approved factories."
+        "q": "您专门从事哪些类型的汽车零件？",
+        "a": "我们的MVP专注于来自可信赖的台湾OEM批准的工厂的高需求车身面板和照明（大灯，尾灯，保险杠，挡泥板）。"
       },
       {
-        "q": "Are your parts OEM or aftermarket?",
-        "a": "All items meet or exceed SAE/DOT standards and are produced in ISO-certified facilities, giving you OEM-level fit and finish at aftermarket pricing."
+        "q": "您的零件是OEM还是售后市场？",
+        "a": "所有物品都符合或超过SAE/DOT标准，并在ISO认证的设施中生产，从而使您在售后市场定价中为您提供了OEM级别的贴合性并完成。"
       },
       {
-        "q": "How long does delivery to the US take?",
-        "a": "Our strategic Dubai hub ensures very fast shipping to your door without customs headaches."
+        "q": "向美国交付多长时间？",
+        "a": "我们的战略性迪拜集线器可确保在没有海关头痛的情况下向您的门运送非常快。"
       },
       {
-        "q": "Is there a minimum order quantity (MOQ)?",
-        "a": "Yes. To secure factory-direct pricing we currently operate on full-container or skid-lot quantities (≈ USD 40k). Mixed-model containers are allowed."
+        "q": "是否有最低订单数量（MOQ）？",
+        "a": "是的。为了确保工厂直接定价，我们目前在全载体或打滑数量（≈40k）上运行。允许混合模型容器。"
       },
       {
-        "q": "Can I mix different models/part numbers in one container?",
-        "a": "Absolutely. We’ll work with you to build a mixed SKU manifest so you can stock a sensible spread of high-turn items."
+        "q": "我可以在一个容器中混合不同的型号/零件号吗？",
+        "a": "绝对地。我们将与您合作建立混合的SKU清单，以便您可以库存明智的高转向物品。"
       },
       {
-        "q": "How do payments work?",
-        "a": "Customer funds are deposited into escrow. Once your shipment is confirmed on board, funds are released to us and production/dispatch begins."
+        "q": "付款如何工作？",
+        "a": "客户资金存入托管。一旦您的发货确认在船上，资金就会向美国释放，并开始生产/派遣。"
       },
       {
-        "q": "Do you offer credit terms?",
-        "a": "For the MVP we operate on escrow/pre-paid terms. Credit programs will roll out after consistent order history (≈3 containers)."
+        "q": "您提供信用条款吗？",
+        "a": "对于MVP，我们按照托管/预付费条款进行操作。信用计划将在一致的订单历史记录（≈3个容器）之后推出。"
       },
       {
-        "q": "What warranty do you provide?",
-        "a": "We back every part with a standard 12-month warranty against manufacturing defects. Extended plans available for volume clients."
+        "q": "您提供什么保修？",
+        "a": "我们对制造缺陷的标准保修进行了为期12个月的标准保修。可用于量客户端的扩展计划。"
       },
       {
-        "q": "Are returns accepted?",
-        "a": "Yes—if a part arrives damaged or does not fit the specified vehicle, we arrange replacement or credit. Full return guidelines are in the supply agreement."
+        "q": "退货接受吗？",
+        "a": "是的 - 如果部分到达损坏或不适合指定车辆，我们将安排更换或信用。供应协议中有完整的退货指南。"
       },
       {
-        "q": "Which US ports do you ship to?",
-        "a": "Los Angeles, Long Beach, Houston, Newark (NY/NJ) and Savannah. Inland drayage to your facility can be quoted on request."
+        "q": "您运送到哪个美国港口？",
+        "a": "洛杉矶，长滩，休斯顿，纽瓦克（纽约州/NJ）和萨凡纳。可以根据要求报价到您的工厂内陆式钻头。"
       },
       {
-        "q": "Can I brand the packaging with my logo?",
-        "a": "Private-label options are available for repeat clients. MOQ for custom prints is typically 300 units per part number."
+        "q": "我可以用我的徽标打包吗？",
+        "a": "私人标签选项可用于重复客户。MOQ for custom prints is typically 300 units per part number."
       },
       {
-        "q": "How are duties and customs handled?",
-        "a": "Our forwarder files all ISF and entry paperwork. Duties (2.5 % ad valorem on most parts) are billed at cost; we’ll guide you through every step."
+        "q": "职责和习俗如何处理？",
+        "a": "我们的货运商归档所有ISF和输入文书。按成本计费的职责（大多数零件上的2.5％的商品）被收费；我们将指导您完成每一步。"
       },
       {
-        "q": "Do you provide fitment data or catalog feeds?",
-        "a": "Yes—CSV/XML fitment tables (year/make/model) and hi-res imagery are included so you can update your webshop instantly."
+        "q": "您提供配件数据或目录供稿吗？",
+        "a": "是的 - 包括CSV/XML装配表（年度/make/型号）和HI-RES图像，因此您可以立即更新网络商店。"
       },
       {
-        "q": "Is drop-shipping to my customers possible?",
-        "a": "Large-parcel drop-ship from our US 3PL is slated for phase 2. Join the wait-list and we’ll notify you when live."
+        "q": "向我的客户投放往可能吗？",
+        "a": "来自我们的美国3PL的大型档案定于第2阶段。加入Wait-List，我们会在现场直播时通知您。"
       },
       {
-        "q": "How do I get started?",
-        "a": "Click “Book a Quick Call” to schedule a 15-minute discovery session. We’ll review your part list, map savings, and design your first container load."
+        "q": "我如何开始？",
+        "a": "单击“预订快速通话”以安排15分钟的发现会话。我们将查看您的零件列表，映射节省，并设计您的第一个容器负载。"
       }
     ]
   },
   "booking": {
-    "title": "Book Your Free Discovery Call",
-    "subtitle1": "Spend 15 minutes with our team to learn how you can save big on premium parts.",
-    "subtitle2": "Choose a time that works for you—we’ll review your parts list and map out exact savings with AutoLink Global."
+    "title": "预订您的免费发现电话",
+    "subtitle1": "与我们的团队一起度过15分钟，以了解如何节省优质零件。",
+    "subtitle2": "选择一个适合您的时间 - 我们将查看您的零件列表，并用Autolink Global绘制精确的节省。"
   },
   "footer": {
-    "text": "© 2025 AutoLink Global. All rights reserved."
+    "text": "©2025 Autolink Global。版权所有。"
   }
 }

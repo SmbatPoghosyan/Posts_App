@@ -1,109 +1,109 @@
 {
   "hero": {
-    "title": "Wholesale OEM Auto Parts Direct from Factory",
-    "tagline1": "Factory-direct pricing, OEM quality and fast shipping from Dubai.",
-    "tagline2": "AutoLink Global gives wholesale resellers a competitive edge.",
-    "view": "View Catalog",
-    "contact": "Contact Sales"
+    "title": "Оптовые автомобильные части OEM прямо с фабрики",
+    "tagline1": "Заводские цены, качество OEM и быстрая доставка из Дубая.",
+    "tagline2": "Autolink Global дает оптовым реселлерам конкурентное преимущество.",
+    "view": "Посмотреть каталог",
+    "contact": "Свяжитесь с продажами"
   },
   "choose": {
-    "title": "Why Choose AutoLink Global for Auto Parts?",
+    "title": "Почему выбирают AutoLink Global для автоматических частей?",
     "oem": {
-      "title": "OEM-Level Quality",
-      "desc": "All parts meet or exceed SAE/DOT standards and come with a solid warranty."
+      "title": "Качество уровня OEM",
+      "desc": "Все части соответствуют или превышают стандарты SAE/DOT и поставляются с твердой гарантией."
     },
     "price": {
-      "title": "Direct-from-Factory Pricing",
-      "desc": "Skip the middle-man. Our Taiwan partnerships let you save 10-15% on average."
+      "title": "Прямая цена",
+      "desc": "Пропустить среднего человека.Наши партнерские отношения на Тайване позволяют вам сэкономить 10-15% в среднем."
     },
     "delivery": {
-      "title": "Fast Delivery",
-      "desc": "Our strategic Dubai hub ensures quick shipping to the US without customs headaches."
+      "title": "Быстрая доставка",
+      "desc": "Наш стратегический Дубайский центр обеспечивает быструю доставку в США без таможенных головных болей."
     }
   },
   "cta": {
-    "title": "Ready to turbo-charge profits?",
-    "subtitle": "Join dozens of US body shops already saving on premium parts.",
-    "button": "Book a Quick Call"
+    "title": "Готовы к турбозарядной прибыли?",
+    "subtitle": "Присоединяйтесь к десяткам американских кузовных магазинов, которые уже экономят на премиальных деталях.",
+    "button": "Забронировать быстрый звонок"
   },
   "insights": {
-    "title": "Market Snapshot",
-    "subtitle": "OEM parts demand keeps climbing. Here are a few highlights.",
-    "barLabel": "Global OEM Market Growth",
-    "lineLabel": "Average Savings per Container (%)",
-    "pieLabel": "Top Part Categories"
+    "title": "Рыночный снимок",
+    "subtitle": "Спрос деталей OEM продолжает лазание.Вот несколько основных моментов.",
+    "barLabel": "Глобальный рост рынка OEM",
+    "lineLabel": "Средняя экономия на контейнер (%)",
+    "pieLabel": "Лучшие категории"
   },
   "faq": {
-    "title": "Frequently Asked Questions",
+    "title": "Часто задаваемые вопросы",
     "items": [
       {
-        "q": "What types of auto parts do you specialise in?",
-        "a": "Our MVP focuses on high-demand body panels and lighting (headlamps, tail-lamps, bumpers, fenders) from trusted Taiwanese OEM-approved factories."
+        "q": "В каких типах автозатрат вы специализируете?",
+        "a": "Наш MVP фокусируется на панелях тела и освещении с высоким спросом (фары, хвостовые лампы, бамперы, крылья) с доверенных тайваньских заводов, одобренных OEM."
       },
       {
-        "q": "Are your parts OEM or aftermarket?",
-        "a": "All items meet or exceed SAE/DOT standards and are produced in ISO-certified facilities, giving you OEM-level fit and finish at aftermarket pricing."
+        "q": "Ваши детали OEM или вторичный рынок?",
+        "a": "Все предметы соответствуют или превышают стандарты SAE/DOT и производятся в ISO-сертифицированных объектах, что дает вам соответствие уровня OEM и финиширование на последующем рынке."
       },
       {
-        "q": "How long does delivery to the US take?",
-        "a": "Our strategic Dubai hub ensures very fast shipping to your door without customs headaches."
+        "q": "Как долго переходит доставка в США?",
+        "a": "Наш стратегический центр Дубая обеспечивает очень быструю доставку в вашу дверь без таможенных головных болей."
       },
       {
-        "q": "Is there a minimum order quantity (MOQ)?",
-        "a": "Yes. To secure factory-direct pricing we currently operate on full-container or skid-lot quantities (≈ USD 40k). Mixed-model containers are allowed."
+        "q": "Есть ли минимальное количество заказа (MOQ)?",
+        "a": "Да.Чтобы обеспечить цены на фабрику, мы в настоящее время работаем на полнозакончителе или количествах лот-лота (≈ 40K в долларах).Контейнеры смешанной модели допускаются."
       },
       {
-        "q": "Can I mix different models/part numbers in one container?",
-        "a": "Absolutely. We’ll work with you to build a mixed SKU manifest so you can stock a sensible spread of high-turn items."
+        "q": "Могу ли я смешать разные модели/числа деталей в одном контейнере?",
+        "a": "Абсолютно.Мы будем работать с вами, чтобы построить смешанный манифест SKU, чтобы вы могли надеть разумное распространение предметов высокого поворота."
       },
       {
-        "q": "How do payments work?",
-        "a": "Customer funds are deposited into escrow. Once your shipment is confirmed on board, funds are released to us and production/dispatch begins."
+        "q": "Как работают платежи?",
+        "a": "Средства клиентов депонируются на условное депонирование.После того, как ваша доставка будет подтверждена на борту, нам выпущены средства, и начинается производство/отправка."
       },
       {
-        "q": "Do you offer credit terms?",
-        "a": "For the MVP we operate on escrow/pre-paid terms. Credit programs will roll out after consistent order history (≈3 containers)."
+        "q": "Вы предлагаете условия кредитования?",
+        "a": "Для MVP мы работаем на условиях условного депонирования/предоплаты.Кредитные программы будут развернуться после последовательной истории заказа (≈3 контейнеров)."
       },
       {
-        "q": "What warranty do you provide?",
-        "a": "We back every part with a standard 12-month warranty against manufacturing defects. Extended plans available for volume clients."
+        "q": "Какая гарантия вы предоставляете?",
+        "a": "Мы поддерживаем каждую часть со стандартной 12-месячной гарантией против производственных дефектов.Расширенные планы доступны для клиентов по объему."
       },
       {
-        "q": "Are returns accepted?",
-        "a": "Yes—if a part arrives damaged or does not fit the specified vehicle, we arrange replacement or credit. Full return guidelines are in the supply agreement."
+        "q": "Приняты ли доход?",
+        "a": "Да, если бы часть прибыла повреждена или не соответствует указанному транспортному средству, мы организуем замену или кредит.Полные рекомендации по возврату находятся в соглашении о поставках."
       },
       {
-        "q": "Which US ports do you ship to?",
-        "a": "Los Angeles, Long Beach, Houston, Newark (NY/NJ) and Savannah. Inland drayage to your facility can be quoted on request."
+        "q": "В какие американские порты вы отправляете?",
+        "a": "Лос -Анджелес, Лонг -Бич, Хьюстон, Ньюарк (Нью -Йорк/Нью -Джерси) и Саванна.Внутренний драйедж на ваш объект может быть указан по запросу."
       },
       {
-        "q": "Can I brand the packaging with my logo?",
-        "a": "Private-label options are available for repeat clients. MOQ for custom prints is typically 300 units per part number."
+        "q": "Могу ли я заклинать упаковку с помощью своего логотипа?",
+        "a": "Варианты частной марки доступны для повторных клиентов.MOQ для пользовательских отпечатков, как правило, 300 единиц на номер детали."
       },
       {
-        "q": "How are duties and customs handled?",
-        "a": "Our forwarder files all ISF and entry paperwork. Duties (2.5 % ad valorem on most parts) are billed at cost; we’ll guide you through every step."
+        "q": "Как выполняются обязанности и таможня?",
+        "a": "Наши файлы Forwarder все ISF и документы в записи.Обязанности (2,5 % ad Valorem на большинстве частей) выставлены счета по цене;Мы проведем вас через каждый шаг."
       },
       {
-        "q": "Do you provide fitment data or catalog feeds?",
-        "a": "Yes—CSV/XML fitment tables (year/make/model) and hi-res imagery are included so you can update your webshop instantly."
+        "q": "Предоставляете ли вы дополнение к данным или каталогам?",
+        "a": "Да-таблицы фиксации CSV/XML (год/Make/Model) и изображения Hi-Res включены, так что вы можете мгновенно обновить свой веб-магазин."
       },
       {
-        "q": "Is drop-shipping to my customers possible?",
-        "a": "Large-parcel drop-ship from our US 3PL is slated for phase 2. Join the wait-list and we’ll notify you when live."
+        "q": "Возможна ли уходы моих клиентов?",
+        "a": "Большой паркул от нашего US 3PL намечен на этап 2. Присоединяйтесь к списку ожидания, и мы уведомим вас в прямом эфире."
       },
       {
-        "q": "How do I get started?",
-        "a": "Click “Book a Quick Call” to schedule a 15-minute discovery session. We’ll review your part list, map savings, and design your first container load."
+        "q": "Как мне начать?",
+        "a": "Нажмите «Забронируйте быстрый звонок», чтобы запланировать 15-минутную сеанс обнаружения.Мы рассмотрим ваш список деталей, экономию карты и разработаем вашу первую загрузку контейнера."
       }
     ]
   },
   "booking": {
-    "title": "Book Your Free Discovery Call",
-    "subtitle1": "Spend 15 minutes with our team to learn how you can save big on premium parts.",
-    "subtitle2": "Choose a time that works for you—we’ll review your parts list and map out exact savings with AutoLink Global."
+    "title": "Забронируйте свой бесплатный звонок об открытии",
+    "subtitle1": "Потратьте 15 минут с нашей командой, чтобы узнать, как вы можете сэкономить на больших частях.",
+    "subtitle2": "Выберите время, которое работает для вас - мы рассмотрим ваш список деталей и наметим точную экономию с Autolink Global."
   },
   "footer": {
-    "text": "© 2025 AutoLink Global. All rights reserved."
+    "text": "© 2025 Autolink Global.Все права защищены."
   }
 }

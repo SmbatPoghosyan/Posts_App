@@ -1,109 +1,109 @@
 {
   "hero": {
-    "title": "Wholesale OEM Auto Parts Direct from Factory",
-    "tagline1": "Factory-direct pricing, OEM quality and fast shipping from Dubai.",
-    "tagline2": "AutoLink Global gives wholesale resellers a competitive edge.",
-    "view": "View Catalog",
-    "contact": "Contact Sales"
+    "title": "أجزاء السيارات بالجملة OEM مباشرة من المصنع",
+    "tagline1": "تسعير المصنع-جودة OEM والشحن السريع من دبي.",
+    "tagline2": "Autolink Global يمنح موزعو الجملة ميزة تنافسية.",
+    "view": "عرض الكتالوج",
+    "contact": "مبيعات الاتصال"
   },
   "choose": {
-    "title": "Why Choose AutoLink Global for Auto Parts?",
+    "title": "لماذا تختار Autolink Global لقطع الغيار؟",
     "oem": {
-      "title": "OEM-Level Quality",
-      "desc": "All parts meet or exceed SAE/DOT standards and come with a solid warranty."
+      "title": "جودة مستوى OEM",
+      "desc": "جميع الأجزاء تلتقي أو تتجاوز معايير SAE/DOT وتأتي مع ضمان قوي."
     },
     "price": {
-      "title": "Direct-from-Factory Pricing",
-      "desc": "Skip the middle-man. Our Taiwan partnerships let you save 10-15% on average."
+      "title": "أسعار مباشرة من العمل",
+      "desc": "تخطي الرجل الأوسط.تتيح لك شراكات تايوان لدينا توفير 10-15 ٪ في المتوسط."
     },
     "delivery": {
-      "title": "Fast Delivery",
-      "desc": "Our strategic Dubai hub ensures quick shipping to the US without customs headaches."
+      "title": "توصيل سريع",
+      "desc": "يضمن مركز دبي الاستراتيجي الشحن السريع إلى الولايات المتحدة بدون صداع جمركي."
     }
   },
   "cta": {
-    "title": "Ready to turbo-charge profits?",
-    "subtitle": "Join dozens of US body shops already saving on premium parts.",
-    "button": "Book a Quick Call"
+    "title": "هل أنت مستعد لصالح الأرباح التوربو؟",
+    "subtitle": "انضم إلى العشرات من متاجر الجسم الأمريكية التي توفر بالفعل على قطع الغيار المتميزة.",
+    "button": "احجز مكالمة سريعة"
   },
   "insights": {
-    "title": "Market Snapshot",
-    "subtitle": "OEM parts demand keeps climbing. Here are a few highlights.",
-    "barLabel": "Global OEM Market Growth",
-    "lineLabel": "Average Savings per Container (%)",
-    "pieLabel": "Top Part Categories"
+    "title": "لقطة السوق",
+    "subtitle": "الطلب على أجزاء OEM يستمر في التسلق.فيما يلي بعض النقاط البارزة.",
+    "barLabel": "نمو سوق OEM العالمي",
+    "lineLabel": "متوسط ​​المدخرات لكل حاوية (٪)",
+    "pieLabel": "فئات الجزء العلوي"
   },
   "faq": {
-    "title": "Frequently Asked Questions",
+    "title": "الأسئلة المتداولة",
     "items": [
       {
-        "q": "What types of auto parts do you specialise in?",
-        "a": "Our MVP focuses on high-demand body panels and lighting (headlamps, tail-lamps, bumpers, fenders) from trusted Taiwanese OEM-approved factories."
+        "q": "ما هي أنواع الأجزاء التلقائية التي تتخصص فيها؟",
+        "a": "يركز MVP لدينا على لوحات الجسم عالية الطلب والإضاءة (المصابيح الأمامية ، المصابيح الخلفية ، المصدات ، المصدات) من المصانع الموثوقة التايوانية المعتمدة على OEM."
       },
       {
-        "q": "Are your parts OEM or aftermarket?",
-        "a": "All items meet or exceed SAE/DOT standards and are produced in ISO-certified facilities, giving you OEM-level fit and finish at aftermarket pricing."
+        "q": "هل أجزائك OEM أم ما بعد البيع؟",
+        "a": "تلبي جميع العناصر أو تتجاوز معايير SAE/DOT ويتم إنتاجها في منشآت معتمدة من ISO ، مما يمنحك ملاءمة على مستوى OEM والانتهاء في تسعير ما بعد البيع."
       },
       {
-        "q": "How long does delivery to the US take?",
-        "a": "Our strategic Dubai hub ensures very fast shipping to your door without customs headaches."
+        "q": "ما هي مدة تسليم الولايات المتحدة؟",
+        "a": "يضمن مركز دبي الاستراتيجي الخاص بنا الشحن السريع للغاية على بابك بدون صداع جمركي."
       },
       {
-        "q": "Is there a minimum order quantity (MOQ)?",
-        "a": "Yes. To secure factory-direct pricing we currently operate on full-container or skid-lot quantities (≈ USD 40k). Mixed-model containers are allowed."
+        "q": "هل يوجد الحد الأدنى من كمية الطلب (MOQ)؟",
+        "a": "نعم.لتأمين التسعير المباشر للمصنع ، نعمل حاليًا على كميات كاملة أو كميات سطحية (≈ 40 ألف دولار أمريكي).يسمح حاويات النموذج المختلط."
       },
       {
-        "q": "Can I mix different models/part numbers in one container?",
-        "a": "Absolutely. We’ll work with you to build a mixed SKU manifest so you can stock a sensible spread of high-turn items."
+        "q": "هل يمكنني مزج النماذج/أرقام الأجزاء المختلفة في حاوية واحدة؟",
+        "a": "قطعاً.سنعمل معك لإنشاء بيان SKU مختلط حتى تتمكن من تخزين انتشار معقول من العناصر عالية المنعطف."
       },
       {
-        "q": "How do payments work?",
-        "a": "Customer funds are deposited into escrow. Once your shipment is confirmed on board, funds are released to us and production/dispatch begins."
+        "q": "كيف تعمل المدفوعات؟",
+        "a": "يتم إيداع أموال العملاء في الضمان.بمجرد تأكيد شحنتك على متن الطائرة ، يتم إصدار الأموال لنا وتبدأ الإنتاج/الإرسال."
       },
       {
-        "q": "Do you offer credit terms?",
-        "a": "For the MVP we operate on escrow/pre-paid terms. Credit programs will roll out after consistent order history (≈3 containers)."
+        "q": "هل تقدمون شروط الائتمان؟",
+        "a": "بالنسبة إلى MVP ، نعمل على شروط الضمان/المدفوعة مسبقًا.سيتم طرح برامج الائتمان بعد تاريخ الطلب المتسق (≈3 حاويات)."
       },
       {
-        "q": "What warranty do you provide?",
-        "a": "We back every part with a standard 12-month warranty against manufacturing defects. Extended plans available for volume clients."
+        "q": "ما الضمان الذي تقدمه؟",
+        "a": "نعود كل جزء مع ضمان قياسي لمدة 12 شهرًا ضد عيوب التصنيع.الخطط الموسعة المتاحة لعملاء الحجم."
       },
       {
-        "q": "Are returns accepted?",
-        "a": "Yes—if a part arrives damaged or does not fit the specified vehicle, we arrange replacement or credit. Full return guidelines are in the supply agreement."
+        "q": "هل يتم قبول العائدات؟",
+        "a": "نعم - إذا وصل جزء من التالف أو لا يناسب السيارة المحددة ، فإننا نرتب الاستبدال أو الائتمان.إرشادات الإرجاع الكاملة في اتفاقية العرض."
       },
       {
-        "q": "Which US ports do you ship to?",
-        "a": "Los Angeles, Long Beach, Houston, Newark (NY/NJ) and Savannah. Inland drayage to your facility can be quoted on request."
+        "q": "ما هي المنافذ الأمريكية التي تشحن إليها؟",
+        "a": "لوس أنجلوس ، لونج بيتش ، هيوستن ، نيوارك (نيويورك/نيوجيرسي) وسافانا.يمكن نقل الدفاع الداخلي إلى منشأتك عند الطلب."
       },
       {
-        "q": "Can I brand the packaging with my logo?",
-        "a": "Private-label options are available for repeat clients. MOQ for custom prints is typically 300 units per part number."
+        "q": "هل يمكنني تجنيد العبوة مع شعوري؟",
+        "a": "تتوفر خيارات التسمية الخاصة للعملاء المتكررين.عادة ما يكون MOQ للطباعة المخصصة 300 وحدة لكل جزء."
       },
       {
-        "q": "How are duties and customs handled?",
-        "a": "Our forwarder files all ISF and entry paperwork. Duties (2.5 % ad valorem on most parts) are billed at cost; we’ll guide you through every step."
+        "q": "كيف يتم التعامل مع الواجبات والعادات؟",
+        "a": "ملفات الشحن لدينا جميع ISF والأوراق الدخول.يتم فواتير الواجبات (2.5 ٪ إعلان في معظم الأجزاء) بالتكلفة ؛سنرشدك في كل خطوة."
       },
       {
-        "q": "Do you provide fitment data or catalog feeds?",
-        "a": "Yes—CSV/XML fitment tables (year/make/model) and hi-res imagery are included so you can update your webshop instantly."
+        "q": "هل تقدم بيانات تركيب أو خلاصات كتالوج؟",
+        "a": "نعم-يتم تضمين جداول تركيبات CSV/XML (السنة/صنع/نموذج) وصور عالية الدقة حتى تتمكن من تحديث Shop على الفور."
       },
       {
-        "q": "Is drop-shipping to my customers possible?",
-        "a": "Large-parcel drop-ship from our US 3PL is slated for phase 2. Join the wait-list and we’ll notify you when live."
+        "q": "هل من الممكن أن يتجول في الشحن لعملائي؟",
+        "a": "من المقرر أن يتم تحديد سفن السطح الكبير من 3PL في الولايات المتحدة للمرحلة الثانية. انضم إلى قائمة الانتظار وسنعلمك عند العيش."
       },
       {
-        "q": "How do I get started?",
-        "a": "Click “Book a Quick Call” to schedule a 15-minute discovery session. We’ll review your part list, map savings, and design your first container load."
+        "q": "كيف أبدأ؟",
+        "a": "انقر فوق \"احجز مكالمة سريعة\" لتحديد موعد جلسة اكتشاف مدتها 15 دقيقة.سنقوم بمراجعة قائمة الأجزاء الخاصة بك ، وتوفير الخريطة ، وتصميم أول تحميل للحاوية."
       }
     ]
   },
   "booking": {
-    "title": "Book Your Free Discovery Call",
-    "subtitle1": "Spend 15 minutes with our team to learn how you can save big on premium parts.",
-    "subtitle2": "Choose a time that works for you—we’ll review your parts list and map out exact savings with AutoLink Global."
+    "title": "احجز مكالمة الاكتشاف المجانية الخاصة بك",
+    "subtitle1": "اقض 15 دقيقة مع فريقنا لمعرفة كيف يمكنك توفير Big على قطع الغيار الممتازة.",
+    "subtitle2": "اختر وقتًا يناسبك - سنقوم بمراجعة قائمة قطع الغيار الخاصة بك ونرسم التوفير الدقيق مع Autolink Global."
   },
   "footer": {
-    "text": "© 2025 AutoLink Global. All rights reserved."
+    "text": "© 2025 Autolink Global.جميع الحقوق محفوظة."
   }
 }

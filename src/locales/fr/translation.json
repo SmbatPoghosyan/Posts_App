@@ -1,109 +1,109 @@
 {
   "hero": {
-    "title": "Wholesale OEM Auto Parts Direct from Factory",
-    "tagline1": "Factory-direct pricing, OEM quality and fast shipping from Dubai.",
-    "tagline2": "AutoLink Global gives wholesale resellers a competitive edge.",
-    "view": "View Catalog",
-    "contact": "Contact Sales"
+    "title": "Parts d'auto OEM en gros directement de l'usine",
+    "tagline1": "Tarification directe d'usine, qualité OEM et expédition rapide de Dubaï.",
+    "tagline2": "AutoLink Global donne aux revendeurs de gros un avantage concurrentiel.",
+    "view": "Afficher le catalogue",
+    "contact": "Ventes de contact"
   },
   "choose": {
-    "title": "Why Choose AutoLink Global for Auto Parts?",
+    "title": "Pourquoi choisir AutoLink Global pour les pièces automobiles?",
     "oem": {
-      "title": "OEM-Level Quality",
-      "desc": "All parts meet or exceed SAE/DOT standards and come with a solid warranty."
+      "title": "Qualité au niveau OEM",
+      "desc": "Toutes les pièces répondent ou dépassent les normes SAE / DOT et sont livrées avec une garantie solide."
     },
     "price": {
-      "title": "Direct-from-Factory Pricing",
-      "desc": "Skip the middle-man. Our Taiwan partnerships let you save 10-15% on average."
+      "title": "Tarification directe de la factoire",
+      "desc": "Sautez l'homme du milieu.Nos partenariats Taiwan vous permettent d'économiser 10 à 15% en moyenne."
     },
     "delivery": {
-      "title": "Fast Delivery",
-      "desc": "Our strategic Dubai hub ensures quick shipping to the US without customs headaches."
+      "title": "Livraison rapide",
+      "desc": "Notre hub stratégique de Dubaï garantit une expédition rapide aux États-Unis sans maux de tête en douane."
     }
   },
   "cta": {
-    "title": "Ready to turbo-charge profits?",
-    "subtitle": "Join dozens of US body shops already saving on premium parts.",
-    "button": "Book a Quick Call"
+    "title": "Prêt à turbo-charge des bénéfices?",
+    "subtitle": "Rejoignez des dizaines de magasins de carrosserie américains qui économisent déjà sur des pièces premium.",
+    "button": "Réservez un appel rapide"
   },
   "insights": {
-    "title": "Market Snapshot",
-    "subtitle": "OEM parts demand keeps climbing. Here are a few highlights.",
-    "barLabel": "Global OEM Market Growth",
-    "lineLabel": "Average Savings per Container (%)",
-    "pieLabel": "Top Part Categories"
+    "title": "Instantané du marché",
+    "subtitle": "La demande de pièces OEM continue d'escalade.Voici quelques faits saillants.",
+    "barLabel": "Croissance mondiale du marché OEM",
+    "lineLabel": "Économies moyennes par conteneur (%)",
+    "pieLabel": "Catégories de la partie supérieure"
   },
   "faq": {
-    "title": "Frequently Asked Questions",
+    "title": "Questions fréquemment posées",
     "items": [
       {
-        "q": "What types of auto parts do you specialise in?",
-        "a": "Our MVP focuses on high-demand body panels and lighting (headlamps, tail-lamps, bumpers, fenders) from trusted Taiwanese OEM-approved factories."
+        "q": "Dans quels types de pièces automobiles vous spécialisez-vous?",
+        "a": "Notre MVP se concentre sur les panneaux de carrosserie et l'éclairage à haute demande (lampes frontales, les lampes de queue, les pare-chocs, les ailes) des usines de confiance approuvées par les OEM taïwanaises."
       },
       {
-        "q": "Are your parts OEM or aftermarket?",
-        "a": "All items meet or exceed SAE/DOT standards and are produced in ISO-certified facilities, giving you OEM-level fit and finish at aftermarket pricing."
+        "q": "Vos pièces sont-elles OEM ou de rechange?",
+        "a": "Tous les articles répondent ou dépassent les normes SAE / DOT et sont produits dans des installations certifiées ISO, ce qui vous donne un ajustement au niveau OEM et une finition à la tarification du marché secondaire."
       },
       {
-        "q": "How long does delivery to the US take?",
-        "a": "Our strategic Dubai hub ensures very fast shipping to your door without customs headaches."
+        "q": "Combien de temps prend la livraison aux États-Unis?",
+        "a": "Notre hub stratégique de Dubaï assure une expédition très rapide à votre porte sans maux de tête."
       },
       {
-        "q": "Is there a minimum order quantity (MOQ)?",
-        "a": "Yes. To secure factory-direct pricing we currently operate on full-container or skid-lot quantities (≈ USD 40k). Mixed-model containers are allowed."
+        "q": "Existe-t-il une quantité de commande minimale (MOQ)?",
+        "a": "Oui.Pour garantir la tarification directe d'usine, nous opérons actuellement sur des quantités à pleine containeuse ou à dérapage (≈ 40k USD).Les conteneurs de modèles mixtes sont autorisés."
       },
       {
-        "q": "Can I mix different models/part numbers in one container?",
-        "a": "Absolutely. We’ll work with you to build a mixed SKU manifest so you can stock a sensible spread of high-turn items."
+        "q": "Puis-je mélanger différents modèles / numéros de pièce dans un seul conteneur?",
+        "a": "Absolument.Nous travaillerons avec vous pour construire un manifeste de SKU mixte afin que vous puissiez stocker une propagation raisonnable d'articles à haut tournage."
       },
       {
-        "q": "How do payments work?",
-        "a": "Customer funds are deposited into escrow. Once your shipment is confirmed on board, funds are released to us and production/dispatch begins."
+        "q": "Comment fonctionnent les paiements?",
+        "a": "Les fonds clients sont déposés en séquestre.Une fois votre envoi confirmé à bord, les fonds nous sont libérés et la production / répartition commence."
       },
       {
-        "q": "Do you offer credit terms?",
-        "a": "For the MVP we operate on escrow/pre-paid terms. Credit programs will roll out after consistent order history (≈3 containers)."
+        "q": "Offrez-vous des conditions de crédit?",
+        "a": "Pour le MVP, nous opérons sur des termes d'entiercement / prépayés.Les programmes de crédit seront déployés après l'historique cohérent des commandes (≈3 conteneurs)."
       },
       {
-        "q": "What warranty do you provide?",
-        "a": "We back every part with a standard 12-month warranty against manufacturing defects. Extended plans available for volume clients."
+        "q": "Quelle garantie fournissez-vous?",
+        "a": "Nous soutenons chaque partie avec une garantie standard de 12 mois contre les défauts de fabrication.Plans étendus disponibles pour les clients en volume."
       },
       {
-        "q": "Are returns accepted?",
-        "a": "Yes—if a part arrives damaged or does not fit the specified vehicle, we arrange replacement or credit. Full return guidelines are in the supply agreement."
+        "q": "Les rendements sont-ils acceptés?",
+        "a": "Oui, si une pièce arrive endommagée ou ne correspond pas au véhicule spécifié, nous organisons le remplacement ou le crédit.Les directives de retour complètes figurent dans le contrat d'approvisionnement."
       },
       {
-        "q": "Which US ports do you ship to?",
-        "a": "Los Angeles, Long Beach, Houston, Newark (NY/NJ) and Savannah. Inland drayage to your facility can be quoted on request."
+        "q": "À quels ports américains expédiez-vous?",
+        "a": "Los Angeles, Long Beach, Houston, Newark (NY / NJ) et Savannah.Inland Drayage dans votre installation peut être cité sur demande."
       },
       {
-        "q": "Can I brand the packaging with my logo?",
-        "a": "Private-label options are available for repeat clients. MOQ for custom prints is typically 300 units per part number."
+        "q": "Puis-je marquer l'emballage avec mon logo?",
+        "a": "Des options de label privé sont disponibles pour les clients réguliers.Le MOQ pour les impressions personnalisées est généralement de 300 unités par numéro de pièce."
       },
       {
-        "q": "How are duties and customs handled?",
-        "a": "Our forwarder files all ISF and entry paperwork. Duties (2.5 % ad valorem on most parts) are billed at cost; we’ll guide you through every step."
+        "q": "Comment les tâches et les douanes sont-elles gérées?",
+        "a": "Nos fichiers de transmission ont tous les documents ISF et d'entrée.Les tâches (2,5% AD Valorem sur la plupart des parties) sont facturées au prix coûtant;Nous vous guiderons à chaque étape."
       },
       {
-        "q": "Do you provide fitment data or catalog feeds?",
-        "a": "Yes—CSV/XML fitment tables (year/make/model) and hi-res imagery are included so you can update your webshop instantly."
+        "q": "Fournissez-vous des données d'ajustement ou des flux de catalogue?",
+        "a": "Oui - Les tables de montage CSV / XML (année / marque / modèle) et les images haute résolution sont incluses afin que vous puissiez mettre à jour votre webshop instantanément."
       },
       {
-        "q": "Is drop-shipping to my customers possible?",
-        "a": "Large-parcel drop-ship from our US 3PL is slated for phase 2. Join the wait-list and we’ll notify you when live."
+        "q": "Est-ce que l'abandon de drop est possible?",
+        "a": "Le navire à grande échelle de notre US 3PL est prévu pour la phase 2. Rejoignez la liste d'attente et nous vous informerons en direct."
       },
       {
-        "q": "How do I get started?",
-        "a": "Click “Book a Quick Call” to schedule a 15-minute discovery session. We’ll review your part list, map savings, and design your first container load."
+        "q": "Comment commencer?",
+        "a": "Cliquez sur «Réservez un appel rapide» pour planifier une session de découverte de 15 minutes.Nous allons passer en revue votre liste de pièces, cartographier les économies et concevoir votre première charge de conteneur."
       }
     ]
   },
   "booking": {
-    "title": "Book Your Free Discovery Call",
-    "subtitle1": "Spend 15 minutes with our team to learn how you can save big on premium parts.",
-    "subtitle2": "Choose a time that works for you—we’ll review your parts list and map out exact savings with AutoLink Global."
+    "title": "Réservez votre appel de découverte gratuit",
+    "subtitle1": "Passez 15 minutes avec notre équipe pour savoir comment économiser gros sur des pièces premium.",
+    "subtitle2": "Choisissez un moment qui fonctionne pour vous - nous allons passer en revue votre liste de pièces et élaborer des économies exactes avec AutoLink Global."
   },
   "footer": {
-    "text": "© 2025 AutoLink Global. All rights reserved."
+    "text": "© 2025 AutoLink Global.Tous droits réservés."
   }
 }

@@ -98,5 +98,28 @@
   },
   "footer": {
     "text": "© 2025 AutoLink Global. Todos los derechos reservados."
+  },
+  "interactive": {
+    "title": "Demos Interactivas",
+    "parallax": {
+      "title": "Imagen Parallax",
+      "desc": "Mueva el ratón para desplazar el paisaje."
+    },
+    "counter": {
+      "title": "Contador Animado",
+      "desc": "Los números aumentan al mostrarse."
+    },
+    "cards": {
+      "title": "Tarjetas con Hover",
+      "desc": "Pase el cursor para ver la animación."
+    },
+    "tilt": {
+      "title": "Efecto Tilt",
+      "desc": "Mueva el ratón sobre la tarjeta."
+    },
+    "theme": {
+      "title": "Interruptor de Modo Oscuro",
+      "desc": "Haga clic para alternar entre claro y oscuro."
+    }
   }
 }

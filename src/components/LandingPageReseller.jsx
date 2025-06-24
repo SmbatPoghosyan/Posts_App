@@ -87,12 +87,158 @@ const FAQSection = () => {
 };
 
 /* ---------------------------------------------------------------------
+  INTERACTIVE DEMO COMPONENTS
+--------------------------------------------------------------------- */
+
+const ParallaxDemo = () => {
+  const { t } = useTranslation();
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const onMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 30;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 30;
+    setOffset({ x, y });
+  };
+  return (
+    <section className="py-16 bg-white text-center" onMouseLeave={() => setOffset({ x: 0, y: 0 })}>
+      <h2 className="text-2xl font-bold mb-4">{t('interactive.parallax.title')}</h2>
+      <p className="mb-6 text-gray-600">{t('interactive.parallax.desc')}</p>
+      <div
+        onMouseMove={onMove}
+        className="mx-auto h-48 w-80 overflow-hidden rounded-lg relative bg-gradient-to-tr from-primary-500 to-primary-700"
+      >
+        <img
+          src={logoMain}
+          alt="logo"
+          className="absolute inset-0 m-auto w-32 transform transition-transform"
+          style={{ transform: `translate(${offset.x}px, ${offset.y}px)` }}
+        />
+      </div>
+    </section>
+  );
+};
+
+const CounterDemo = () => {
+  const { t } = useTranslation();
+  const ref = useRef(null);
+  const [started, setStarted] = useState(false);
+  const [counts, setCounts] = useState([0, 0, 0]);
+  const targets = useRef([50, 200, 500]);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setStarted(true);
+        obs.disconnect();
+      }
+    });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
+    targets.current.forEach((target, idx) => {
+      let current = 0;
+      const step = Math.ceil(target / 40);
+      const id = setInterval(() => {
+        current += step;
+        setCounts((c) => c.map((v, i) => (i === idx ? Math.min(current, target) : v)));
+        if (current >= target) clearInterval(id);
+      }, 50);
+    });
+  }, [started]);
+
+  return (
+    <section ref={ref} className="py-16 bg-gray-50 text-center">
+      <h2 className="text-2xl font-bold mb-4">{t('interactive.counter.title')}</h2>
+      <p className="mb-6 text-gray-600">{t('interactive.counter.desc')}</p>
+      <div className="flex justify-center gap-8">
+        {counts.map((n, i) => (
+          <div key={i} className="text-4xl font-extrabold text-primary-600 w-16">
+            {n}
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+const HoverCardsDemo = () => {
+  const { t } = useTranslation();
+  return (
+    <section className="py-16 bg-white text-center">
+      <h2 className="text-2xl font-bold mb-4">{t('interactive.cards.title')}</h2>
+      <p className="mb-6 text-gray-600">{t('interactive.cards.desc')}</p>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto px-6">
+        {[1, 2, 3].map((n) => (
+          <div
+            key={n}
+            className="p-8 bg-gray-100 rounded-lg transform transition-transform hover:rotate-1 hover:scale-105"
+          >
+            Card {n}
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+const TiltDemo = () => {
+  const { t } = useTranslation();
+  const [rotate, setRotate] = useState({ x: 0, y: 0 });
+  const onMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -20;
+    setRotate({ x, y });
+  };
+  return (
+    <section className="py-16 bg-gray-50 text-center" onMouseLeave={() => setRotate({ x: 0, y: 0 })}>
+      <h2 className="text-2xl font-bold mb-4">{t('interactive.tilt.title')}</h2>
+      <p className="mb-6 text-gray-600">{t('interactive.tilt.desc')}</p>
+      <div className="flex justify-center">
+        <div
+          onMouseMove={onMove}
+          className="w-64 h-40 bg-white shadow-lg rounded-lg flex items-center justify-center"
+          style={{ transform: `rotateX(${rotate.y}deg) rotateY(${rotate.x}deg)` }}
+        >
+          <img src={logoMain} alt="logo" className="w-24" />
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const ThemeToggleDemo = ({ dark, setDark }) => {
+  const { t } = useTranslation();
+  return (
+    <section className="py-16 bg-white text-center">
+      <h2 className="text-2xl font-bold mb-4">{t('interactive.theme.title')}</h2>
+      <p className="mb-6 text-gray-600">{t('interactive.theme.desc')}</p>
+      <button
+        onClick={() => setDark((v) => !v)}
+        className="px-6 py-3 bg-primary-600 text-white rounded-md"
+      >
+        {dark ? 'Light' : 'Dark'}
+      </button>
+    </section>
+  );
+};
+
+/* ---------------------------------------------------------------------
   LANDING PAGE COMPONENT
 --------------------------------------------------------------------- */
 function LandingPageReseller() {
   const { t } = useTranslation();
   const calendlyRef = useRef(null);
   const [showCatalog, setShowCatalog] = useState(false);
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    const cl = document.documentElement.classList;
+    dark ? cl.add('dark') : cl.remove('dark');
+  }, [dark]);
 
   useEffect(() => {
     if (!calendlyRef.current) return;
@@ -187,6 +333,13 @@ function LandingPageReseller() {
             {t('cta.button')}
           </a>
         </section>
+
+        {/* Interactive Demo Sections */}
+        <ParallaxDemo />
+        <CounterDemo />
+        <HoverCardsDemo />
+        <TiltDemo />
+        <ThemeToggleDemo dark={dark} setDark={setDark} />
 
         {/* FAQ – collapsible */}
         <FAQSection />

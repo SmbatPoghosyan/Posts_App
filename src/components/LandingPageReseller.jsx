@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { motion as Motion, AnimatePresence } from 'framer-motion';
 import LanguageSwitcher from './LanguageSwitcher';
 import logoMain from '../../public/logo_main.png';
+import PdfPreview from './PdfPreview';
 
 /* ---------------------------------------------------------------------
   LOGO ‐ Updated to use logo_main.png
@@ -91,6 +92,7 @@ const FAQSection = () => {
 function LandingPageReseller() {
   const { t } = useTranslation();
   const calendlyRef = useRef(null);
+  const [showCatalog, setShowCatalog] = useState(false);
 
   useEffect(() => {
     if (!calendlyRef.current) return;
@@ -115,6 +117,9 @@ function LandingPageReseller() {
 
   return (
     <div className="font-sans text-gray-800 scroll-smooth">
+      {showCatalog && (
+        <PdfPreview file="/catalog.pdf" onClose={() => setShowCatalog(false)} />
+      )}
       {/* Hero */}
       <header>
         <section className="relative bg-gradient-to-br from-white via-blue-50 to-white text-gray-900 py-16 px-6">
@@ -130,14 +135,12 @@ function LandingPageReseller() {
               {t('hero.tagline2')}
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <a
-                href="/catalog.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => setShowCatalog(true)}
                 className="bg-primary-600 text-white px-5 py-3 rounded-md text-lg font-semibold hover:bg-primary-700 transition"
               >
-                {t('hero.download')}
-              </a>
+                {t('hero.view')}
+              </button>
               <a
                 href="mailto:sales@autolinkglobal.com?subject=Parts%20Inquiry"
                 className="bg-white text-gray-900 px-5 py-3 rounded-md text-lg font-semibold hover:bg-gray-100 transition"

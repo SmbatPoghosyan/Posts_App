@@ -1,44 +1,44 @@
 {
   "hero": {
-    "title": "Großhandel OEM -Autoteile direkt aus der Fabrik",
-    "tagline1": "Fabrik-Gereiterpreise, OEM-Qualität und schnelle Versand aus Dubai.",
-    "tagline2": "Autolink Global verleiht Großhandelsverkäufer einen Wettbewerbsvorteil.",
-    "view": "Katalog anzeigen",
-    "contact": "Wenden Sie sich an den Verkauf"
+    "title": "OEM-Autoteile im Großhandel direkt ab Werk",
+    "tagline1": "Direkte Werkskonditionen, OEM-Qualität und schneller Versand aus Dubai.",
+    "tagline2": "AutoLink Global verschafft Großhändlern einen Wettbewerbsvorteil.",
+    "view": "Katalog ansehen",
+    "contact": "Vertrieb kontaktieren"
   },
   "choose": {
-    "title": "Warum Autolink Global für Autoteile wählen?",
+    "title": "Warum AutoLink Global für Ihre Ersatzteile?",
     "oem": {
-      "title": "Qualität auf OEM-Ebene",
-      "desc": "Alle Teile erfüllen oder übertreffen die SAE/DOT -Standards und sind mit einer soliden Garantie geliefert."
+      "title": "Qualität in Erstausrüsterqualität",
+      "desc": "Alle Teile erfüllen oder übertreffen SAE/DOT-Standards und kommen mit verlässlicher Garantie."
     },
     "price": {
-      "title": "Direktfrom-faktorische Preisgestaltung",
-      "desc": "Überspringen Sie den Mittelmann.Mit unseren Taiwan-Partnerschaften können Sie durchschnittlich 10-15% sparen."
+      "title": "Direktpreise ab Werk",
+      "desc": "Umgehen Sie den Zwischenhändler. Dank unserer Taiwan-Partnerschaften sparen Sie im Schnitt 10–15 %."
     },
     "delivery": {
       "title": "Schnelle Lieferung",
-      "desc": "Unser strategischer Dubai Hub sorgt für den schnellen Versand in den USA ohne Zollkopfschmerzen."
+      "desc": "Unser strategischer Hub in Dubai sorgt für zügige Zustellung in die USA ohne Zollprobleme."
     }
   },
   "cta": {
-    "title": "Bereit zu Turbodarngewinnen?",
-    "subtitle": "Schließen Sie sich Dutzenden von US -Body -Shops an, die bereits in Premium -Teilen sparen.",
-    "button": "Buchen Sie einen kurzen Anruf"
+    "title": "Bereit, Ihre Gewinne zu steigern?",
+    "subtitle": "Schließen Sie sich Dutzenden US-Werkstätten an, die bereits bei Premiumteilen sparen.",
+    "button": "Kurzes Gespräch buchen"
   },
   "insights": {
-    "title": "Marktschnappschuss",
-    "subtitle": "Die Nachfrage nach OEM -Teilen steigt weiter.Hier sind ein paar Highlights.",
-    "barLabel": "Globales OEM -Marktwachstum",
-    "lineLabel": "Durchschnittliche Einsparungen pro Behälter (%)",
-    "pieLabel": "Top -Teil -Kategorien"
+    "title": "Marktüberblick",
+    "subtitle": "Die Nachfrage nach Originalteilen wächst stetig. Hier ein paar Kennzahlen.",
+    "barLabel": "Weltweites OEM-Marktwachstum",
+    "lineLabel": "Durchschnittliche Ersparnis pro Container (%)",
+    "pieLabel": "Wichtigste Teilkategorien"
   },
   "faq": {
     "title": "Häufig gestellte Fragen",
     "items": [
       {
-        "q": "Auf welche Arten von Autoteilen sind Sie spezialisiert?",
-        "a": "Unser MVP konzentriert sich auf hochdarstellende Körperpaneele und Beleuchtung (Scheinwerfer, Schwanzlampen, Stoßstangen, Kotflügel) aus vertrauenswürdigen taiwanesischen OEM-anerkannten Fabriken."
+        "q": "Auf welche Autoteile sind Sie spezialisiert?",
+        "a": "Unser MVP fokussiert sich auf gefragte Karosserieteile und Beleuchtung (Scheinwerfer, Rückleuchten, Stoßstangen, Kotflügel) aus bewährten OEM-zertifizierten Werken in Taiwan."
       },
       {
         "q": "Sind Ihre Teile OEM oder Aftermarket?",
@@ -58,7 +58,7 @@
       },
       {
         "q": "Wie funktionieren Zahlungen?",
-        "a": "Kundenfonds werden in die Treuhandlung eingelagert.Sobald Ihre Sendung an Bord bestätigt wurde, werden uns Mittel zur Verfügung gestellt und die Produktion/den Versand beginnt."
+        "a": "Kundengelder werden treuhänderisch hinterlegt. Nach Bestätigung der Verladung werden die Mittel freigegeben und die Produktion startet."
       },
       {
         "q": "Bieten Sie Kreditbedingungen an?",
@@ -77,8 +77,8 @@
         "a": "Los Angeles, Long Beach, Houston, Newark (NY/NJ) und Savannah.Inland Drayage zu Ihrer Einrichtung kann auf Anfrage angegeben werden."
       },
       {
-        "q": "Kann ich die Verpackung mit meinem Logo brandmarken?",
-        "a": "Für Stammkunden stehen private Label-Optionen zur Verfügung.MOQ for custom prints is typically 300 units per part number."
+        "q": "Kann ich die Verpackung mit meinem Logo branden?",
+        "a": "Für Stammkunden bieten wir Eigenmarkenoptionen an. Die Mindestmenge für individuelle Drucke liegt meist bei 300 Stück pro Artikelnummer."
       },
       {
         "q": "Wie werden Pflichten und Zoll erledigt?",
@@ -99,11 +99,11 @@
     ]
   },
   "booking": {
-    "title": "Buchen Sie Ihren kostenlosen Discovery -Anruf",
-    "subtitle1": "Verbringen Sie 15 Minuten mit unserem Team, um zu erfahren, wie Sie Premium -Teile groß sparen können.",
-    "subtitle2": "Wählen Sie eine Zeit, die für Sie funktioniert - wir werden Ihre Teileliste überprüfen und genaue Einsparungen mit Autolink Global erstellen."
+    "title": "Buchen Sie Ihren kostenlosen Beratungstermin",
+    "subtitle1": "Nehmen Sie sich 15 Minuten Zeit und erfahren Sie, wie Sie bei Premiumteilen sparen können.",
+    "subtitle2": "Wählen Sie einen passenden Termin – wir prüfen Ihre Teileliste und berechnen die genauen Einsparungen mit AutoLink Global."
   },
   "footer": {
-    "text": "© 2025 Autolink Global.Alle Rechte vorbehalten."
+    "text": "© 2025 AutoLink Global. Alle Rechte vorbehalten."
   }
 }

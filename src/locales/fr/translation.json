@@ -1,44 +1,44 @@
 {
   "hero": {
-    "title": "Parts d'auto OEM en gros directement de l'usine",
-    "tagline1": "Tarification directe d'usine, qualité OEM et expédition rapide de Dubaï.",
-    "tagline2": "AutoLink Global donne aux revendeurs de gros un avantage concurrentiel.",
-    "view": "Afficher le catalogue",
-    "contact": "Ventes de contact"
+    "title": "Pièces automobiles d'origine en gros directement depuis l'usine",
+    "tagline1": "Tarifs directs usine, qualité d'origine et expédition rapide depuis Dubaï.",
+    "tagline2": "AutoLink Global offre aux grossistes un avantage concurrentiel.",
+    "view": "Voir le catalogue",
+    "contact": "Contacter les ventes"
   },
   "choose": {
-    "title": "Pourquoi choisir AutoLink Global pour les pièces automobiles?",
+    "title": "Pourquoi choisir AutoLink Global pour vos pièces auto ?",
     "oem": {
-      "title": "Qualité au niveau OEM",
-      "desc": "Toutes les pièces répondent ou dépassent les normes SAE / DOT et sont livrées avec une garantie solide."
+      "title": "Qualité constructeur",
+      "desc": "Toutes nos pièces respectent ou dépassent les normes SAE/DOT et sont couvertes par une solide garantie."
     },
     "price": {
-      "title": "Tarification directe de la factoire",
-      "desc": "Sautez l'homme du milieu.Nos partenariats Taiwan vous permettent d'économiser 10 à 15% en moyenne."
+      "title": "Prix direct usine",
+      "desc": "Évitez l'intermédiaire. Nos partenaires à Taïwan vous font économiser en moyenne 10 à 15 %."
     },
     "delivery": {
       "title": "Livraison rapide",
-      "desc": "Notre hub stratégique de Dubaï garantit une expédition rapide aux États-Unis sans maux de tête en douane."
+      "desc": "Notre hub stratégique de Dubaï assure des envois rapides vers les États-Unis sans soucis de douane."
     }
   },
   "cta": {
-    "title": "Prêt à turbo-charge des bénéfices?",
-    "subtitle": "Rejoignez des dizaines de magasins de carrosserie américains qui économisent déjà sur des pièces premium.",
-    "button": "Réservez un appel rapide"
+    "title": "Prêt à booster vos bénéfices ?",
+    "subtitle": "Rejoignez des dizaines d'ateliers américains qui économisent déjà sur les pièces premium.",
+    "button": "Réserver un appel rapide"
   },
   "insights": {
-    "title": "Instantané du marché",
-    "subtitle": "La demande de pièces OEM continue d'escalade.Voici quelques faits saillants.",
+    "title": "Aperçu du marché",
+    "subtitle": "La demande de pièces d’origine ne cesse de croître. Voici quelques chiffres clés.",
     "barLabel": "Croissance mondiale du marché OEM",
     "lineLabel": "Économies moyennes par conteneur (%)",
-    "pieLabel": "Catégories de la partie supérieure"
+    "pieLabel": "Catégories de pièces principales"
   },
   "faq": {
     "title": "Questions fréquemment posées",
     "items": [
       {
-        "q": "Dans quels types de pièces automobiles vous spécialisez-vous?",
-        "a": "Notre MVP se concentre sur les panneaux de carrosserie et l'éclairage à haute demande (lampes frontales, les lampes de queue, les pare-chocs, les ailes) des usines de confiance approuvées par les OEM taïwanaises."
+        "q": "Dans quels types de pièces auto êtes‑vous spécialisés ?",
+        "a": "Notre MVP privilégie les panneaux de carrosserie et l'éclairage très demandés (phares, feux, pare-chocs, ailes) issus d'usines taïwanaises agréées."
       },
       {
         "q": "Vos pièces sont-elles OEM ou de rechange?",
@@ -57,8 +57,8 @@
         "a": "Absolument.Nous travaillerons avec vous pour construire un manifeste de SKU mixte afin que vous puissiez stocker une propagation raisonnable d'articles à haut tournage."
       },
       {
-        "q": "Comment fonctionnent les paiements?",
-        "a": "Les fonds clients sont déposés en séquestre.Une fois votre envoi confirmé à bord, les fonds nous sont libérés et la production / répartition commence."
+        "q": "Comment fonctionnent les paiements ?",
+        "a": "Les fonds sont placés en séquestre. Dès que votre cargaison est confirmée, nous recevons le paiement et lançons la production."
       },
       {
         "q": "Offrez-vous des conditions de crédit?",
@@ -93,17 +93,17 @@
         "a": "Le navire à grande échelle de notre US 3PL est prévu pour la phase 2. Rejoignez la liste d'attente et nous vous informerons en direct."
       },
       {
-        "q": "Comment commencer?",
-        "a": "Cliquez sur «Réservez un appel rapide» pour planifier une session de découverte de 15 minutes.Nous allons passer en revue votre liste de pièces, cartographier les économies et concevoir votre première charge de conteneur."
+        "q": "Comment commencer ?",
+        "a": "Cliquez sur \"Réserver un appel rapide\" pour planifier une session découverte de 15 minutes. Nous étudierons votre liste de pièces, estimerons les économies et organiserons votre première cargaison."
       }
     ]
   },
   "booking": {
     "title": "Réservez votre appel de découverte gratuit",
-    "subtitle1": "Passez 15 minutes avec notre équipe pour savoir comment économiser gros sur des pièces premium.",
-    "subtitle2": "Choisissez un moment qui fonctionne pour vous - nous allons passer en revue votre liste de pièces et élaborer des économies exactes avec AutoLink Global."
+    "subtitle1": "Accordez 15 minutes à notre équipe pour découvrir comment économiser sur des pièces haut de gamme.",
+    "subtitle2": "Choisissez l'heure qui vous convient : nous passerons votre liste en revue et calculerons les économies exactes avec AutoLink Global."
   },
   "footer": {
-    "text": "© 2025 AutoLink Global.Tous droits réservés."
+    "text": "© 2025 AutoLink Global. Tous droits réservés."
   }
 }

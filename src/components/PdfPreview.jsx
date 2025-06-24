@@ -18,16 +18,9 @@ function PdfPreview({ file, onClose }) {
       onClick={onClose}
     >
       <div
-        className="relative bg-white p-4 rounded-md max-h-[90vh] w-[80vw] overflow-y-auto"
+        className="relative bg-white p-4 rounded-md max-h-[90vh] w-[80vw] overflow-y-auto faq-scroll"
         onClick={(e) => e.stopPropagation()}
       >
-        <button
-          className="absolute top-2 right-2 text-2xl leading-none text-gray-600 hover:text-black"
-          onClick={onClose}
-          aria-label="Close"
-        >
-          ×
-        </button>
         <Worker workerUrl={workerUrl}>
           <Viewer fileUrl={file} />
         </Worker>

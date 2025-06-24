@@ -25,20 +25,19 @@ function ContactModal({ onClose }) {
   };
 
   const applySuggestion = (text) => {
-    setMessage((prev) => {
-      if (active.has(text)) {
-        const regex = new RegExp(`\\s*${text.replace(/([.*+?^${}()|[\]\\])/g, '\\$1')}\\s*`);
-        const cleaned = prev.replace(regex, ' ').replace(/\s+/g, ' ').trim();
-        syncActiveFromMessage(cleaned);
-        return cleaned;
-      }
-      const next = prev ? `${prev} ${text}` : text;
-      const trimmed = next.trim();
-      syncActiveFromMessage(trimmed);
-      return trimmed;
-    });
-
-  // active suggestions are recalculated in syncActiveFromMessage
+    let newMessage;
+    if (active.has(text)) {
+      newMessage = message
+        .split(text)
+        .join(' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    } else {
+      const next = message ? `${message} ${text}` : text;
+      newMessage = next.trim();
+    }
+    setMessage(newMessage);
+    syncActiveFromMessage(newMessage);
   };
 
   const handleSubmit = (e) => {
@@ -67,7 +66,13 @@ function ContactModal({ onClose }) {
           ×
         </button>
         <h2 className="text-xl font-bold mb-4 text-center">{t('contactModal.title')}</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form
+          onSubmit={handleSubmit}
+          name="contact"
+          data-netlify="true"
+          className="space-y-4"
+        >
+          <input type="hidden" name="form-name" value="contact" />
           <input
             type="text"
             className="w-full border border-blue-300 bg-blue-100 rounded-md p-2 placeholder-primary-600"

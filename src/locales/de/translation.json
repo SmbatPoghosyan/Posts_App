@@ -1,0 +1,109 @@
+{
+  "hero": {
+    "title": "OEM-Autoteile im Großhandel direkt ab Werk",
+    "tagline1": "Direkte Werkskonditionen, OEM-Qualität und schneller Versand aus Dubai.",
+    "tagline2": "AutoLink Global verschafft Großhändlern einen Wettbewerbsvorteil.",
+    "view": "Katalog ansehen",
+    "contact": "Vertrieb kontaktieren"
+  },
+  "choose": {
+    "title": "Warum AutoLink Global für Ihre Ersatzteile?",
+    "oem": {
+      "title": "Qualität in Erstausrüsterqualität",
+      "desc": "Alle Teile erfüllen oder übertreffen SAE/DOT-Standards und kommen mit verlässlicher Garantie."
+    },
+    "price": {
+      "title": "Direktpreise ab Werk",
+      "desc": "Umgehen Sie den Zwischenhändler. Dank unserer Taiwan-Partnerschaften sparen Sie im Schnitt 10–15 %."
+    },
+    "delivery": {
+      "title": "Schnelle Lieferung",
+      "desc": "Unser strategischer Hub in Dubai sorgt für zügige Zustellung in die USA ohne Zollprobleme."
+    }
+  },
+  "cta": {
+    "title": "Bereit, Ihre Gewinne zu steigern?",
+    "subtitle": "Schließen Sie sich Dutzenden US-Werkstätten an, die bereits bei Premiumteilen sparen.",
+    "button": "Kurzes Gespräch buchen"
+  },
+  "insights": {
+    "title": "Marktüberblick",
+    "subtitle": "Die Nachfrage nach Originalteilen wächst stetig. Hier ein paar Kennzahlen.",
+    "barLabel": "Weltweites OEM-Marktwachstum",
+    "lineLabel": "Durchschnittliche Ersparnis pro Container (%)",
+    "pieLabel": "Wichtigste Teilkategorien"
+  },
+  "faq": {
+    "title": "Häufig gestellte Fragen",
+    "items": [
+      {
+        "q": "Auf welche Autoteile sind Sie spezialisiert?",
+        "a": "Unser MVP fokussiert sich auf gefragte Karosserieteile und Beleuchtung (Scheinwerfer, Rückleuchten, Stoßstangen, Kotflügel) aus bewährten OEM-zertifizierten Werken in Taiwan."
+      },
+      {
+        "q": "Sind Ihre Teile OEM oder Aftermarket?",
+        "a": "Alle Gegenstände erfüllen oder übertreffen die SAE/DOT-Standards und werden in ISO-zertifizierten Einrichtungen hergestellt, wodurch Sie bei der Preisgestaltung von Aftermarket-Niveau eine OEM-Niveau-Anpassung und das Abschluss erhalten."
+      },
+      {
+        "q": "Wie lange dauert die Lieferung an die USA?",
+        "a": "Unser strategischer Hub sorgt für einen sehr schnellen Versand an Ihre Tür ohne Zollkopfschmerzen."
+      },
+      {
+        "q": "Gibt es eine Mindestbestellmenge (MOQ)?",
+        "a": "Ja.Zur Sicherung der pflanzlich-direkten Preisgestaltung betreiben wir derzeit mit umfassenden Größen in vollem Maße (≈ USD 40K).Behälter mit gemischtem Modell sind erlaubt."
+      },
+      {
+        "q": "Kann ich verschiedene Modelle/Teilenzahlen in einem Container mischen?",
+        "a": "Absolut.Wir werden mit Ihnen zusammenarbeiten, um ein gemischtes SKU-Manifest zu bauen, damit Sie eine vernünftige Ausbreitung von hochgedrehten Artikeln auf Lager haben können."
+      },
+      {
+        "q": "Wie funktionieren Zahlungen?",
+        "a": "Kundengelder werden treuhänderisch hinterlegt. Nach Bestätigung der Verladung werden die Mittel freigegeben und die Produktion startet."
+      },
+      {
+        "q": "Bieten Sie Kreditbedingungen an?",
+        "a": "Für das MVP arbeiten wir mit Treuhandkuppen/Vorbezahlten.Kreditprogramme werden nach einer konsistenten Auftragshistorie (~ 3 Container) eingeführt."
+      },
+      {
+        "q": "Welche Garantie bieten Sie an?",
+        "a": "Wir unterstützen jeden Teil mit einer Standardgarantie von 12 Monaten gegen Herstellungsfehler.Erweiterte Pläne für Volumenkunden."
+      },
+      {
+        "q": "Werden Rückgaben akzeptiert?",
+        "a": "Ja - wenn ein Teil beschädigt oder nicht zum angegebenen Fahrzeug passt, arrangieren wir Ersatz oder Kredit.Die vollständigen Rendite -Richtlinien sind im Angebotsvertrag."
+      },
+      {
+        "q": "An welchen US -Häfen versenden Sie?",
+        "a": "Los Angeles, Long Beach, Houston, Newark (NY/NJ) und Savannah.Inland Drayage zu Ihrer Einrichtung kann auf Anfrage angegeben werden."
+      },
+      {
+        "q": "Kann ich die Verpackung mit meinem Logo branden?",
+        "a": "Für Stammkunden bieten wir Eigenmarkenoptionen an. Die Mindestmenge für individuelle Drucke liegt meist bei 300 Stück pro Artikelnummer."
+      },
+      {
+        "q": "Wie werden Pflichten und Zoll erledigt?",
+        "a": "Unsere Spediteurdateien alle ISF- und Eintragsunterlagen.Aufgaben (2,5 % Ad Valorem in den meisten Teilen) werden zum Preis in Rechnung gestellt.Wir werden Sie durch jeden Schritt führen."
+      },
+      {
+        "q": "Stellen Sie Ausstattungsdaten oder Katalog -Feeds an?",
+        "a": "Ja-CSV/XML-Ausstattungstabellen (Jahr/Make/Model) und Hi-Res-Bilder sind enthalten, damit Sie Ihren Webshop sofort aktualisieren können."
+      },
+      {
+        "q": "Ist ein Drop-Shipping für meine Kunden möglich?",
+        "a": "Large-Parcel-Drop-Schiff von unserem US 3PL ist für Phase 2 geplant. Schließen Sie sich der Warteliste an und wir werden Sie beim Live benachrichtigen."
+      },
+      {
+        "q": "Wie fange ich an?",
+        "a": "Klicken Sie auf \"Buchen Sie einen kurzen Anruf\", um eine 15-minütige Erkennungssitzung zu vereinbaren.Wir werden Ihre Teilliste überprüfen, Einsparungen des Kartons und Ihre erste Containerlast entwerfen."
+      }
+    ]
+  },
+  "booking": {
+    "title": "Buchen Sie Ihren kostenlosen Beratungstermin",
+    "subtitle1": "Nehmen Sie sich 15 Minuten Zeit und erfahren Sie, wie Sie bei Premiumteilen sparen können.",
+    "subtitle2": "Wählen Sie einen passenden Termin – wir prüfen Ihre Teileliste und berechnen die genauen Einsparungen mit AutoLink Global."
+  },
+  "footer": {
+    "text": "© 2025 AutoLink Global. Alle Rechte vorbehalten."
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "hero": {
+    "title": "Pièces automobiles d'origine en gros directement depuis l'usine",
+    "tagline1": "Tarifs directs usine, qualité d'origine et expédition rapide depuis Dubaï.",
+    "tagline2": "AutoLink Global offre aux grossistes un avantage concurrentiel.",
+    "view": "Voir le catalogue",
+    "contact": "Contacter les ventes"
+  },
+  "choose": {
+    "title": "Pourquoi choisir AutoLink Global pour vos pièces auto ?",
+    "oem": {
+      "title": "Qualité constructeur",
+      "desc": "Toutes nos pièces respectent ou dépassent les normes SAE/DOT et sont couvertes par une solide garantie."
+    },
+    "price": {
+      "title": "Prix direct usine",
+      "desc": "Évitez l'intermédiaire. Nos partenaires à Taïwan vous font économiser en moyenne 10 à 15 %."
+    },
+    "delivery": {
+      "title": "Livraison rapide",
+      "desc": "Notre hub stratégique de Dubaï assure des envois rapides vers les États-Unis sans soucis de douane."
+    }
+  },
+  "cta": {
+    "title": "Prêt à booster vos bénéfices ?",
+    "subtitle": "Rejoignez des dizaines d'ateliers américains qui économisent déjà sur les pièces premium.",
+    "button": "Réserver un appel rapide"
+  },
+  "insights": {
+    "title": "Aperçu du marché",
+    "subtitle": "La demande de pièces d’origine ne cesse de croître. Voici quelques chiffres clés.",
+    "barLabel": "Croissance mondiale du marché OEM",
+    "lineLabel": "Économies moyennes par conteneur (%)",
+    "pieLabel": "Catégories de pièces principales"
+  },
+  "faq": {
+    "title": "Questions fréquemment posées",
+    "items": [
+      {
+        "q": "Dans quels types de pièces auto êtes‑vous spécialisés ?",
+        "a": "Notre MVP privilégie les panneaux de carrosserie et l'éclairage très demandés (phares, feux, pare-chocs, ailes) issus d'usines taïwanaises agréées."
+      },
+      {
+        "q": "Vos pièces sont-elles OEM ou de rechange?",
+        "a": "Tous les articles répondent ou dépassent les normes SAE / DOT et sont produits dans des installations certifiées ISO, ce qui vous donne un ajustement au niveau OEM et une finition à la tarification du marché secondaire."
+      },
+      {
+        "q": "Combien de temps prend la livraison aux États-Unis?",
+        "a": "Notre hub stratégique de Dubaï assure une expédition très rapide à votre porte sans maux de tête."
+      },
+      {
+        "q": "Existe-t-il une quantité de commande minimale (MOQ)?",
+        "a": "Oui.Pour garantir la tarification directe d'usine, nous opérons actuellement sur des quantités à pleine containeuse ou à dérapage (≈ 40k USD).Les conteneurs de modèles mixtes sont autorisés."
+      },
+      {
+        "q": "Puis-je mélanger différents modèles / numéros de pièce dans un seul conteneur?",
+        "a": "Absolument.Nous travaillerons avec vous pour construire un manifeste de SKU mixte afin que vous puissiez stocker une propagation raisonnable d'articles à haut tournage."
+      },
+      {
+        "q": "Comment fonctionnent les paiements ?",
+        "a": "Les fonds sont placés en séquestre. Dès que votre cargaison est confirmée, nous recevons le paiement et lançons la production."
+      },
+      {
+        "q": "Offrez-vous des conditions de crédit?",
+        "a": "Pour le MVP, nous opérons sur des termes d'entiercement / prépayés.Les programmes de crédit seront déployés après l'historique cohérent des commandes (≈3 conteneurs)."
+      },
+      {
+        "q": "Quelle garantie fournissez-vous?",
+        "a": "Nous soutenons chaque partie avec une garantie standard de 12 mois contre les défauts de fabrication.Plans étendus disponibles pour les clients en volume."
+      },
+      {
+        "q": "Les rendements sont-ils acceptés?",
+        "a": "Oui, si une pièce arrive endommagée ou ne correspond pas au véhicule spécifié, nous organisons le remplacement ou le crédit.Les directives de retour complètes figurent dans le contrat d'approvisionnement."
+      },
+      {
+        "q": "À quels ports américains expédiez-vous?",
+        "a": "Los Angeles, Long Beach, Houston, Newark (NY / NJ) et Savannah.Inland Drayage dans votre installation peut être cité sur demande."
+      },
+      {
+        "q": "Puis-je marquer l'emballage avec mon logo?",
+        "a": "Des options de label privé sont disponibles pour les clients réguliers.Le MOQ pour les impressions personnalisées est généralement de 300 unités par numéro de pièce."
+      },
+      {
+        "q": "Comment les tâches et les douanes sont-elles gérées?",
+        "a": "Nos fichiers de transmission ont tous les documents ISF et d'entrée.Les tâches (2,5% AD Valorem sur la plupart des parties) sont facturées au prix coûtant;Nous vous guiderons à chaque étape."
+      },
+      {
+        "q": "Fournissez-vous des données d'ajustement ou des flux de catalogue?",
+        "a": "Oui - Les tables de montage CSV / XML (année / marque / modèle) et les images haute résolution sont incluses afin que vous puissiez mettre à jour votre webshop instantanément."
+      },
+      {
+        "q": "Est-ce que l'abandon de drop est possible?",
+        "a": "Le navire à grande échelle de notre US 3PL est prévu pour la phase 2. Rejoignez la liste d'attente et nous vous informerons en direct."
+      },
+      {
+        "q": "Comment commencer ?",
+        "a": "Cliquez sur \"Réserver un appel rapide\" pour planifier une session découverte de 15 minutes. Nous étudierons votre liste de pièces, estimerons les économies et organiserons votre première cargaison."
+      }
+    ]
+  },
+  "booking": {
+    "title": "Réservez votre appel de découverte gratuit",
+    "subtitle1": "Accordez 15 minutes à notre équipe pour découvrir comment économiser sur des pièces haut de gamme.",
+    "subtitle2": "Choisissez l'heure qui vous convient : nous passerons votre liste en revue et calculerons les économies exactes avec AutoLink Global."
+  },
+  "footer": {
+    "text": "© 2025 AutoLink Global. Tous droits réservés."
+  }
+}

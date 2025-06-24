@@ -28,7 +28,10 @@
   },
   "insights": {
     "title": "Market Snapshot",
-    "subtitle": "OEM parts demand keeps climbing. Here are a few highlights."
+    "subtitle": "OEM parts demand keeps climbing. Here are a few highlights.",
+    "barLabel": "Global OEM Market Growth",
+    "lineLabel": "Average Savings per Container (%)",
+    "pieLabel": "Top Part Categories"
   },
   "faq": {
     "title": "Frequently Asked Questions",

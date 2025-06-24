@@ -15,7 +15,7 @@ function LanguageSwitcher() {
 
   return (
     <div className="flex border rounded-full overflow-hidden bg-white text-gray-800 text-sm">
-      {['en', 'es'].map((lng) => (
+      {['en', 'es', 'fr', 'de', 'ar', 'zh', 'ru'].map((lng) => (
         <button
           key={lng}
           type="button"

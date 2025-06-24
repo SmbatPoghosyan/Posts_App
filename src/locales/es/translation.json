@@ -28,7 +28,10 @@
   },
   "insights": {
     "title": "Panorama del Mercado",
-    "subtitle": "La demanda de piezas OEM sigue creciendo en todo el mundo. Aquí algunos datos."
+    "subtitle": "La demanda de piezas OEM sigue creciendo en todo el mundo. Aquí algunos datos.",
+    "barLabel": "Crecimiento Global del Mercado OEM",
+    "lineLabel": "Ahorro Promedio por Contenedor (%)",
+    "pieLabel": "Categorías de Piezas Principales"
   },
   "faq": {
     "title": "Preguntas Frecuentes",

@@ -103,6 +103,19 @@
     "subtitle1": "Nehmen Sie sich 15 Minuten Zeit und erfahren Sie, wie Sie bei Premiumteilen sparen können.",
     "subtitle2": "Wählen Sie einen passenden Termin – wir prüfen Ihre Teileliste und berechnen die genauen Einsparungen mit AutoLink Global."
   },
+  "contactModal": {
+    "title": "Vertrieb kontaktieren",
+    "name": "Ihr Name",
+    "email": "Ihre E-Mail",
+    "message": "Nachricht",
+    "messagePlaceholder": "Teilen Sie uns mit, welche Teile Sie benötigen...",
+    "suggestions": [
+      "Ich benötige Preise für diese Teilenummern.",
+      "Bitte senden Sie Versandoptionen und Zeiten.",
+      "Ich möchte Wiederverkäufer werden."
+    ],
+    "submit": "Nachricht senden"
+  },
   "footer": {
     "text": "© 2025 AutoLink Global. Alle Rechte vorbehalten."
   }

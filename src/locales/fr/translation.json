@@ -103,6 +103,19 @@
     "subtitle1": "Accordez 15 minutes à notre équipe pour découvrir comment économiser sur des pièces haut de gamme.",
     "subtitle2": "Choisissez l'heure qui vous convient : nous passerons votre liste en revue et calculerons les économies exactes avec AutoLink Global."
   },
+  "contactModal": {
+    "title": "Contacter les ventes",
+    "name": "Votre nom",
+    "email": "Votre e-mail",
+    "message": "Message",
+    "messagePlaceholder": "Dites-nous quelles pièces vous recherchez...",
+    "suggestions": [
+      "J'ai besoin des tarifs pour ces références.",
+      "Veuillez envoyer les options et délais de livraison.",
+      "Je souhaite devenir revendeur."
+    ],
+    "submit": "Envoyer le message"
+  },
   "footer": {
     "text": "© 2025 AutoLink Global. Tous droits réservés."
   }

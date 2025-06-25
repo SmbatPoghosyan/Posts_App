@@ -103,6 +103,19 @@
     "subtitle1": "花 15 分钟与我们团队了解如何在优质零件上节省成本。",
     "subtitle2": "请选择合适时间，我们将查看您的零件列表并与 AutoLink Global 精确计算节省。"
   },
+  "contactModal": {
+    "title": "联系销售",
+    "name": "您的姓名",
+    "email": "您的邮箱",
+    "message": "留言",
+    "messagePlaceholder": "请告诉我们需要哪些零件...",
+    "suggestions": [
+      "我需要这些零件号的报价。",
+      "请发送运输方式和时间。",
+      "我想成为经销商。"
+    ],
+    "submit": "发送信息"
+  },
   "footer": {
     "text": "©2025 AutoLink Global。版权所有。"
   }

@@ -20,9 +20,10 @@ This file guides OpenAI Codex and other AI agents working in this repository.
 
 ## Programmatic Checks
 
-Before committing any changes, run:
+Before committing any changes, ensure dependencies are installed and run:
 
 ```bash
+pnpm install
 pnpm run lint
 pnpm run build
 ```

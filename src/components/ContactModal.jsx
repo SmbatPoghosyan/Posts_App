@@ -68,7 +68,7 @@ function ContactModal({ onClose }) {
         </button>
         <h2 className="text-xl font-bold mb-4 text-center">{t('contactModal.title')}</h2>
         <form
-          onSubmit={handleSubmit}
+          // onSubmit={handleSubmit}
           name="contact"
           data-netlify="true"
           netlify="true"

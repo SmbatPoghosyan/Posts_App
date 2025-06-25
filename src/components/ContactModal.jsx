@@ -71,7 +71,7 @@ function ContactModal({ onClose }) {
           // onSubmit={handleSubmit}
           name="contact"
           data-netlify="true"
-          netlify="true"
+          netlify=""
           className="space-y-4"
         >
           <input type="hidden" name="form-name" value="contact" />

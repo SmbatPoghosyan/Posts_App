@@ -77,6 +77,7 @@ function ContactModal({ onClose }) {
           <input type="hidden" name="form-name" value="contact" />
           <input
             type="text"
+            name='name'
             className="w-full border border-blue-300 bg-blue-100 rounded-md p-2 placeholder-primary-600"
             placeholder={t('contactModal.name')}
             value={name}
@@ -85,6 +86,7 @@ function ContactModal({ onClose }) {
           />
           <input
             type="email"
+            name='email'
             className="w-full border border-blue-300 bg-blue-100 rounded-md p-2 placeholder-primary-600"
             placeholder={t('contactModal.email')}
             value={email}
@@ -94,6 +96,8 @@ function ContactModal({ onClose }) {
           <textarea
             className="w-full border border-blue-300 bg-blue-100 rounded-md p-2 placeholder-primary-600"
             rows="4"
+            name='message'
+            type="text"
             placeholder={t('contactModal.messagePlaceholder')}
             value={message}
             onChange={(e) => {

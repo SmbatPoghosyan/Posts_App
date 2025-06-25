@@ -24,7 +24,8 @@ function ContactModal({ onClose }) {
     setActive(newSet);
   };
 
-  const applySuggestion = (text) => {
+  const applySuggestion = (text, evt) => {
+    if (evt) evt.currentTarget.blur();
     let newMessage;
     if (active.has(text)) {
       newMessage = message
@@ -106,8 +107,8 @@ function ContactModal({ onClose }) {
               <button
                 key={idx}
                 type="button"
-                onClick={() => applySuggestion(text)}
-                className={`text-sm px-3 py-1 rounded-full transition border cursor-pointer ${active.has(text) ? 'bg-primary-600 text-white border-primary-700' : 'bg-gray-100 hover:bg-primary-600 hover:text-white border-transparent'}`}
+                onClick={(e) => applySuggestion(text, e)}
+                className={`text-sm px-3 py-1 rounded-full transition border cursor-pointer ${active.has(text) ? 'bg-primary-600 text-white border-primary-700' : 'bg-blue-100 text-primary-700 border-blue-300 hover:bg-primary-600 hover:text-white'}`}
               >
                 {text}
               </button>

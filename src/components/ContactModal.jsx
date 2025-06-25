@@ -40,14 +40,46 @@ function ContactModal({ onClose }) {
     setMessage(newMessage);
     syncActiveFromMessage(newMessage);
   };
+/* 
+const handleSubmit = event => {
+  event.preventDefault();
 
+  const myForm = event.target;
+  const formData = new FormData(myForm);
+
+  fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams(formData).toString()
+  })
+    .then(() => console.log("Form successfully submitted"))
+    .catch(error => alert(error));
+};
+
+document.querySelector("form").addEventListener("submit", handleSubmit);
+ */
   const handleSubmit = (e) => {
     e.preventDefault();
-    const body = `${message}\n\nFrom: ${name} <${email}>`;
-    window.location.href = `mailto:sales@autolinkglobal.com?subject=${encodeURIComponent(
-      'Inquiry from ' + name,
-    )}&body=${encodeURIComponent(body)}`;
-    onClose();
+    const form = e.target;
+    const formData = new FormData(form);
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(formData).toString(),
+    })
+      .then(() => {
+        console.log('Form successfully submitted');
+        onClose();
+        setName('');
+        setEmail('');
+        setMessage('');
+        setActive(new Set());
+      })
+      .catch((error) => {
+        console.error('Error submitting form:', error);
+        alert(t('contactModal.error'));
+      });
   };
 
   return (
@@ -68,7 +100,7 @@ function ContactModal({ onClose }) {
         </button>
         <h2 className="text-xl font-bold mb-4 text-center">{t('contactModal.title')}</h2>
         <form
-          // onSubmit={handleSubmit}
+          onSubmit={handleSubmit}
           name="contact"
           method="POST"
           data-netlify="true"

@@ -30,6 +30,25 @@ pnpm run build
 
 Both commands must succeed. Fix issues and rerun if needed.
 
+## Repository Checks
+
+Verify the repository is clean and directory layout matches the structure above:
+
+```bash
+git status --short
+```
+
+If you introduce new folders or files, keep them organized under `src`, `public`
+and `dist` as documented in **Project Structure**.
+
+## Localization
+
+Translations live under `src/locales/<lang>/translation.json`. When modifying UI
+copy, update every locale file with the new keys. To add a language:
+1. Create a new folder under `src/locales` with a `translation.json` file.
+2. Import it in `src/i18n.js` and include it in the `resources` object.
+3. Ensure `pnpm run build` succeeds with the new language.
+
 ## Pull Requests
 
 When creating a PR:
